@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_FoodOnLinkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TB_AdminMaster">
+    <Key>
+      <PropertyRef Name="ADMIN_ID" />
+    </Key>
+    <Property Name="ADMIN_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ADMIN_NAME" Type="nvarchar" MaxLength="200" />
+    <Property Name="MOBILE_NO" Type="nvarchar" MaxLength="30" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="500" />
+    <Property Name="PASSWORD" Type="nvarchar" MaxLength="30" />
+    <Property Name="ROLE_ID" Type="bigint" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+    <Property Name="STATUS" Type="nvarchar" MaxLength="30" />
+    <Property Name="REG_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TB_Restaurant">
+    <Key>
+      <PropertyRef Name="RES_ID" />
+    </Key>
+    <Property Name="RES_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RES_NAME" Type="nvarchar" MaxLength="500" />
+    <Property Name="OWNER_NAME" Type="nvarchar" MaxLength="300" />
+    <Property Name="MOBILE_NUMBER" Type="nvarchar" MaxLength="30" />
+    <Property Name="FOOD_TYPE" Type="nvarchar" MaxLength="20" />
+    <Property Name="PASSWORD" Type="nvarchar" MaxLength="40" />
+    <Property Name="CONFIRM_PASSWORD" Type="nvarchar" MaxLength="40" />
+    <Property Name="RES_LOGO" Type="nvarchar(max)" />
+    <Property Name="RES_OPEN_TIME" Type="varchar" MaxLength="30" />
+    <Property Name="RES_CLOSE_TIME" Type="varchar" MaxLength="30" />
+    <Property Name="ADDRESS" Type="nvarchar(max)" />
+    <Property Name="LATITUDE" Type="nvarchar" MaxLength="100" />
+    <Property Name="LONGITUDE" Type="nvarchar" MaxLength="100" />
+    <Property Name="PINCODE" Type="nvarchar" MaxLength="50" />
+    <Property Name="STATUS" Type="nvarchar" MaxLength="20" />
+    <Property Name="REG_DATE" Type="datetime" />
+    <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TB_UserMaster">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USER_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="MOBILE_NUMBER" Type="nvarchar" MaxLength="20" />
+    <Property Name="EMAIL_ID" Type="nvarchar" MaxLength="100" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="300" />
+    <Property Name="PROFILE_PHOTO" Type="nvarchar(max)" />
+    <Property Name="STATUS" Type="nvarchar" MaxLength="30" />
+    <Property Name="REG_DATE" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="DB_FoodOnLinkModelStoreContainer">
+    <EntitySet Name="TB_AdminMaster" EntityType="Self.TB_AdminMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_Restaurant" EntityType="Self.TB_Restaurant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_UserMaster" EntityType="Self.TB_UserMaster" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

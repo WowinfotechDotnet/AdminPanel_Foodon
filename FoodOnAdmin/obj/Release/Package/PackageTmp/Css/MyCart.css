@@ -1,0 +1,253 @@
+﻿.jumbotron {
+    padding: 20px;
+    /*margin-right: 0.2px;
+        margin-left: 0.2px;*/
+    background-color: white;
+}
+
+body {
+    background-color: #FAFAFA;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.sectionHeadingStyle {
+    font-size: 20px;
+    padding: 10px;
+    padding-left: 12px;
+    color: #525252;
+    /*font-family: Roboto;*/
+}
+
+.headingNumberStyle {
+    padding: 3px 8px;
+    border: 1px solid forestgreen;
+    color: forestgreen;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+/*styles for radio button*/
+.radio-toolbar {
+    margin: 10px;
+    text-align: center;
+}
+
+    .radio-toolbar input[type="radio"] {
+        opacity: 0;
+        position: fixed;
+        width: 0;
+    }
+
+    .radio-toolbar label {
+        display: inline-block;
+        /*background-color: #ddd;*/
+        padding: 10px 20px;
+        font-family: sans-serif, Arial;
+        font-size: 14px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        width: 100%;
+        font-weight: normal;
+        color: #46001C;
+    }
+
+        .radio-toolbar label:hover {
+            background-color: #F6DDC9;
+        }
+
+    .radio-toolbar input[type="radio"]:focus + label {
+        border: 1px dashed #46001C;
+    }
+
+    .radio-toolbar input[type="radio"]:checked + label {
+        background-color: #F6DDC9;
+        border-color: #46001C;
+    }
+
+
+.productImgDiv img {
+    /*height:80px;
+    width:100%;*/
+    height: 100px;
+    width: 85%;
+    margin-right:20px;
+    margin-left:10px;
+}
+
+
+/* CSS that should be displayed if width is equal to or less than 768px goes here */
+/*@media (max-width: 768px) {
+    .productImgDiv img {
+        height: 120px;
+        width: 100%;
+    }
+
+}*/
+
+.UpdateCartDiv_MobileViewBelow460 {
+    display: none
+}
+/* CSS that should be displayed if width is equal to or less than 460px goes here */
+@media (max-width: 460px) {
+    .UpdateCartDiv_MobileViewBelow460 {
+        display: block
+    }
+    .UpdateCartDiv_MobileandDescViewAbove460 {
+        display: none
+    }
+
+
+    .productImgDiv img {
+        /*height:80px;
+    width:100%;*/
+        height: 80px;
+        width: 92%;
+        /*margin-right:5px;*/
+        margin-left:10px;
+    }
+
+
+}
+
+
+
+
+.marginTopMobDescView{
+    margin-top:30px;
+}
+
+/* CSS that should be displayed if width is equal to or less than 460px goes here */
+@media (max-width: 768px) {
+    .marginTopMobDescView {
+        margin-top: 0px;
+    }
+}
+
+
+
+/*DELIVERY ADDRESS STYLES*/
+/*To Solve Column height problem*/
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .row.display-flex > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+/*radio btn style for add delivery address modal*/
+.myaddrLable {
+    font-weight: normal;
+    font-size: 14px;
+    color: #7E7E7E
+}
+/*Checkbox Css Style*/
+.radioBtnInCheckboxStyle input[type=radio] + label {
+    display: block;
+    margin: 0.2em;
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+.radioBtnInCheckboxStyle input[type=radio] {
+    display: none;
+}
+
+    .radioBtnInCheckboxStyle input[type=radio] + label:before {
+        content: "\2714";
+        border: 0.1em solid #FF7C2E;
+        border-radius: 0.2em;
+        display: inline-block;
+        width: 1.5em;
+        height: 1.5em;
+        padding-left: 0.2em;
+        padding-bottom: 0.3em;
+        margin-right: 0.2em;
+        vertical-align: middle;
+        color: transparent;
+        transition: .2s;
+    }
+
+    .radioBtnInCheckboxStyle input[type=radio] + label:active:before {
+        transform: scale(0);
+    }
+
+    .radioBtnInCheckboxStyle input[type=radio]:checked + label:before {
+        background-color: #FF7C2E;
+        border-color: #FF7C2E;
+        color: #fff;
+    }
+
+    .radioBtnInCheckboxStyle input[type=radio]:disabled + label:before {
+        transform: scale(1);
+        border-color: #aaa;
+    }
+
+    .radioBtnInCheckboxStyle input[type=radio]:checked:disabled + label:before {
+        transform: scale(1);
+        background-color: #bfb;
+        border-color: #bfb;
+    }
+
+
+
+/*radio button Css Style for online payment
+*/
+.radioBtnInCheckboxStyle_Payment input[type=radio] + label {
+    display: block;
+    margin: 0.2em;
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+.radioBtnInCheckboxStyle_Payment input[type=radio] {
+    display: none;
+}
+
+    .radioBtnInCheckboxStyle_Payment input[type=radio] + label:before {
+        content: "\2714";
+        border: 0.1em solid forestgreen;
+        /*border-radius: 0.2em;*/
+        border-radius: 50%;
+        display: inline-block;
+        width: 1.5em;
+        height: 1.5em;
+        padding-left: 0.2em;
+        padding-bottom: 0.3em;
+        margin-right: 0.2em;
+        vertical-align: middle;
+        color: transparent;
+        transition: .2s;
+    }
+
+    .radioBtnInCheckboxStyle_Payment input[type=radio] + label:active:before {
+        transform: scale(0);
+    }
+
+    .radioBtnInCheckboxStyle_Payment input[type=radio]:checked + label:before {
+        background-color: forestgreen;
+        border-color: forestgreen;
+        color: #fff;
+    }
+
+    .radioBtnInCheckboxStyle_Payment input[type=radio]:disabled + label:before {
+        transform: scale(1);
+        border-color: #aaa;
+    }
+
+    .radioBtnInCheckboxStyle_Payment input[type=radio]:checked:disabled + label:before {
+        transform: scale(1);
+        background-color: #bfb;
+        border-color: #bfb;
+    }

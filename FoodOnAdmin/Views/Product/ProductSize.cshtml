@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "ProductSize";
+}
+
+
+
+<style>
+    .table td, .table th {
+        padding: 0.50rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+</style>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs" style="background-color:green;color:white"><span class="fa fa-arrow-left"></span></a>
+                            </div>
+                            <div class="col-lg-11">
+                                <h3 class="card-title"><b>Product Size List</b></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <button type="button" class="btn btn-sm" style="background-color:green;color:white" data-toggle="modal" data-target="#AddAdminReg_modal" ng-click="AddAdmin1()">Add Product Size</button>
+                        </div>
+                        <div class="col-3"></div> <div class="col-3"></div>
+                        <div class="col-3">
+                            <input type="text" class="form-control" placeholder="Search Product" ng-model="FARMER_SEARCH" ng-keyup="SearchAdmin()">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="font-size: 0.8rem;color:black;">
+                            <thead>
+                                <tr style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black ">
+                                    <th>Sr.No</th>
+                                    <th>Product Size</th>
+                                    <th>Product Type</th>
+                                    <th>Product Prize</th>
+                                    <th>Product Discount</th>
+                                    <th>Product Image</th>
+                                    <th>Status</th>
+                                    <th style="width:50px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <a>
+                                            Half Plate
+                                        </a>
+                                    </td>
+                                    <td>Veg</td>
+                                    <td>60</td>
+                                    <td>10</td>
+                                    <td>
+                                        <img src="~/Images/download (3).jpg" style="height:90px">
+                                    </td>
+                                    <td>Active</td>
+                                    <td>
+                                        <span title="Edit" data-toggle="modal" data-target="#AddAdminReg_modal" style="cursor:pointer;" class="btn btn-xs btn-primary" ng-click="UpdateAdmin(Admin)"><span class="fa fa-edit"></span></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <a>
+                                            Full Plate
+                                        </a>
+                                    </td>
+                                    <td>Veg</td>
+                                    <td>110</td>
+                                    <td>10</td>
+                                    <td>
+                                        <img src="~/Images/download (3).jpg" style="height:90px">
+                                    </td>
+                                    <td>Active</td>
+                                    <td>
+                                        <span title="Edit" data-toggle="modal" data-target="#AddAdminReg_modal" style="cursor:pointer;" class="btn btn-xs btn-primary" ng-click="UpdateAdmin(Admin)"><span class="fa fa-edit"></span></span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <ul ng-if="pager.pages.length" class="pagination" style="margin-left:30px;">
+                            <li ng-class="{disabled:pager.currentPage === 1}">
+                                <a ng-click="setPage(1)">First</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === 1}">
+                                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                            </li>
+                            <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+                                <a ng-click="setPage(page)">{{page}}</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                <a ng-click="setPage(pager.totalPages)">Last</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="AddAdminReg_modal" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+                        <div class="modal-dialog modal-md" style="font-family:Roboto;">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black;padding:10px;">
+                                    <span class="modal-title"><b>Add Product Size</b></span>
+                                    <button type="button" class="close" data-dismiss="modal" style="margin-right:5px;">&times;</button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form name="C2" ng-submit="C2(C2.$valid)" novalidate" data-toggle="validator" role="form">
+                                                <label hidden>{{CITY_ID}}</label>
+                                                <div class="row">
+                                                    <div class="col-lg-12 form-group">
+                                                        <label style="font-size:11px;">Product Size :</label><label style="color:red;">*</label>
+                                                        <input type="text" name="AREA_NAME" class="form-control" ng-model="AREA_NAME" maxlength="120" required placeholder="Enter Product Name" />
+                                                    </div>
+                                            
+                                                    <div class="col-lg-12 form-group">
+                                                        <label style="font-size:11px;">Price :</label><label style="color:red;">*</label>
+                                                        <input type="text" name="AREA_NAME" class="form-control" ng-model="AREA_NAME" maxlength="120" required placeholder="Enter Area Name" />
+                                                    </div>
+                                                    <div class="col-lg-12 form-group">
+                                                        <label style="font-size:11px;">Discount :</label><label style="color:red;">*</label>
+                                                        <input type="text" name="AREA_NAME" class="form-control" ng-model="AREA_NAME" maxlength="120" required placeholder="Enter Area Name" />
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label style="color:black;font-size:11px;">Product Image:</label><label style="color:red">*</label>
+                                                                <input type="file" ng-model="IMAGE_URL" class="form-control" accept="image/*" style="height:38px;" id="Profile_photo">
+                                                                <label style="color:green;font-size:14px;">Note:Image size should be less than 500 kb and Dimension: 512 * 220 pixels.</label>
+                                                                <a href="#" style="display:none" id="divProfile">
+                                                                    <img src={{IMAGE_URL}} style="height: 100px; width: 100px; object-fit: contain;">&nbsp; &nbsp; &nbsp;
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="form-group col-lg-12">
+                                                        <center>
+                                                            <input type="button" class="btn btn-sm" style="background-color: #13b757f2; color: black; font-size: 14px;" ng-disabled="C2.$invalid" ng-click="AddUpdateAdmin()" value="Add Product" />
+                                                        </center>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+
+    <script src="~/AngularJs/DateFilter.js"></script>
+
+    <link href="~/Paging/Paging.css" rel="stylesheet" />
+}
+
+
+
+
+

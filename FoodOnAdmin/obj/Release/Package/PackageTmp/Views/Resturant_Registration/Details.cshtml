@@ -1,0 +1,1030 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<style>
+    .paper .b-r-cta {
+        border: 1px solid #17a2b8;
+        background-color: #17a2b8;
+        background-image: linear-gradient(180deg,#544427,#17a2b8);
+        text-shadow: 0 1px 1px rgba(0,0,0,.2);
+        padding: 5px 15px;
+    }
+
+        .paper .b-r-cta:focus, .paper .b-r-cta:hover {
+            transition: all .3s ease;
+            background-image: linear-gradient(180deg,#544427,#e86700);
+        }
+
+    .paper * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /*background-image: linear-gradient(180deg,orange,#ff7302);*/
+    }
+
+    .invalid-blink {
+        background-color: green;
+        color: white;
+    }
+</style>
+<style>
+    .catStyle_Desc {
+        color: orangered;
+        cursor: pointer;
+        font-size: 15px;
+        border: 1px solid #077F7B;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .catStyle_active_Desc {
+        color: white;
+        background-color: #077F7B;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 5px 10px;
+        border: 1px solid #077F7B;
+        border-radius: 5px;
+    }
+</style>
+
+<style>
+    .table td, .table th {
+        padding: 0.30rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+</style>
+<style>
+    input[type=checkbox] + label {
+        display: block;
+        margin: 0.2em;
+        cursor: pointer;
+        padding: 0.2em;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+        input[type=checkbox] + label:before {
+            content: "\2714";
+            border: 0.1em solid #F1511B;
+            border-radius: 0.2em;
+            /*border-radius: 50%;*/
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            padding-left: 0.2em;
+            padding-bottom: 1.5em;
+            margin-right: 0.2em;
+            vertical-align: middle;
+            color: transparent;
+            transition: .2s;
+        }
+
+        input[type=checkbox] + label:active:before {
+            transform: scale(0);
+        }
+
+        input[type=checkbox]:checked + label:before {
+            background-color: #F1511B;
+            border-color: #F1511B;
+            color: #fff;
+        }
+
+        input[type=checkbox]:disabled + label:before {
+            transform: scale(1);
+            border-color: #aaa;
+        }
+
+        input[type=checkbox]:checked:disabled + label:before {
+            transform: scale(1);
+            background-color: #F1511B;
+            border-color: #F1511B;
+        }
+</style>
+
+
+<section class="content" ng-controller="ShopController">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 class="card-title"><b> Restaurant Name:(<span style="color:red"> {{ShopList[0].RES_NAME}} </span>)</b></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12" style="overflow-y: auto;">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%" style="font-size: 0.8rem; ">
+                                <thead style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black ">
+                                    <tr>
+                                        <th>Shop Name</th>
+                                        <th>Owner Number</th>
+                                        <th>Mobile Number</th>
+                                        <th>Address</th>
+                                        <th>Pincode</th>
+                                        <th>Hotel Type</th>
+                                        <th>Hotel Open Time</th>
+                                        <th>Hotel Close Time</th>
+                                        <th>Status</th>
+                                        <th>Reg Date</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr ng-repeat="shop in  ShopList">
+                                        <td> {{shop.RES_NAME}}</td>
+                                        <td> {{shop.OWNER_NAME}}</td>
+                                        <td>{{shop.MOBILE_NUMBER}}</td>
+                                        <td>{{shop.ADDRESS}}</td>
+                                        <td>{{shop.PINCODE}}</td>
+                                        <td>{{shop.FOOD_TYPE}}</td>
+                                        <td>{{shop.RES_OPEN_TIME}}</td>
+                                        <td>{{shop.RES_CLOSE_TIME}}</td>
+
+                                        <td style="color:red;font-weight:bold">{{shop.STATUS}}</td>
+                                        <td>{{shop.REG_DATE |jsonDate:'dd/MM/yyyy'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div style="overflow: auto; white-space: nowrap; padding:15px 0px;">
+                                                <center>
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_active_Desc" id="1_catId_Desc" ng-click="OnCategoryClick('1')" style="padding:5px; margin:5px;font-size:12px;">Images</span>
+                                                    </span>
+
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="2_catId_Desc" ng-click="OnCategoryClick('2')" style="padding:5px; margin:5px;font-size:12px;">Information</span>
+                                                    </span>
+
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="3_catId_Desc" ng-click="OnCategoryClick('3')" style="padding:5px; margin:5px;font-size:12px;">Facility</span>
+                                                    </span>
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="4_catId_Desc" ng-click="OnCategoryClick('4')" style="padding:5px; margin:5px;font-size:12px;">Todays Food Enquiry</span>
+                                                    </span>
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="5_catId_Desc" ng-click="OnCategoryClick('5')" style="padding:5px; margin:5px;font-size:12px;">Todays Dinning Enquiry</span>
+                                                    </span>
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="6_catId_Desc" ng-click="OnCategoryClick('6')" style="padding:5px; margin:5px;font-size:12px;">Total Food Enquiry</span>
+                                                    </span>
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="7_catId_Desc" ng-click="OnCategoryClick('7')" style="padding:5px; margin:5px;font-size:12px;">Total Dinning Enquiry</span>
+                                                    </span>
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="8_catId_Desc" ng-click="OnCategoryClick('8')" style="padding:5px; margin:5px;font-size:12px;">Pending</span>
+                                                    </span>
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="9_catId_Desc" ng-click="OnCategoryClick('9')" style="padding:5px; margin:5px;font-size:12px;">Complete</span>
+                                                    </span>
+                                                    <span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="10_catId_Desc" ng-click="OnCategoryClick('10')" style="padding:5px; margin:5px;font-size:12px;">Cancel</span>
+                                                    </span>
+                                                </center>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="card-body" id="Demoexample_1">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" style="font-size: 0.8rem;color:black;">
+                                            <thead>
+                                                <tr style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black ">
+                                                    <th>Sr.No</th>                                                   
+                                                    <th>Restaurant Image</th>
+                                                    <th>Status</th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="images in ShopImageList">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>
+                                                        <img src="{{images.R_PHOTO}}" style="height:90px;width:250px;">
+                                                    </td>
+                                                    <td>{{images.STATUS}}</td>         
+                                                </tr>         
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                                <div class="card-body" id="Demoexample_2" style="display:none;">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" style="font-size: 0.8rem;color:black;">
+                                            <thead>
+                                                <tr style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black ">
+                                                    <th>Sr.No</th>
+                                                    <th>Information</th>
+                                                    <th>Status</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="info in ShopImageList">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>
+                                                        {{info.R_PHOTO}}
+                                                    </td>
+
+                                                    <td>{{info.STATUS}}</td>
+
+                                                </tr>
+
+
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="card-body" id="Demoexample_3" style="display:none;">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" style="font-size: 0.8rem;color:black;">
+                                            <thead>
+                                                <tr style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black ">
+                                                    <th>Sr.No</th>
+                                                    <th>Facility</th>
+                                                    <th>Status</th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Review in ShopImageList">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>
+                                                        {{Review.R_PHOTO}}
+                                                    </td>
+
+                                                    <td>{{Review.STATUS}}</td>
+                                                   
+                                                </tr>
+                                                
+                                                
+                                                
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="card-body" id="Demoexample_4" style="display:none;">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="table table-bordered bordered" style="font-size: 0.7rem">
+                                            <thead>
+                                                <tr style="background-color:lightgray">
+                                                    <th style="color:black;width:10%"><center>Sr.No</center></th>
+                                                    <th style="color: black; width:15%"><center>Customer Name</center></th>
+                                                    <th style="color: black; width:15%"><center>Mobile Number</center></th>
+                                                    <th style="color: black; width:10%"><center>Food Type</center></th>
+                                                    <th style="color: black; width: 10%"><center>Order Date</center></th>
+                                                    <th style="color: black; width: 10%"><center>Order Time</center></th>
+                                                    <th style="color: black; width: 10%"><center>Status</center></th>
+                                                    <th style="color: black; width: 10%"><center>Action</center></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>1</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>03.49 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>2</span></center></td>
+                                                    <td><center><span>Ram Pandit</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>03.49 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>3</span></center></td>
+                                                    <td><center><span>Sham Khelukar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>03.49 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>4</span></center></td>
+                                                    <td><center><span>Vedant Patil</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>03.49 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>5</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>02.49 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>6</span></center></td>
+                                                    <td><center><span>Virat Kohli</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>04.41 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>7</span></center></td>
+                                                    <td><center><span>Akash Pawar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>04.49 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="card-body" id="Demoexample_5" style="display:none;">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="table table-bordered bordered" style="font-size: 0.7rem">
+                                            <thead>
+                                                <tr style="background-color:lightgray">
+                                                    <th style="color:black;width:10%"><center>Sr.No</center></th>
+                                                    <th style="color: black; width:15%"><center>Customer Name</center></th>
+                                                    <th style="color: black; width:15%"><center>Mobile Number</center></th>
+                                                    <th style="color: black; width:10%"><center>Food Type</center></th>
+                                                    <th style="color: black; width: 10%"><center>Order Date</center></th>
+                                                    <th style="color: black; width: 10%"><center>Dinning Time</center></th>
+                                                    <th style="color: black; width: 10%"><center>Order Time</center></th>
+                                                    <th style="color: black; width: 10%"><center>Status</center></th>
+                                                    <th style="color: black; width: 10%"><center>Action</center></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>1</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+                                                    <td style="text-align:center">
+
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>2</span></center></td>
+                                                    <td><center><span>Ram Pandit</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>3</span></center></td>
+                                                    <td><center><span>Sham Khelukar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>4</span></center></td>
+                                                    <td><center><span>Vedant Patil</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>5</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>6</span></center></td>
+                                                    <td><center><span>Virat Kohli</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+                                                    <td style="text-align:center">
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>7</span></center></td>
+                                                    <td><center><span>Akash Pawar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="card-body" id="Demoexample_6" style="display:none;">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="table table-bordered bordered" style="font-size: 0.7rem">
+                                            <thead>
+                                                <tr style="background-color:lightgray">
+                                                    <th style="color:black;width:10%"><center>Sr.No</center></th>
+                                                    <th style="color: black; width:15%"><center>Customer Name</center></th>
+                                                    <th style="color: black; width:15%"><center>Mobile Number</center></th>
+                                                    <th style="color: black; width:10%"><center>Food Type</center></th>
+                                                    <th style="color: black; width: 10%"><center>Order Date</center></th>
+                                                    <th style="color: black; width: 10%"><center>Order Time</center></th>
+                                                    <th style="color: black; width: 10%"><center>Status</center></th>
+                                                    <th style="color: black; width: 10%"><center>Action</center></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>1</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>03.49 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>2</span></center></td>
+                                                    <td><center><span>Ram Pandit</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>03.49 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>3</span></center></td>
+                                                    <td><center><span>Sham Khelukar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>03.49 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>4</span></center></td>
+                                                    <td><center><span>Vedant Patil</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>03.49 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>5</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>02.49 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>6</span></center></td>
+                                                    <td><center><span>Virat Kohli</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>04.41 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>7</span></center></td>
+                                                    <td><center><span>Akash Pawar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>04.49 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="card-body" id="Demoexample_7" style="display:none;">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="table table-bordered bordered" style="font-size: 0.7rem">
+                                            <thead>
+                                                <tr style="background-color:lightgray">
+                                                    <th style="color:black;width:10%"><center>Sr.No</center></th>
+                                                    <th style="color: black; width:15%"><center>Customer Name</center></th>
+                                                    <th style="color: black; width:15%"><center>Mobile Number</center></th>
+                                                    <th style="color: black; width:10%"><center>Food Type</center></th>
+                                                    <th style="color: black; width: 10%"><center>Order Date</center></th>
+                                                    <th style="color: black; width: 10%"><center>Dinning Time</center></th>
+                                                    <th style="color: black; width: 10%"><center>Order Time</center></th>
+                                                    <th style="color: black; width: 10%"><center>Status</center></th>
+                                                    <th style="color: black; width: 10%"><center>Action</center></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>1</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+                                                    <td style="text-align:center">
+
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>2</span></center></td>
+                                                    <td><center><span>Ram Pandit</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>3</span></center></td>
+                                                    <td><center><span>Sham Khelukar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>4</span></center></td>
+                                                    <td><center><span>Vedant Patil</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>5</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>6</span></center></td>
+                                                    <td><center><span>Virat Kohli</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+                                                    <td style="text-align:center">
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>7</span></center></td>
+                                                    <td><center><span>Akash Pawar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="card-body" id="Demoexample_8" style="display:none;">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="table table-bordered bordered" style="font-size: 0.7rem">
+                                            <thead>
+                                                <tr style="background-color:lightgray">
+                                                    <th style="color:black;width:10%"><center>Sr.No</center></th>
+                                                    <th style="color: black; width:15%"><center>Customer Name</center></th>
+                                                    <th style="color: black; width:15%"><center>Mobile Number</center></th>
+                                                    <th style="color: black; width:10%"><center>Food Type</center></th>
+                                                    <th style="color: black; width: 10%"><center>Total Quantity</center></th>
+                                                    <th style="color: black; width: 10%"><center>Total Price</center></th>
+                                                    <th style="color: black; width: 10%"><center>Order Time</center></th>
+                                                    <th style="color: black; width: 10%"><center>Status</center></th>
+                                                    <th style="color: black; width: 10%"><center>Action</center></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>1</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+                                                    <td style="text-align:center">
+
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>2</span></center></td>
+                                                    <td><center><span>Ram Pandit</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td><center><span>Pending</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>3</span></center></td>
+                                                    <td><center><span>Sham Khelukar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>4</span></center></td>
+                                                    <td><center><span>Vedant Patil</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Non-Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>5</span></center></td>
+                                                    <td><center><span>Wow Infotech</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>6</span></center></td>
+                                                    <td><center><span>Virat Kohli</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+                                                    <td style="text-align:center">
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr style="position:sticky;color:black">
+                                                    <td><center><span>7</span></center></td>
+                                                    <td><center><span>Akash Pawar</span></center></td>
+                                                    <td><center><span>7889455612</span></center></td>
+                                                    <td><center><span>Veg Food</span></center></td>
+                                                    <td><center><span>15/09/2022</span></center></td>
+                                                    <td><center><span>3:00 PM</span></center></td>
+                                                    <td><center><span>4:00 PM</span></center></td>
+                                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                                    <td style="text-align:center">
+
+                                                        <a href="/Dining/DiningRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                                            <span class="fa fa-eye"></span>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+@section Scripts{
+    <script src="~/AngularJs/ShopDetails.js"></script>
+    
+    <script src="~/AngularJs/Datefilter.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
+
+
+}  

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_FoodOnLinkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DB_FoodOnLinkEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TB_AdminMaster" EntityType="DB_FoodOnLinkModel.TB_AdminMaster" />
+    <EntitySet Name="TB_UserMaster" EntityType="DB_FoodOnLinkModel.TB_UserMaster" />
+    <EntitySet Name="TB_Restaurant" EntityType="DB_FoodOnLinkModel.TB_Restaurant" />
+  </EntityContainer>
+  <EntityType Name="TB_AdminMaster">
+    <Key>
+      <PropertyRef Name="ADMIN_ID" />
+    </Key>
+    <Property Name="ADMIN_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ADMIN_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MOBILE_NO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ADDRESS" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PASSWORD" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ROLE_ID" Type="Int64" />
+    <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TB_UserMaster">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USER_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MOBILE_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ADDRESS" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="PROFILE_PHOTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TB_Restaurant">
+    <Key>
+      <PropertyRef Name="RES_ID" />
+    </Key>
+    <Property Name="RES_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RES_NAME" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="OWNER_NAME" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="MOBILE_NUMBER" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="FOOD_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PASSWORD" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="CONFIRM_PASSWORD" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="RES_LOGO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RES_OPEN_TIME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="RES_CLOSE_TIME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LATITUDE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LONGITUDE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PINCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

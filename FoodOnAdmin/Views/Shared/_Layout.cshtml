@@ -1,0 +1,266 @@
+﻿
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FoodOn | DashBoard</title>
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+
+
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+
+    <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+    <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+
+    <style>
+        .btn-info {
+            color: white;
+            background-color: brown;
+            border-color: brown;
+        }
+    </style>
+
+    <style>
+        [ng-cloak] {
+            display: none !important;
+        }
+    </style>
+
+    <style>
+        #loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            opacity: 0.4;
+            background: url('../../Images/Spinner.gif') 50% 50% no-repeat rgb(249,249,249);
+            background-size: 100px 100px;
+            /*background-color: black;*/
+            /*background-color: rgba(0, 0, 0, 0.4);*/
+            background-color: rgba(255, 255, 255, 1);
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed ng-cloak" ng-app="FO">
+    <div id="loader" style="display:none;"></div>
+    <div class="wrapper">
+
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #009ad9">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color:black"></i></a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fas fa-th-large" style="color:black"></i>&nbsp;
+                        <b style="color:black">  @Session["ADMIN_NAME"]</b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <div class="dropdown-divider"></div>
+                        <a class="user-header">
+                            <center> <img src="~/Images/spgif.gif" class="img-circle" style="height:180px;width:200px;"></center>
+                            <center>  (<b style="color:red">@Session["ADMIN_NAME"]</b>)</center>
+                            <br>
+                        </a>
+                        <a href="~/AdminMaster/AdminProfile/@Session["ADMIN_ID"]" class="dropdown-item">
+                            <i class="fas fa-user mr-2"></i> Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+                        <a href="~/Home/Logout" class="dropdown-item">
+                            <i class="fas fa-stop mr-2"></i> Logout
+                        </a>
+                        <div class="dropdown-divider"></div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="~/Home/Index" class="brand-link">
+                <center> <span class="brand-text font-weight-light"><b style="font-size:25px;color:white;">FoodOn</b></span></center>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item menu-open">
+                            <a href="~/Home/Index" class="nav-link active" style="background-color: #009ad9">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p style="color:white">
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="~/UserMaster/Index" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p style="color:white">
+                                    User Master
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="~/Resturant_Registration/Index" class="nav-link">
+                                <i class="nav-icon fas fa-house-damage"></i>
+                                <p style="color:white">
+                                    Restaurant
+                                </p>
+                            </a>
+                        </li>
+                        @*<li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-copy"></i>
+                <p style="color:white">
+                    Product
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="~/Product/Index" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white"> Product</p>
+                    </a>
+                </li>
+
+            </ul>
+        </li>*@
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy" style="color:white"></i>
+                                <p style="color:white">
+                                    Master
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/AdminMaster/Index" class="nav-link">
+                                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                                        <p style="color:white">Admin Master</p>
+                                    </a>
+                                </li>
+                                @*<li class="nav-item">
+                    <a href="~/BannerMaster/Index" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Banner Master</p>
+                    </a>
+                </li>*@
+
+                            </ul>
+                        </li>
+
+
+                        @*<li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-copy" style="color:white"></i>
+                <p style="color:white">
+                    Enquiry
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="~/FoodRequest/FoodRequest" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Today Food Enquiry</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Dining/Index" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Today Dining Enquiry</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/FoodRequest/TotalFoodRequest" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Total Food Enquiry</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Dining/TotalDinningRequest" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Total Dining Enquiry</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                        <a href="~/Order/AsignOrder" class="nav-link">
+                            <i class="far fa-circle nav-icon" style="color:white"></i>
+                            <p style="color:white">Assign Order</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Order/CompleteOrder" class="nav-link">
+                            <i class="far fa-circle nav-icon" style="color:white"></i>
+                            <p style="color:white">Completed Order</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Order/CancelOrder" class="nav-link">
+                            <i class="far fa-circle nav-icon" style="color:white"></i>
+                            <p style="color:white">Cancel Order</p>
+                        </a>
+                    </li>
+            </ul>
+        </li>*@
+
+
+
+
+
+
+                    </ul>
+                </nav>
+
+            </div>
+        </aside>
+
+
+        <div class="content-wrapper">
+            <section class="content">
+                <br>
+                @RenderBody()
+            </section>
+        </div>
+
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-inline-block">
+
+                <b>Version</b> 2.0.0
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/AngularJs/Module.js"></script>
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <script src="~/dist/js/adminlte.js"></script>
+
+    <script src="~/dist/js/demo.js"></script>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+
+
+
+

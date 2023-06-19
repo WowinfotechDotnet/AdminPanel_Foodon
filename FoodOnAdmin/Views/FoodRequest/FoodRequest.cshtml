@@ -1,0 +1,282 @@
+﻿
+@{
+    ViewBag.Title = "FoodRequest";
+}
+
+
+
+
+<style>
+    .table td, .table th {
+        padding: 0.50rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+</style>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-1">
+                                    <a href="~/Home/Index" class="btn btn-xs" style="background-color:green;color:white"><span class="fa fa-arrow-left"></span></a>
+                                </div>
+                                <div class="col-11">
+                                    <h3 class="card-title"><b>Todays Food Request List</b></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            @*<button type="button" class="btn btn-sm" style="background-color:green;color:white" data-toggle="modal" data-target="#AddAdminReg_modal" ng-click="AddAdmin1()">Add Product</button>*@
+                        </div>
+                        <div class="col-3"></div>
+                        <div class="col-3"></div>
+                        <div class="col-3">
+                            <input type="text" class="form-control" placeholder="Search Order" ng-model="FARMER_SEARCH" ng-keyup="SearchAdmin()">
+                        </div>
+                    </div>
+                    <br>
+
+
+
+                    <div class="table-responsive">
+                        <table id="example2" class="table table-bordered bordered" style="font-size: 0.7rem">
+                            <thead>
+                                <tr style="background-color:lightgray">
+                                    <th style="color:black;width:10%"><center>Sr.No</center></th>
+                                    <th style="color: black; width:15%"><center>Customer Name</center></th>
+                                    <th style="color: black; width:15%"><center>Mobile Number</center></th>
+                                    <th style="color: black; width:10%"><center>Food Type</center></th>
+                                    <th style="color: black; width: 10%"><center>Order Date</center></th>
+                                    <th style="color: black; width: 10%"><center>Order Time</center></th>
+                                    <th style="color: black; width: 10%"><center>Status</center></th>
+                                    <th style="color: black; width: 10%"><center>Action</center></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="position:sticky;color:black">
+                                    <td><center><span>1</span></center></td>
+                                    <td><center><span>Wow Infotech</span></center></td>
+                                    <td><center><span>7889455612</span></center></td>
+                                    <td><center><span>Veg Food</span></center></td>
+                                    <td><center><span>15/09/2022</span></center></td>
+                                    <td><center><span>03.49 PM</span></center></td>
+                                    <td><center><span>Pending</span></center></td>
+                                    <td style="text-align:center">
+
+                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                            <span class="fa fa-eye"></span>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                <tr style="position:sticky;color:black">
+                                    <td><center><span>2</span></center></td>
+                                    <td><center><span>Ram Pandit</span></center></td>
+                                    <td><center><span>7889455612</span></center></td>
+                                    <td><center><span>Veg Food</span></center></td>
+                                    <td><center><span>15/09/2022</span></center></td>
+                                    <td><center><span>03.49 PM</span></center></td>
+                                    <td><center><span>Pending</span></center></td>
+
+                                    <td style="text-align:center">
+
+                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                            <span class="fa fa-eye"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr style="position:sticky;color:black">
+                                    <td><center><span>3</span></center></td>
+                                    <td><center><span>Sham Khelukar</span></center></td>
+                                    <td><center><span>7889455612</span></center></td>
+                                    <td><center><span>Non-Veg Food</span></center></td>
+                                    <td><center><span>15/09/2022</span></center></td>
+                                    <td><center><span>03.49 PM</span></center></td>
+                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                    <td style="text-align:center">
+
+                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                            <span class="fa fa-eye"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr style="position:sticky;color:black">
+                                    <td><center><span>4</span></center></td>
+                                    <td><center><span>Vedant Patil</span></center></td>
+                                    <td><center><span>7889455612</span></center></td>
+                                    <td><center><span>Veg Food</span></center></td>
+                                    <td><center><span>15/09/2022</span></center></td>
+                                    <td><center><span>03.49 PM</span></center></td>
+                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                    <td style="text-align:center">
+
+                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                            <span class="fa fa-eye"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr style="position:sticky;color:black">
+                                    <td><center><span>5</span></center></td>
+                                    <td><center><span>Wow Infotech</span></center></td>
+                                    <td><center><span>7889455612</span></center></td>
+
+                                    <td><center><span>Non-Veg Food</span></center></td>
+                                    <td><center><span>15/09/2022</span></center></td>
+                                    <td><center><span>02.49 PM</span></center></td>
+                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                    <td style="text-align:center">
+
+                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                            <span class="fa fa-eye"></span>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                <tr style="position:sticky;color:black">
+                                    <td><center><span>6</span></center></td>
+                                    <td><center><span>Virat Kohli</span></center></td>
+                                    <td><center><span>7889455612</span></center></td>
+
+                                    <td><center><span>Veg Food</span></center></td>
+                                    <td><center><span>15/09/2022</span></center></td>
+                                    <td><center><span>04.41 PM</span></center></td>
+                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                    <td style="text-align:center">
+
+                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                            <span class="fa fa-eye"></span>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                <tr style="position:sticky;color:black">
+                                    <td><center><span>7</span></center></td>
+                                    <td><center><span>Akash Pawar</span></center></td>
+                                    <td><center><span>7889455612</span></center></td>
+                                    <td><center><span>Veg Food</span></center></td>
+                                    <td><center><span>15/09/2022</span></center></td>
+                                    <td><center><span>04.49 PM</span></center></td>
+                                    <td style="color:red;font-weight:bold"><center><span>Details Sent</span></center></td>
+
+                                    <td style="text-align:center">
+
+                                        <a href="/FoodRequest/FoodRequestDetails" title="Details" ng-click="GetproductByIdScheme(ProductMaster)" style="cursor:pointer;background-color:#077F7B;color:white" class="btn btn-outline btn-xs dim">
+                                            <span class="fa fa-eye"></span>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul ng-if="pager.pages.length" class="pagination" style="margin-left:30px;">
+                            <li ng-class="{disabled:pager.currentPage === 1}">
+                                <a ng-click="setPage(1)">First</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === 1}">
+                                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                            </li>
+                            <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+                                <a ng-click="setPage(page)">{{page}}</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                            </li>
+                            <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                <a ng-click="setPage(pager.totalPages)">Last</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div id="AddAdminReg_modal" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+                        <div class="modal-dialog modal-md" style="font-family:Roboto;">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black;padding:10px;">
+                                    <span class="modal-title"><b>Add Product</b></span>
+                                    <button type="button" class="close" data-dismiss="modal" style="margin-right:5px;">&times;</button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form name="C2" ng-submit="C2(C2.$valid)" novalidate" data-toggle="validator" role="form">
+                                                <label hidden>{{CITY_ID}}</label>
+                                                <div class="row">
+                                                    <div class="col-lg-12 form-group">
+                                                        <label style="font-size:11px;">Product Name :</label><label style="color:red;">*</label>
+                                                        <input type="text" name="AREA_NAME" class="form-control" ng-model="AREA_NAME" maxlength="120" required placeholder="Enter Product Name" />
+                                                    </div>
+                                                    <div class="col-lg-12 form-group">
+                                                        <label style="font-size:11px;">Select Food Type :</label><label style="color:red;">*</label>
+                                                        <input type="text" name="AREA_NAME" class="form-control" ng-model="AREA_NAME" maxlength="120" required placeholder="Enter Food Type" />
+                                                    </div>
+                                                    <div class="col-lg-12 form-group">
+                                                        <label style="font-size:11px;">Price :</label><label style="color:red;">*</label>
+                                                        <input type="text" name="AREA_NAME" class="form-control" ng-model="AREA_NAME" maxlength="120" required placeholder="Enter Area Name" />
+                                                    </div>
+                                                    <div class="col-lg-12 form-group">
+                                                        <label style="font-size:11px;">Discount :</label><label style="color:red;">*</label>
+                                                        <input type="text" name="AREA_NAME" class="form-control" ng-model="AREA_NAME" maxlength="120" required placeholder="Enter Area Name" />
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label style="color:black;font-size:11px;">Product Image:</label><label style="color:red">*</label>
+                                                                <input type="file" ng-model="IMAGE_URL" class="form-control" accept="image/*" style="height:38px;" id="Profile_photo">
+                                                                <label style="color:green;font-size:14px;">Note:Image size should be less than 500 kb and Dimension: 512 * 220 pixels.</label>
+                                                                <a href="#" style="display:none" id="divProfile">
+                                                                    <img src={{IMAGE_URL}} style="height: 100px; width: 100px; object-fit: contain;">&nbsp; &nbsp; &nbsp;
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="form-group col-lg-12">
+                                                        <center>
+                                                            <input type="button" class="btn btn-sm" style="background-color: #13b757f2; color: black; font-size: 14px;" ng-disabled="C2.$invalid" ng-click="AddUpdateAdmin()" value="Add Product" />
+                                                        </center>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+@section Scripts{
+
+    <script src="~/AngularJs/DateFilter.js"></script>
+
+    <link href="~/Paging/Paging.css" rel="stylesheet" />
+}
+
+
+
+

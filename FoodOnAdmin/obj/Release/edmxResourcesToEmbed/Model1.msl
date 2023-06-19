@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_FoodOnLinkModelStoreContainer" CdmEntityContainer="DB_FoodOnLinkEntities">
+    <EntitySetMapping Name="TB_AdminMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_AdminMaster">
+        <MappingFragment StoreEntitySet="TB_AdminMaster">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="MOBILE_NO" ColumnName="MOBILE_NO" />
+          <ScalarProperty Name="ADMIN_NAME" ColumnName="ADMIN_NAME" />
+          <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_UserMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_UserMaster">
+        <MappingFragment StoreEntitySet="TB_UserMaster">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="PROFILE_PHOTO" ColumnName="PROFILE_PHOTO" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="EMAIL_ID" ColumnName="EMAIL_ID" />
+          <ScalarProperty Name="MOBILE_NUMBER" ColumnName="MOBILE_NUMBER" />
+          <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_Restaurant">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_Restaurant">
+        <MappingFragment StoreEntitySet="TB_Restaurant">
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="PINCODE" ColumnName="PINCODE" />
+          <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+          <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="RES_CLOSE_TIME" ColumnName="RES_CLOSE_TIME" />
+          <ScalarProperty Name="RES_OPEN_TIME" ColumnName="RES_OPEN_TIME" />
+          <ScalarProperty Name="RES_LOGO" ColumnName="RES_LOGO" />
+          <ScalarProperty Name="CONFIRM_PASSWORD" ColumnName="CONFIRM_PASSWORD" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="FOOD_TYPE" ColumnName="FOOD_TYPE" />
+          <ScalarProperty Name="MOBILE_NUMBER" ColumnName="MOBILE_NUMBER" />
+          <ScalarProperty Name="OWNER_NAME" ColumnName="OWNER_NAME" />
+          <ScalarProperty Name="RES_NAME" ColumnName="RES_NAME" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
