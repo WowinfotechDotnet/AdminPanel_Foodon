@@ -36,8 +36,8 @@ namespace FoodOnAdmin
         public static string userlogin;
         public static string text, Tokens;
         public static int K = 0;
-        public static string serverurl = @"https://admin.anarking.wowinfotech.co/";
-        public static string pdf = @"https://admin.anarking.wowinfotech.co/";
+        public static string serverurl = @"https://admin.foodon.wowinfotech.co";
+        public static string pdf = @"https://admin.foodon.wowinfotech.co";
  
         // public bool IsSplashFormVisible { get; }
 

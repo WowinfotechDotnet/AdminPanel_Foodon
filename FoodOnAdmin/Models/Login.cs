@@ -48,6 +48,36 @@ namespace FoodOnAdmin.Models
 
     }
 
+    public class Employee
+    {
+        public long EMP_ID { get; set; }
+        public long VEHICAL_ID { get; set; }
+        public string EMP_NAME { get; set; }
+        public string MOBILE_NO { get; set; }
+        public string PASSWORD { get; set; }
+        public string ADDRESS { get; set; }
+        public string AreaOfWork { get; set; }
+        public string AADHAAR { get; set; }
+        public string PAN { get; set; }
+        public string EMAIL { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+        public string PROJECT_ACTION { get; set; }
+        public string DOCUMENT_TYPE { get; set; }
+        public string ADHARCARD_COPY { get; set; }
+
+        //adharcard
+        public string ImageBase64Data { get; set; }
+        public string ImageName { get; set; }
+        public string ImageExtension { get; set; }
+
+        //pancard
+        public string PancardImageBase64Data { get; set; }
+        public string PancardImageName { get; set; }
+        public string PancardImageExtension { get; set; }
+
+    }
+
     public class UserMaster
     {
         public long USER_ID { get; set; }

@@ -14,6 +14,13 @@ namespace FoodOnAdmin
     
     public partial class TB_Restaurant
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_Restaurant()
+        {
+            this.TB_DinningAnswer = new HashSet<TB_DinningAnswer>();
+            this.TB_ProductMaster = new HashSet<TB_ProductMaster>();
+        }
+    
         public long RES_ID { get; set; }
         public string RES_NAME { get; set; }
         public string OWNER_NAME { get; set; }
@@ -31,5 +38,18 @@ namespace FoodOnAdmin
         public string STATUS { get; set; }
         public Nullable<System.DateTime> REG_DATE { get; set; }
         public string DESCRIPTION { get; set; }
+        public string ADVANCED_AMT { get; set; }
+        public string QR_CODE { get; set; }
+        public string CATEGORY { get; set; }
+        public Nullable<double> RES_RATING { get; set; }
+        public Nullable<double> DISTANCE_KM { get; set; }
+        public Nullable<long> OFFERS_ID { get; set; }
+        public Nullable<long> TIME { get; set; }
+        public string RES_LIKE { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_DinningAnswer> TB_DinningAnswer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_ProductMaster> TB_ProductMaster { get; set; }
     }
 }

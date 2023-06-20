@@ -14,6 +14,13 @@ namespace FoodOnAdmin
     
     public partial class TB_UserMaster
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_UserMaster()
+        {
+            this.TB_Diningrequest = new HashSet<TB_Diningrequest>();
+            this.TB_DinningAnswer = new HashSet<TB_DinningAnswer>();
+        }
+    
         public long USER_ID { get; set; }
         public string USER_NAME { get; set; }
         public string MOBILE_NUMBER { get; set; }
@@ -22,5 +29,10 @@ namespace FoodOnAdmin
         public string PROFILE_PHOTO { get; set; }
         public string STATUS { get; set; }
         public Nullable<System.DateTime> REG_DATE { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_Diningrequest> TB_Diningrequest { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_DinningAnswer> TB_DinningAnswer { get; set; }
     }
 }
