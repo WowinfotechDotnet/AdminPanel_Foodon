@@ -291,8 +291,7 @@ namespace FoodOnAdmin.Controllers
             {
             }
 
-            //try
-            //{
+           
                 cmd = new SqlCommand("UPLOAD_TB_EMPLOYEE_DOCUMENT", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@EMPLOYEE_ID", tB_Employee.EMP_ID);
@@ -336,10 +335,6 @@ namespace FoodOnAdmin.Controllers
                     }
 
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //}
             var _Monthlyreport = FinalreportList;
             return Json(_Monthlyreport, JsonRequestBehavior.AllowGet);
 
