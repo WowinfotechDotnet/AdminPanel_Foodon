@@ -136,6 +136,7 @@
     <Compile Include="Controllers\FacilitesController.cs" />
     <Compile Include="Controllers\FoodRequestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\Resturant_RegistrationController.cs" />
     <Compile Include="Controllers\ShopInformationController.cs" />
@@ -188,6 +189,9 @@
     <Compile Include="TB_OrderDetails.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_PackageMaster.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_PreferredMenu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -220,6 +224,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularJs\Package.js" />
     <Content Include="AngularJs\Admin.js" />
     <Content Include="AngularJs\AdminProfile.js" />
     <Content Include="AngularJs\Datefilter.js" />
@@ -2858,6 +2863,7 @@
     <Content Include="Views\UserMaster\Index.cshtml" />
     <Content Include="Views\AdminMaster\AdminProfile.cshtml" />
     <Content Include="Views\DeliveryBoyMaster\Index.cshtml" />
+    <Content Include="Views\Package\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

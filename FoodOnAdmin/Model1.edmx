@@ -142,12 +142,14 @@
           <Property Name="NOTE" Type="nvarchar" MaxLength="200" />
           <Property Name="STATUS" Type="nvarchar" MaxLength="200" />
           <Property Name="REG_DATE" Type="datetime" />
-          <Property Name="DELIVERY_BOY_REMARK" Type="nvarchar" MaxLength="100" />
           <Property Name="DELIVERY_BOY_STATUS" Type="nvarchar" MaxLength="100" />
           <Property Name="EMP_ID" Type="bigint" />
           <Property Name="ORDER_TYPE" Type="nvarchar" MaxLength="100" />
-          <Property Name="PREFERRED_MENU" Type="nvarchar" MaxLength="200" />
           <Property Name="APP_ORDER_ID" Type="bigint" />
+          <Property Name="DELIVERY_BOY_REMARK" Type="nvarchar" MaxLength="200" />
+          <Property Name="ORDER_REMARK" Type="nvarchar" MaxLength="200" />
+          <Property Name="ORDER_RATING" Type="float" />
+          <Property Name="RATE_STATUS" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TB_OrderDetails">
           <Key>
@@ -160,6 +162,20 @@
           <Property Name="QUANTITY" Type="bigint" />
           <Property Name="STATUS" Type="nvarchar" MaxLength="200" />
           <Property Name="REG_DATE" Type="date" />
+        </EntityType>
+        <EntityType Name="TB_PackageMaster">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PACKAGE_NAME" Type="nvarchar" MaxLength="500" />
+          <Property Name="PACKAGE_DESCRIPTION" Type="nvarchar(max)" />
+          <Property Name="MRP" Type="money" />
+          <Property Name="OFFER_PRICE" Type="money" />
+          <Property Name="PACKAGE_VALIDITY" Type="bigint" />
+          <Property Name="POST_COUNT" Type="int" />
+          <Property Name="STATUS" Type="varchar" MaxLength="20" />
+          <Property Name="REG_DATE" Type="datetime" />
         </EntityType>
         <EntityType Name="TB_PreferredMenu">
           <Key>
@@ -180,6 +196,9 @@
           <Property Name="DELIVERY_BOY_STATUS" Type="nvarchar" MaxLength="100" />
           <Property Name="EMP_ID" Type="bigint" />
           <Property Name="APP_ORDER_ID" Type="bigint" />
+          <Property Name="ORDER_REMARK" Type="nvarchar" MaxLength="200" />
+          <Property Name="ORDER_RATING" Type="float" />
+          <Property Name="RATE_STATUS" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TB_PreferredMenuAnswer">
           <Key>
@@ -217,6 +236,7 @@
           <Property Name="SERVES_COUNT" Type="bigint" />
           <Property Name="DISTANACE_KM" Type="float" />
           <Property Name="OFFERS_ID" Type="bigint" />
+          <Property Name="P_CAT_ID" Type="bigint" />
         </EntityType>
         <EntityType Name="TB_Restaurant">
           <Key>
@@ -277,6 +297,7 @@
           <Property Name="OFFERS_BY_PERCENT" Type="nvarchar" MaxLength="300" />
           <Property Name="STATUS" Type="nvarchar" MaxLength="200" />
           <Property Name="REG_DATE" Type="date" />
+          <Property Name="OFFERS_IMAGE" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="TB_Settings">
           <Key>
@@ -380,6 +401,7 @@
           <EntitySet Name="TB_EMPLOYEE" EntityType="Self.TB_EMPLOYEE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ORDER" EntityType="Self.TB_ORDER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_OrderDetails" EntityType="Self.TB_OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_PackageMaster" EntityType="Self.TB_PackageMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PreferredMenu" EntityType="Self.TB_PreferredMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PreferredMenuAnswer" EntityType="Self.TB_PreferredMenuAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ProductMaster" EntityType="Self.TB_ProductMaster" Schema="dbo" store:Type="Tables" />
@@ -425,9 +447,7 @@
           <EntitySet Name="TB_Diningrequest" EntityType="DB_FoodOnLinkModel.TB_Diningrequest" />
           <EntitySet Name="TB_DinningAnswer" EntityType="DB_FoodOnLinkModel.TB_DinningAnswer" />
           <EntitySet Name="TB_EMPLOYEE" EntityType="DB_FoodOnLinkModel.TB_EMPLOYEE" />
-          <EntitySet Name="TB_ORDER" EntityType="DB_FoodOnLinkModel.TB_ORDER" />
           <EntitySet Name="TB_OrderDetails" EntityType="DB_FoodOnLinkModel.TB_OrderDetails" />
-          <EntitySet Name="TB_PreferredMenu" EntityType="DB_FoodOnLinkModel.TB_PreferredMenu" />
           <EntitySet Name="TB_PreferredMenuAnswer" EntityType="DB_FoodOnLinkModel.TB_PreferredMenuAnswer" />
           <EntitySet Name="TB_ProductMaster" EntityType="DB_FoodOnLinkModel.TB_ProductMaster" />
           <EntitySet Name="TB_Restaurant_Images" EntityType="DB_FoodOnLinkModel.TB_Restaurant_Images" />
@@ -455,6 +475,9 @@
             <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
             <End Role="TB_ProductMaster" EntitySet="TB_ProductMaster" />
           </AssociationSet>
+          <EntitySet Name="TB_PackageMaster" EntityType="DB_FoodOnLinkModel.TB_PackageMaster" />
+          <EntitySet Name="TB_PreferredMenu" EntityType="DB_FoodOnLinkModel.TB_PreferredMenu" />
+          <EntitySet Name="TB_ORDER" EntityType="DB_FoodOnLinkModel.TB_ORDER" />
         </EntityContainer>
         <EntityType Name="TB_AdminMaster">
           <Key>
@@ -629,29 +652,6 @@
           <Property Name="AADHAAR" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PAN" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="TB_ORDER">
-          <Key>
-            <PropertyRef Name="ORDER_ID" />
-          </Key>
-          <Property Name="ORDER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USER_ID" Type="Int64" />
-          <Property Name="RES_ID" Type="Int64" />
-          <Property Name="ADD_ID" Type="Int64" />
-          <Property Name="TOTAL_AMOUNT" Type="Double" />
-          <Property Name="TOTAL_QUANTITY" Type="Int64" />
-          <Property Name="DELIVERY_CHARGES" Type="Double" />
-          <Property Name="GST" Type="Double" />
-          <Property Name="DISCOUNT" Type="Double" />
-          <Property Name="NOTE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
-          <Property Name="DELIVERY_BOY_REMARK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DELIVERY_BOY_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="EMP_ID" Type="Int64" />
-          <Property Name="ORDER_TYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PREFERRED_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="APP_ORDER_ID" Type="Int64" />
-        </EntityType>
         <EntityType Name="TB_OrderDetails">
           <Key>
             <PropertyRef Name="OD_ID" />
@@ -663,26 +663,6 @@
           <Property Name="QUANTITY" Type="Int64" />
           <Property Name="STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="REG_DATE" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="TB_PreferredMenu">
-          <Key>
-            <PropertyRef Name="PreferredMenu_ID" />
-          </Key>
-          <Property Name="PreferredMenu_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USER_ID" Type="Int64" />
-          <Property Name="PREFERRED_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LATITIUDE" Type="Double" />
-          <Property Name="LONGITUDE" Type="Double" />
-          <Property Name="PREFERRED_TYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="RESTO_LIST" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SHOW_MOBILE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
-          <Property Name="DELIVERY_BOY_REMARK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DELIVERY_BOY_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="EMP_ID" Type="Int64" />
-          <Property Name="APP_ORDER_ID" Type="Int64" />
         </EntityType>
         <EntityType Name="TB_PreferredMenuAnswer">
           <Key>
@@ -721,6 +701,7 @@
           <Property Name="DISTANACE_KM" Type="Double" />
           <Property Name="OFFERS_ID" Type="Int64" />
           <NavigationProperty Name="TB_Restaurant" Relationship="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" FromRole="TB_ProductMaster" ToRole="TB_Restaurant" />
+          <Property Name="P_CAT_ID" Type="Int64" />
         </EntityType>
         <EntityType Name="TB_Restaurant_Images">
           <Key>
@@ -751,6 +732,7 @@
           <Property Name="OFFERS_BY_PERCENT" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="REG_DATE" Type="DateTime" Precision="0" />
+          <Property Name="OFFERS_IMAGE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TB_Settings">
           <Key>
@@ -831,6 +813,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TB_PackageMaster">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PACKAGE_NAME" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PACKAGE_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MRP" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OFFER_PRICE" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PACKAGE_VALIDITY" Type="Int64" />
+          <Property Name="POST_COUNT" Type="Int32" />
+          <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TB_PreferredMenu">
+          <Key>
+            <PropertyRef Name="PreferredMenu_ID" />
+          </Key>
+          <Property Name="PreferredMenu_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="PREFERRED_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LATITIUDE" Type="Double" />
+          <Property Name="LONGITUDE" Type="Double" />
+          <Property Name="PREFERRED_TYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RESTO_LIST" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SHOW_MOBILE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+          <Property Name="DELIVERY_BOY_REMARK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DELIVERY_BOY_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EMP_ID" Type="Int64" />
+          <Property Name="APP_ORDER_ID" Type="Int64" />
+          <Property Name="ORDER_REMARK" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ORDER_RATING" Type="Double" />
+          <Property Name="RATE_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_ORDER">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="RES_ID" Type="Int64" />
+          <Property Name="ADD_ID" Type="Int64" />
+          <Property Name="TOTAL_AMOUNT" Type="Double" />
+          <Property Name="TOTAL_QUANTITY" Type="Int64" />
+          <Property Name="DELIVERY_CHARGES" Type="Double" />
+          <Property Name="GST" Type="Double" />
+          <Property Name="DISCOUNT" Type="Double" />
+          <Property Name="NOTE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+          <Property Name="DELIVERY_BOY_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EMP_ID" Type="Int64" />
+          <Property Name="ORDER_TYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="APP_ORDER_ID" Type="Int64" />
+          <Property Name="DELIVERY_BOY_REMARK" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ORDER_REMARK" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ORDER_RATING" Type="Double" />
+          <Property Name="RATE_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1010,30 +1054,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_ORDER">
-            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_ORDER">
-              <MappingFragment StoreEntitySet="TB_ORDER">
-                <ScalarProperty Name="APP_ORDER_ID" ColumnName="APP_ORDER_ID" />
-                <ScalarProperty Name="PREFERRED_MENU" ColumnName="PREFERRED_MENU" />
-                <ScalarProperty Name="ORDER_TYPE" ColumnName="ORDER_TYPE" />
-                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
-                <ScalarProperty Name="DELIVERY_BOY_STATUS" ColumnName="DELIVERY_BOY_STATUS" />
-                <ScalarProperty Name="DELIVERY_BOY_REMARK" ColumnName="DELIVERY_BOY_REMARK" />
-                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
-                <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
-                <ScalarProperty Name="GST" ColumnName="GST" />
-                <ScalarProperty Name="DELIVERY_CHARGES" ColumnName="DELIVERY_CHARGES" />
-                <ScalarProperty Name="TOTAL_QUANTITY" ColumnName="TOTAL_QUANTITY" />
-                <ScalarProperty Name="TOTAL_AMOUNT" ColumnName="TOTAL_AMOUNT" />
-                <ScalarProperty Name="ADD_ID" ColumnName="ADD_ID" />
-                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TB_OrderDetails">
             <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_OrderDetails">
               <MappingFragment StoreEntitySet="TB_OrderDetails">
@@ -1044,27 +1064,6 @@
                 <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
                 <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
                 <ScalarProperty Name="OD_ID" ColumnName="OD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_PreferredMenu">
-            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PreferredMenu">
-              <MappingFragment StoreEntitySet="TB_PreferredMenu">
-                <ScalarProperty Name="APP_ORDER_ID" ColumnName="APP_ORDER_ID" />
-                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
-                <ScalarProperty Name="DELIVERY_BOY_STATUS" ColumnName="DELIVERY_BOY_STATUS" />
-                <ScalarProperty Name="DELIVERY_BOY_REMARK" ColumnName="DELIVERY_BOY_REMARK" />
-                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="SHOW_MOBILE" ColumnName="SHOW_MOBILE" />
-                <ScalarProperty Name="RESTO_LIST" ColumnName="RESTO_LIST" />
-                <ScalarProperty Name="PREFERRED_TYPE" ColumnName="PREFERRED_TYPE" />
-                <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
-                <ScalarProperty Name="LATITIUDE" ColumnName="LATITIUDE" />
-                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
-                <ScalarProperty Name="PREFERRED_MENU" ColumnName="PREFERRED_MENU" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="PreferredMenu_ID" ColumnName="PreferredMenu_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1089,6 +1088,7 @@
           <EntitySetMapping Name="TB_ProductMaster">
             <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_ProductMaster">
               <MappingFragment StoreEntitySet="TB_ProductMaster">
+                <ScalarProperty Name="P_CAT_ID" ColumnName="P_CAT_ID" />
                 <ScalarProperty Name="OFFERS_ID" ColumnName="OFFERS_ID" />
                 <ScalarProperty Name="DISTANACE_KM" ColumnName="DISTANACE_KM" />
                 <ScalarProperty Name="SERVES_COUNT" ColumnName="SERVES_COUNT" />
@@ -1133,6 +1133,7 @@
           <EntitySetMapping Name="TB_RestaurantOffersMaster">
             <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_RestaurantOffersMaster">
               <MappingFragment StoreEntitySet="TB_RestaurantOffersMaster">
+                <ScalarProperty Name="OFFERS_IMAGE" ColumnName="OFFERS_IMAGE" />
                 <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="OFFERS_BY_PERCENT" ColumnName="OFFERS_BY_PERCENT" />
@@ -1158,6 +1159,71 @@
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="VEHICAL_NAME" ColumnName="VEHICAL_NAME" />
                 <ScalarProperty Name="VEHICAL_ID" ColumnName="VEHICAL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_PackageMaster">
+            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PackageMaster">
+              <MappingFragment StoreEntitySet="TB_PackageMaster">
+                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="POST_COUNT" ColumnName="POST_COUNT" />
+                <ScalarProperty Name="PACKAGE_VALIDITY" ColumnName="PACKAGE_VALIDITY" />
+                <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="PACKAGE_DESCRIPTION" ColumnName="PACKAGE_DESCRIPTION" />
+                <ScalarProperty Name="PACKAGE_NAME" ColumnName="PACKAGE_NAME" />
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_PreferredMenu">
+            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PreferredMenu">
+              <MappingFragment StoreEntitySet="TB_PreferredMenu">
+                <ScalarProperty Name="RATE_STATUS" ColumnName="RATE_STATUS" />
+                <ScalarProperty Name="ORDER_RATING" ColumnName="ORDER_RATING" />
+                <ScalarProperty Name="ORDER_REMARK" ColumnName="ORDER_REMARK" />
+                <ScalarProperty Name="APP_ORDER_ID" ColumnName="APP_ORDER_ID" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="DELIVERY_BOY_STATUS" ColumnName="DELIVERY_BOY_STATUS" />
+                <ScalarProperty Name="DELIVERY_BOY_REMARK" ColumnName="DELIVERY_BOY_REMARK" />
+                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="SHOW_MOBILE" ColumnName="SHOW_MOBILE" />
+                <ScalarProperty Name="RESTO_LIST" ColumnName="RESTO_LIST" />
+                <ScalarProperty Name="PREFERRED_TYPE" ColumnName="PREFERRED_TYPE" />
+                <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+                <ScalarProperty Name="LATITIUDE" ColumnName="LATITIUDE" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="PREFERRED_MENU" ColumnName="PREFERRED_MENU" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="PreferredMenu_ID" ColumnName="PreferredMenu_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ORDER">
+            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_ORDER">
+              <MappingFragment StoreEntitySet="TB_ORDER">
+                <ScalarProperty Name="RATE_STATUS" ColumnName="RATE_STATUS" />
+                <ScalarProperty Name="ORDER_RATING" ColumnName="ORDER_RATING" />
+                <ScalarProperty Name="ORDER_REMARK" ColumnName="ORDER_REMARK" />
+                <ScalarProperty Name="DELIVERY_BOY_REMARK" ColumnName="DELIVERY_BOY_REMARK" />
+                <ScalarProperty Name="APP_ORDER_ID" ColumnName="APP_ORDER_ID" />
+                <ScalarProperty Name="ORDER_TYPE" ColumnName="ORDER_TYPE" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="DELIVERY_BOY_STATUS" ColumnName="DELIVERY_BOY_STATUS" />
+                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+                <ScalarProperty Name="GST" ColumnName="GST" />
+                <ScalarProperty Name="DELIVERY_CHARGES" ColumnName="DELIVERY_CHARGES" />
+                <ScalarProperty Name="TOTAL_QUANTITY" ColumnName="TOTAL_QUANTITY" />
+                <ScalarProperty Name="TOTAL_AMOUNT" ColumnName="TOTAL_AMOUNT" />
+                <ScalarProperty Name="ADD_ID" ColumnName="ADD_ID" />
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

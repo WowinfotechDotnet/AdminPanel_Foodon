@@ -357,7 +357,7 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
                 $("#loader").css("display", 'none');
             }
             else if (d.data.success === false) {
-                alert("Restaurant allready added.");
+                alert("Restaurant already added.");
                 $("#loader").css("display", 'none');
             }
             else {
@@ -386,7 +386,7 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
                 $("#loader").css("display", 'none');
             }
             else if (d.data.success === false) {
-                alert("Restaurant allready added.");
+                alert("Restaurant already added.");
                 $("#loader").css("display", 'none');
             }
             else {

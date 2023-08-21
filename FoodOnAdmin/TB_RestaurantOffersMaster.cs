@@ -18,5 +18,6 @@ namespace FoodOnAdmin
         public string OFFERS_BY_PERCENT { get; set; }
         public string STATUS { get; set; }
         public Nullable<System.DateTime> REG_DATE { get; set; }
+        public string OFFERS_IMAGE { get; set; }
     }
 }

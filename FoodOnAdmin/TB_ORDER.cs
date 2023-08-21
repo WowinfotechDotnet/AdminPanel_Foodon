@@ -26,11 +26,13 @@ namespace FoodOnAdmin
         public string NOTE { get; set; }
         public string STATUS { get; set; }
         public Nullable<System.DateTime> REG_DATE { get; set; }
-        public string DELIVERY_BOY_REMARK { get; set; }
         public string DELIVERY_BOY_STATUS { get; set; }
         public Nullable<long> EMP_ID { get; set; }
         public string ORDER_TYPE { get; set; }
-        public string PREFERRED_MENU { get; set; }
         public Nullable<long> APP_ORDER_ID { get; set; }
+        public string DELIVERY_BOY_REMARK { get; set; }
+        public string ORDER_REMARK { get; set; }
+        public Nullable<double> ORDER_RATING { get; set; }
+        public string RATE_STATUS { get; set; }
     }
 }

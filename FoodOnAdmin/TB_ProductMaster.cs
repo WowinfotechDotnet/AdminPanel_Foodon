@@ -29,6 +29,7 @@ namespace FoodOnAdmin
         public Nullable<long> SERVES_COUNT { get; set; }
         public Nullable<double> DISTANACE_KM { get; set; }
         public Nullable<long> OFFERS_ID { get; set; }
+        public Nullable<long> P_CAT_ID { get; set; }
     
         public virtual TB_Restaurant TB_Restaurant { get; set; }
     }

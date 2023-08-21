@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dd4c14c50b8043d68894ca674123de9e" Name="Diagram1">
+      <Diagram DiagramId="dd4c14c50b8043d68894ca674123de9e" Name="Diagram1" ZoomLevel="90">
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_AdminMaster" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_UserMaster" Width="1.5" PointX="3.375" PointY="4.75" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_Restaurant" Width="1.5" PointX="0.75" PointY="0.75" />
@@ -14,10 +14,8 @@
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_Diningrequest" Width="1.5" PointX="6" PointY="3.25" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_DinningAnswer" Width="1.5" PointX="8.25" PointY="2.75" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_EMPLOYEE" Width="1.5" PointX="5.75" PointY="10.75" />
-        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_ORDER" Width="1.5" PointX="10.75" PointY="8.75" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_OrderDetails" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_PreferredMenu" Width="1.5" PointX="12.75" PointY="4.75" />
-        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_PreferredMenuAnswer" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_PreferredMenuAnswer" Width="2.75" PointX="14.625" PointY="9.75" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_ProductMaster" Width="1.5" PointX="3.375" PointY="8.75" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_Restaurant_Images" Width="1.5" PointX="0.75" PointY="13.75" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_RestaurantLike" Width="1.5" PointX="2.75" PointY="13.75" />
@@ -29,6 +27,9 @@
         <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_Dinnin__RES_I__412EB0B6" />
         <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_Dinnin__USER___403A8C7D" />
         <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" />
+        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_PackageMaster" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_PreferredMenu" Width="4.25" PointX="10.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_ORDER" Width="1.5" PointX="11.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

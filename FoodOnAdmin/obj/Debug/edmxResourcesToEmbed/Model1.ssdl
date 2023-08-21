@@ -137,12 +137,14 @@
     <Property Name="NOTE" Type="nvarchar" MaxLength="200" />
     <Property Name="STATUS" Type="nvarchar" MaxLength="200" />
     <Property Name="REG_DATE" Type="datetime" />
-    <Property Name="DELIVERY_BOY_REMARK" Type="nvarchar" MaxLength="100" />
     <Property Name="DELIVERY_BOY_STATUS" Type="nvarchar" MaxLength="100" />
     <Property Name="EMP_ID" Type="bigint" />
     <Property Name="ORDER_TYPE" Type="nvarchar" MaxLength="100" />
-    <Property Name="PREFERRED_MENU" Type="nvarchar" MaxLength="200" />
     <Property Name="APP_ORDER_ID" Type="bigint" />
+    <Property Name="DELIVERY_BOY_REMARK" Type="nvarchar" MaxLength="200" />
+    <Property Name="ORDER_REMARK" Type="nvarchar" MaxLength="200" />
+    <Property Name="ORDER_RATING" Type="float" />
+    <Property Name="RATE_STATUS" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="TB_OrderDetails">
     <Key>
@@ -155,6 +157,20 @@
     <Property Name="QUANTITY" Type="bigint" />
     <Property Name="STATUS" Type="nvarchar" MaxLength="200" />
     <Property Name="REG_DATE" Type="date" />
+  </EntityType>
+  <EntityType Name="TB_PackageMaster">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PACKAGE_NAME" Type="nvarchar" MaxLength="500" />
+    <Property Name="PACKAGE_DESCRIPTION" Type="nvarchar(max)" />
+    <Property Name="MRP" Type="money" />
+    <Property Name="OFFER_PRICE" Type="money" />
+    <Property Name="PACKAGE_VALIDITY" Type="bigint" />
+    <Property Name="POST_COUNT" Type="int" />
+    <Property Name="STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="REG_DATE" Type="datetime" />
   </EntityType>
   <EntityType Name="TB_PreferredMenu">
     <Key>
@@ -175,6 +191,9 @@
     <Property Name="DELIVERY_BOY_STATUS" Type="nvarchar" MaxLength="100" />
     <Property Name="EMP_ID" Type="bigint" />
     <Property Name="APP_ORDER_ID" Type="bigint" />
+    <Property Name="ORDER_REMARK" Type="nvarchar" MaxLength="200" />
+    <Property Name="ORDER_RATING" Type="float" />
+    <Property Name="RATE_STATUS" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="TB_PreferredMenuAnswer">
     <Key>
@@ -212,6 +231,7 @@
     <Property Name="SERVES_COUNT" Type="bigint" />
     <Property Name="DISTANACE_KM" Type="float" />
     <Property Name="OFFERS_ID" Type="bigint" />
+    <Property Name="P_CAT_ID" Type="bigint" />
   </EntityType>
   <EntityType Name="TB_Restaurant">
     <Key>
@@ -272,6 +292,7 @@
     <Property Name="OFFERS_BY_PERCENT" Type="nvarchar" MaxLength="300" />
     <Property Name="STATUS" Type="nvarchar" MaxLength="200" />
     <Property Name="REG_DATE" Type="date" />
+    <Property Name="OFFERS_IMAGE" Type="nvarchar" MaxLength="300" />
   </EntityType>
   <EntityType Name="TB_Settings">
     <Key>
@@ -375,6 +396,7 @@
     <EntitySet Name="TB_EMPLOYEE" EntityType="Self.TB_EMPLOYEE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_ORDER" EntityType="Self.TB_ORDER" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_OrderDetails" EntityType="Self.TB_OrderDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_PackageMaster" EntityType="Self.TB_PackageMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_PreferredMenu" EntityType="Self.TB_PreferredMenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_PreferredMenuAnswer" EntityType="Self.TB_PreferredMenuAnswer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_ProductMaster" EntityType="Self.TB_ProductMaster" Schema="dbo" store:Type="Tables" />

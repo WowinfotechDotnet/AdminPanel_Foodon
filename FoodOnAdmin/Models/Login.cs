@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -116,6 +117,20 @@ namespace FoodOnAdmin.Models
         public string ImageBase64Data { get; set; }
         public string ImageName { get; set; }
         public string ImageExtension { get; set; }
+    }
+
+    public class Package
+    {
+        public long P_ID { get; set; }
+        public string PACKAGE_NAME { get; set; }
+        public string PACKAGE_DESCRIPTION { get; set; }
+        public Decimal MRP { get; set; }
+        public Decimal OFFER_PRICE { get; set; }
+        public long PACKAGE_VALIDITY { get; set; }
+        public int POST_COUNT { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+
     }
 
 }

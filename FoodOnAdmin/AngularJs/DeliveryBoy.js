@@ -298,7 +298,7 @@ app.controller("EmployeeCtrl", function ($scope, EmployeeService) {
                 $("#loader").css("display", 'none');
             }
             else if (d.data.success === false) {
-                alert("Employee allready added.");
+                alert("Employee already added.");
                 $("#loader").css("display", 'none');
             }
             else {
@@ -322,7 +322,7 @@ app.controller("EmployeeCtrl", function ($scope, EmployeeService) {
                 $("#loader").css("display", 'none');
             }
             else if (d.data.success === false) {
-                alert("Employee allready added.");
+                alert("Employee already added.");
                 $("#loader").css("display", 'none');
             }
             else {
