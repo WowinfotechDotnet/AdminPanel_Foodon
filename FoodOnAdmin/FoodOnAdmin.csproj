@@ -216,6 +216,9 @@
     <Compile Include="TB_Settings.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_SubscriptionMaster.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="TB_UserMaster.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -24,11 +24,11 @@
                 <div class="card-header">
                     <div class="col-lg-12">
                         <div class="row">
-                            <div class="col-lg-1">
+                            <div class="col-md-1">
                                 <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs" style="background-color:brown;color:white"><span class="fa fa-arrow-left"></span></a>
                             </div>
-                            <div class="col-lg-11">
-                                <h3 class="card-title"><b>Package</b></h3>
+                            <div class="col-md-11" style="padding-left:35%;text-align:center;">
+                                <h3 class="card-title"><b>Package Master</b></h3>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        <label style="color:black;font-size:14px;">MRP:</label>
+                                                        <label style="color:black;font-size:14px;">MRP:</label><label style="color:red">*</label>
                                                         <input type="number" min="" step="0.01" onkeyup="if (this.value < 0) { this.value = 0; return false; }" class="form-control" ng-model="MRP" placeholder="Enter MRP" required>
                                                     </div>
                                                 </div>
@@ -144,14 +144,14 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        <label style="color:black;font-size:14px;">Offer Price:</label>
+                                                        <label style="color:black;font-size:14px;">Offer Price:</label><label style="color:red">*</label>
                                                         <input type="number" min="0" step="0.01" onkeyup="if (this.value < 0) { this.value = 0; return false; }" class="form-control" ng-model="OFFER_PRICE" placeholder="Offer Price" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        <label style="color:black;font-size:14px;">Post Count:</label>
-                                                        <input type="number" min="0" step="1" onkeyup="if (this.value < 0) { this.value = 0; return false; }" class="form-control" ng-model="POST_COUNT" placeholder="Post Count">
+                                                        <label style="color:black;font-size:14px;">Post Count:</label><label style="color:red">*</label>
+                                                        <input type="number" min="0" step="1" onkeyup="if (this.value < 0) { this.value = 0; return false; }" class="form-control" ng-model="POST_COUNT" placeholder="Post Count" required>
                                                     </div>
                                                 </div>
                                             </div>

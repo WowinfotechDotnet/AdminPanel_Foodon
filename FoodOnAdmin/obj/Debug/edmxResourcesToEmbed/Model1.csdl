@@ -38,9 +38,18 @@
       <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
       <End Role="TB_ProductMaster" EntitySet="TB_ProductMaster" />
     </AssociationSet>
-    <EntitySet Name="TB_PackageMaster" EntityType="DB_FoodOnLinkModel.TB_PackageMaster" />
     <EntitySet Name="TB_PreferredMenu" EntityType="DB_FoodOnLinkModel.TB_PreferredMenu" />
     <EntitySet Name="TB_ORDER" EntityType="DB_FoodOnLinkModel.TB_ORDER" />
+    <EntitySet Name="TB_SubscriptionMaster" EntityType="DB_FoodOnLinkModel.TB_SubscriptionMaster" />
+    <AssociationSet Name="FK__TB_Subscr__RES_I__0E391C95" Association="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95">
+      <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
+      <End Role="TB_SubscriptionMaster" EntitySet="TB_SubscriptionMaster" />
+    </AssociationSet>
+    <EntitySet Name="TB_PackageMaster" EntityType="DB_FoodOnLinkModel.TB_PackageMaster" />
+    <AssociationSet Name="FK__TB_Subscr__PACKA__0F2D40CE" Association="DB_FoodOnLinkModel.FK__TB_Subscr__PACKA__0F2D40CE">
+      <End Role="TB_PackageMaster" EntitySet="TB_PackageMaster" />
+      <End Role="TB_SubscriptionMaster" EntitySet="TB_SubscriptionMaster" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="TB_AdminMaster">
     <Key>
@@ -102,6 +111,7 @@
     <Property Name="RES_LIKE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TB_DinningAnswer" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__RES_I__412EB0B6" FromRole="TB_Restaurant" ToRole="TB_DinningAnswer" />
     <NavigationProperty Name="TB_ProductMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" FromRole="TB_Restaurant" ToRole="TB_ProductMaster" />
+    <NavigationProperty Name="TB_SubscriptionMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95" FromRole="TB_Restaurant" ToRole="TB_SubscriptionMaster" />
   </EntityType>
   <EntityType Name="TB_AddressConfiguration">
     <Key>
@@ -376,20 +386,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="TB_PackageMaster">
-    <Key>
-      <PropertyRef Name="P_ID" />
-    </Key>
-    <Property Name="P_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PACKAGE_NAME" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="PACKAGE_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="MRP" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="OFFER_PRICE" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="PACKAGE_VALIDITY" Type="Int64" />
-    <Property Name="POST_COUNT" Type="Int32" />
-    <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="TB_PreferredMenu">
     <Key>
       <PropertyRef Name="PreferredMenu_ID" />
@@ -438,4 +434,60 @@
     <Property Name="ORDER_RATING" Type="Double" />
     <Property Name="RATE_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="TB_SubscriptionMaster">
+    <Key>
+      <PropertyRef Name="SUB_ID" />
+    </Key>
+    <Property Name="SUB_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RES_ID" Type="Int64" />
+    <Property Name="TRANSACTION_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="REFERENCE_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PACKAGE_ID" Type="Int64" />
+    <Property Name="SUB_START_DATE" Type="DateTime" Precision="3" />
+    <Property Name="SUB_END_DATE" Type="DateTime" Precision="3" />
+    <Property Name="PAID_AMOUNT" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TB_Restaurant" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95" FromRole="TB_SubscriptionMaster" ToRole="TB_Restaurant" />
+    <NavigationProperty Name="TB_PackageMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__PACKA__0F2D40CE" FromRole="TB_SubscriptionMaster" ToRole="TB_PackageMaster" />
+  </EntityType>
+  <Association Name="FK__TB_Subscr__RES_I__0E391C95">
+    <End Type="DB_FoodOnLinkModel.TB_Restaurant" Role="TB_Restaurant" Multiplicity="0..1" />
+    <End Type="DB_FoodOnLinkModel.TB_SubscriptionMaster" Role="TB_SubscriptionMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_Restaurant">
+        <PropertyRef Name="RES_ID" />
+      </Principal>
+      <Dependent Role="TB_SubscriptionMaster">
+        <PropertyRef Name="RES_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TB_PackageMaster">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PACKAGE_NAME" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PACKAGE_DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MRP" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="OFFER_PRICE" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PACKAGE_VALIDITY" Type="Int64" />
+    <Property Name="POST_COUNT" Type="Int64" />
+    <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TB_SubscriptionMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__PACKA__0F2D40CE" FromRole="TB_PackageMaster" ToRole="TB_SubscriptionMaster" />
+  </EntityType>
+  <Association Name="FK__TB_Subscr__PACKA__0F2D40CE">
+    <End Type="DB_FoodOnLinkModel.TB_PackageMaster" Role="TB_PackageMaster" Multiplicity="0..1" />
+    <End Type="DB_FoodOnLinkModel.TB_SubscriptionMaster" Role="TB_SubscriptionMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_PackageMaster">
+        <PropertyRef Name="P_ID" />
+      </Principal>
+      <Dependent Role="TB_SubscriptionMaster">
+        <PropertyRef Name="PACKAGE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

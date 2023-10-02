@@ -282,21 +282,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TB_PackageMaster">
-      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PackageMaster">
-        <MappingFragment StoreEntitySet="TB_PackageMaster">
-          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="POST_COUNT" ColumnName="POST_COUNT" />
-          <ScalarProperty Name="PACKAGE_VALIDITY" ColumnName="PACKAGE_VALIDITY" />
-          <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
-          <ScalarProperty Name="MRP" ColumnName="MRP" />
-          <ScalarProperty Name="PACKAGE_DESCRIPTION" ColumnName="PACKAGE_DESCRIPTION" />
-          <ScalarProperty Name="PACKAGE_NAME" ColumnName="PACKAGE_NAME" />
-          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TB_PreferredMenu">
       <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PreferredMenu">
         <MappingFragment StoreEntitySet="TB_PreferredMenu">
@@ -344,6 +329,37 @@
           <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
           <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
           <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_SubscriptionMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_SubscriptionMaster">
+        <MappingFragment StoreEntitySet="TB_SubscriptionMaster">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="PAID_AMOUNT" ColumnName="PAID_AMOUNT" />
+          <ScalarProperty Name="SUB_END_DATE" ColumnName="SUB_END_DATE" />
+          <ScalarProperty Name="SUB_START_DATE" ColumnName="SUB_START_DATE" />
+          <ScalarProperty Name="PACKAGE_ID" ColumnName="PACKAGE_ID" />
+          <ScalarProperty Name="REFERENCE_NO" ColumnName="REFERENCE_NO" />
+          <ScalarProperty Name="TRANSACTION_ID" ColumnName="TRANSACTION_ID" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="SUB_ID" ColumnName="SUB_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_PackageMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PackageMaster">
+        <MappingFragment StoreEntitySet="TB_PackageMaster">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="POST_COUNT" ColumnName="POST_COUNT" />
+          <ScalarProperty Name="PACKAGE_VALIDITY" ColumnName="PACKAGE_VALIDITY" />
+          <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="PACKAGE_DESCRIPTION" ColumnName="PACKAGE_DESCRIPTION" />
+          <ScalarProperty Name="PACKAGE_NAME" ColumnName="PACKAGE_NAME" />
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -168,7 +168,7 @@
     <Property Name="MRP" Type="money" />
     <Property Name="OFFER_PRICE" Type="money" />
     <Property Name="PACKAGE_VALIDITY" Type="bigint" />
-    <Property Name="POST_COUNT" Type="int" />
+    <Property Name="POST_COUNT" Type="bigint" />
     <Property Name="STATUS" Type="varchar" MaxLength="20" />
     <Property Name="REG_DATE" Type="datetime" />
   </EntityType>
@@ -304,6 +304,21 @@
     <Property Name="STATUS" Type="nvarchar" MaxLength="30" />
     <Property Name="REG_DATE" Type="datetime" />
   </EntityType>
+  <EntityType Name="TB_SubscriptionMaster">
+    <Key>
+      <PropertyRef Name="SUB_ID" />
+    </Key>
+    <Property Name="SUB_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RES_ID" Type="bigint" />
+    <Property Name="TRANSACTION_ID" Type="nvarchar" MaxLength="100" />
+    <Property Name="REFERENCE_NO" Type="nvarchar" MaxLength="100" />
+    <Property Name="PACKAGE_ID" Type="bigint" />
+    <Property Name="SUB_START_DATE" Type="datetime" />
+    <Property Name="SUB_END_DATE" Type="datetime" />
+    <Property Name="PAID_AMOUNT" Type="money" />
+    <Property Name="STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="REG_DATE" Type="datetime" />
+  </EntityType>
   <EntityType Name="TB_UserMaster">
     <Key>
       <PropertyRef Name="USER_ID" />
@@ -386,6 +401,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__TB_Subscr__PACKA__0F2D40CE">
+    <End Role="TB_PackageMaster" Type="Self.TB_PackageMaster" Multiplicity="0..1" />
+    <End Role="TB_SubscriptionMaster" Type="Self.TB_SubscriptionMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_PackageMaster">
+        <PropertyRef Name="P_ID" />
+      </Principal>
+      <Dependent Role="TB_SubscriptionMaster">
+        <PropertyRef Name="PACKAGE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TB_Subscr__RES_I__0E391C95">
+    <End Role="TB_Restaurant" Type="Self.TB_Restaurant" Multiplicity="0..1" />
+    <End Role="TB_SubscriptionMaster" Type="Self.TB_SubscriptionMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_Restaurant">
+        <PropertyRef Name="RES_ID" />
+      </Principal>
+      <Dependent Role="TB_SubscriptionMaster">
+        <PropertyRef Name="RES_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DB_FoodOnLinkModelStoreContainer">
     <EntitySet Name="TB_AddressConfiguration" EntityType="Self.TB_AddressConfiguration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_AdminMaster" EntityType="Self.TB_AdminMaster" Schema="dbo" store:Type="Tables" />
@@ -405,6 +444,7 @@
     <EntitySet Name="TB_RestaurantLike" EntityType="Self.TB_RestaurantLike" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_RestaurantOffersMaster" EntityType="Self.TB_RestaurantOffersMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_Settings" EntityType="Self.TB_Settings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_SubscriptionMaster" EntityType="Self.TB_SubscriptionMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_UserMaster" EntityType="Self.TB_UserMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_VehicalMaster" EntityType="Self.TB_VehicalMaster" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__TB_Dining__USER___3B75D760" Association="Self.FK__TB_Dining__USER___3B75D760">
@@ -426,6 +466,14 @@
     <AssociationSet Name="FK__TB_Produc__RES_I__31EC6D26" Association="Self.FK__TB_Produc__RES_I__31EC6D26">
       <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
       <End Role="TB_ProductMaster" EntitySet="TB_ProductMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TB_Subscr__PACKA__0F2D40CE" Association="Self.FK__TB_Subscr__PACKA__0F2D40CE">
+      <End Role="TB_PackageMaster" EntitySet="TB_PackageMaster" />
+      <End Role="TB_SubscriptionMaster" EntitySet="TB_SubscriptionMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TB_Subscr__RES_I__0E391C95" Association="Self.FK__TB_Subscr__RES_I__0E391C95">
+      <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
+      <End Role="TB_SubscriptionMaster" EntitySet="TB_SubscriptionMaster" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

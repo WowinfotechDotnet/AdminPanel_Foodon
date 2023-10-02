@@ -42,8 +42,9 @@ namespace FoodOnAdmin
         public virtual DbSet<TB_RestaurantOffersMaster> TB_RestaurantOffersMaster { get; set; }
         public virtual DbSet<TB_Settings> TB_Settings { get; set; }
         public virtual DbSet<TB_VehicalMaster> TB_VehicalMaster { get; set; }
-        public virtual DbSet<TB_PackageMaster> TB_PackageMaster { get; set; }
         public virtual DbSet<TB_PreferredMenu> TB_PreferredMenu { get; set; }
         public virtual DbSet<TB_ORDER> TB_ORDER { get; set; }
+        public virtual DbSet<TB_SubscriptionMaster> TB_SubscriptionMaster { get; set; }
+        public virtual DbSet<TB_PackageMaster> TB_PackageMaster { get; set; }
     }
 }
