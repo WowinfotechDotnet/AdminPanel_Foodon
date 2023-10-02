@@ -20,6 +20,7 @@ namespace FoodOnAdmin
             this.TB_DinningAnswer = new HashSet<TB_DinningAnswer>();
             this.TB_ProductMaster = new HashSet<TB_ProductMaster>();
             this.TB_SubscriptionMaster = new HashSet<TB_SubscriptionMaster>();
+            this.TB_PostMaster = new HashSet<TB_PostMaster>();
         }
     
         public long RES_ID { get; set; }
@@ -54,5 +55,7 @@ namespace FoodOnAdmin
         public virtual ICollection<TB_ProductMaster> TB_ProductMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_SubscriptionMaster> TB_SubscriptionMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_PostMaster> TB_PostMaster { get; set; }
     }
 }

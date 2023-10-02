@@ -363,5 +363,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TB_PostMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PostMaster">
+        <MappingFragment StoreEntitySet="TB_PostMaster">
+          <ScalarProperty Name="POST_NAME" ColumnName="POST_NAME" />
+          <ScalarProperty Name="OFFER" ColumnName="OFFER" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="POST_END_DATE" ColumnName="POST_END_DATE" />
+          <ScalarProperty Name="POST_START_DATE" ColumnName="POST_START_DATE" />
+          <ScalarProperty Name="AMOUNT_OFF_UPTO" ColumnName="AMOUNT_OFF_UPTO" />
+          <ScalarProperty Name="PERCENTAGE_OFF" ColumnName="PERCENTAGE_OFF" />
+          <ScalarProperty Name="POST_IMAGE" ColumnName="POST_IMAGE" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="POST_ID" ColumnName="POST_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_Video_Banner_Image">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_Video_Banner_Image">
+        <MappingFragment StoreEntitySet="TB_Video_Banner_Image">
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="VIDEO_URL_LINK" ColumnName="VIDEO_URL_LINK" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VIDEO_BANNER_URL" ColumnName="VIDEO_BANNER_URL" />
+          <ScalarProperty Name="VIDEO_NAME" ColumnName="VIDEO_NAME" />
+          <ScalarProperty Name="VID_BANNER_ID" ColumnName="VID_BANNER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -33,6 +33,9 @@
         <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_PackageMaster" Width="1.5" PointX="0.75" PointY="9" />
         <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_Subscr__PACKA__0F2D40CE" />
+        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_PostMaster" Width="1.5" PointX="3" PointY="17.375" />
+        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_Video_Banner_Image" Width="1.5" PointX="15.375" PointY="14.75" />
+        <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_PostMa__RES_I__19AACF41" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

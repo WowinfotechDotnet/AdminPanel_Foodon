@@ -132,5 +132,15 @@ namespace FoodOnAdmin.Models
         public string REG_DATE { get; set; }
 
     }
-
+    public class RestaurantVideoURLMaster
+    {
+        public long RES_ID { get; set; }
+        public long VID_BANNER_ID { get; set; }
+        public string VIDEO_URL_LINK { get; set; }
+        public string VIDEO_NAME { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+        public string ACTION { get; set; }
+       
+    }
 }

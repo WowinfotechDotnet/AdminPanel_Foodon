@@ -50,6 +50,12 @@
       <End Role="TB_PackageMaster" EntitySet="TB_PackageMaster" />
       <End Role="TB_SubscriptionMaster" EntitySet="TB_SubscriptionMaster" />
     </AssociationSet>
+    <EntitySet Name="TB_PostMaster" EntityType="DB_FoodOnLinkModel.TB_PostMaster" />
+    <EntitySet Name="TB_Video_Banner_Image" EntityType="DB_FoodOnLinkModel.TB_Video_Banner_Image" />
+    <AssociationSet Name="FK__TB_PostMa__RES_I__19AACF41" Association="DB_FoodOnLinkModel.FK__TB_PostMa__RES_I__19AACF41">
+      <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
+      <End Role="TB_PostMaster" EntitySet="TB_PostMaster" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="TB_AdminMaster">
     <Key>
@@ -112,6 +118,7 @@
     <NavigationProperty Name="TB_DinningAnswer" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__RES_I__412EB0B6" FromRole="TB_Restaurant" ToRole="TB_DinningAnswer" />
     <NavigationProperty Name="TB_ProductMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" FromRole="TB_Restaurant" ToRole="TB_ProductMaster" />
     <NavigationProperty Name="TB_SubscriptionMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95" FromRole="TB_Restaurant" ToRole="TB_SubscriptionMaster" />
+    <NavigationProperty Name="TB_PostMaster" Relationship="DB_FoodOnLinkModel.FK__TB_PostMa__RES_I__19AACF41" FromRole="TB_Restaurant" ToRole="TB_PostMaster" />
   </EntityType>
   <EntityType Name="TB_AddressConfiguration">
     <Key>
@@ -487,6 +494,47 @@
       </Principal>
       <Dependent Role="TB_SubscriptionMaster">
         <PropertyRef Name="PACKAGE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TB_PostMaster">
+    <Key>
+      <PropertyRef Name="POST_ID" />
+    </Key>
+    <Property Name="POST_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RES_ID" Type="Int64" />
+    <Property Name="POST_IMAGE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="PERCENTAGE_OFF" Type="Byte" />
+    <Property Name="AMOUNT_OFF_UPTO" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="POST_START_DATE" Type="DateTime" Precision="3" />
+    <Property Name="POST_END_DATE" Type="DateTime" Precision="3" />
+    <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+    <Property Name="OFFER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="POST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TB_Restaurant" Relationship="DB_FoodOnLinkModel.FK__TB_PostMa__RES_I__19AACF41" FromRole="TB_PostMaster" ToRole="TB_Restaurant" />
+  </EntityType>
+  <EntityType Name="TB_Video_Banner_Image">
+    <Key>
+      <PropertyRef Name="VID_BANNER_ID" />
+    </Key>
+    <Property Name="VID_BANNER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VIDEO_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="VIDEO_BANNER_URL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+    <Property Name="VIDEO_URL_LINK" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="RES_ID" Type="Int64" />
+  </EntityType>
+  <Association Name="FK__TB_PostMa__RES_I__19AACF41">
+    <End Type="DB_FoodOnLinkModel.TB_Restaurant" Role="TB_Restaurant" Multiplicity="0..1" />
+    <End Type="DB_FoodOnLinkModel.TB_PostMaster" Role="TB_PostMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_Restaurant">
+        <PropertyRef Name="RES_ID" />
+      </Principal>
+      <Dependent Role="TB_PostMaster">
+        <PropertyRef Name="RES_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
