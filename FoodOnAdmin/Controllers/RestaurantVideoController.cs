@@ -96,6 +96,7 @@ namespace FoodOnAdmin.Controllers
                         rt.RES_ID = Convert.ToInt64(dt.Rows[i]["RES_ID"]);
                         rt.VID_BANNER_ID = Convert.ToInt64(dt.Rows[i]["VID_BANNER_ID"]);
                         rt.VIDEO_URL_LINK = (dt.Rows[i]["VIDEO_URL_LINK"].ToString());
+                        rt.RES_NAME = (dt.Rows[i]["RES_NAME"].ToString());
                         rt.VIDEO_NAME = (dt.Rows[i]["VIDEO_NAME"].ToString());
                         rt.STATUS = (dt.Rows[i]["STATUS"]).ToString();
                         rt.REG_DATE = (dt.Rows[i]["REG_DATE"]).ToString();

@@ -136,6 +136,7 @@ namespace FoodOnAdmin.Models
     {
         public long RES_ID { get; set; }
         public long VID_BANNER_ID { get; set; }
+        public string RES_NAME { get; set; }
         public string VIDEO_URL_LINK { get; set; }
         public string VIDEO_NAME { get; set; }
         public string STATUS { get; set; }
