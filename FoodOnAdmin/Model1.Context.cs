@@ -48,5 +48,8 @@ namespace FoodOnAdmin
         public virtual DbSet<TB_PackageMaster> TB_PackageMaster { get; set; }
         public virtual DbSet<TB_PostMaster> TB_PostMaster { get; set; }
         public virtual DbSet<TB_Video_Banner_Image> TB_Video_Banner_Image { get; set; }
+        public virtual DbSet<TB_MasterPage_Video_Banner_Image> TB_MasterPage_Video_Banner_Image { get; set; }
+        public virtual DbSet<TB_FoodSale_Banner> TB_FoodSale_Banner { get; set; }
+        public virtual DbSet<TB_FOOD_CATEGORY> TB_FOOD_CATEGORY { get; set; }
     }
 }

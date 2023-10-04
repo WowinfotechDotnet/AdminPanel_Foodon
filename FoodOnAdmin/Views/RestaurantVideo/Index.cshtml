@@ -38,7 +38,7 @@
                                 <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs" style="background-color:green;color:white"><span class="fa fa-arrow-left"></span></a>
                             </div>
                             <div class="col-md-8" style="padding-left:25%;text-align:center;">
-                                <h3 class="card-title"><b>Restaurant Video Url Master</b></h3>
+                                <h3 class="card-title"><b>Restaurant Video Master</b></h3>
                             </div>
                             <div class="col-md-3">
                                 <button type="button" class="btn btn-sm" style="float:right; background-color:green;color:white" data-toggle="modal" ng-click="AdminClick()">Add Video Url</button>
@@ -86,9 +86,11 @@
                                             <td>{{$index+1}}</td>
                                             <td>{{video.RES_NAME}}</td>
                                             <td>{{video.VIDEO_NAME}}</td>
-                                            <td style="width:100px;"><a target="_blank" href="{{video.VIDEO_URL_LINK}}">
+                                            <td style="width:100px;">
+                                                <a target="_blank" href="{{video.VIDEO_URL_LINK}}">
                                                 {{video.VIDEO_URL_LINK}}
-                                                 </a>
+                                                </a>
+                                            </td>
                                             <td><a href="" ng-click="ChangeStatus(video)"><b style="color:red">{{video.STATUS}}</b></a></td>
                                             <td>{{video.REG_DATE}}</td>
                                             <td><button type="button" class="btn btn-xs" style="background-color:green;color:white;" data-toggle="modal" ng-click="Update(video)">Edit</button></td>

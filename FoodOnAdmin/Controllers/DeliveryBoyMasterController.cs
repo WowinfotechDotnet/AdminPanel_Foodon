@@ -228,14 +228,14 @@ namespace FoodOnAdmin.Controllers
                     string extension = tB_Employee.ImageExtension;
                     //fileName = "Adhar" + OTP + extension;
                     string fileName1 = fileName;
-                    tB_Employee.AADHAAR = Master.serverurl + "/DocunmentsUpload/" + fileName;
-                    fileName = Path.Combine(Server.MapPath("~/DocunmentsUpload/"), fileName);
+                    tB_Employee.AADHAAR = Master.serverurl + "/UploadedDocuments/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/UploadedDocuments/"), fileName);
 
                     if (tB_Employee.AADHAAR != string.Empty)
                     {
                         byte[] imageByteData = Convert.FromBase64String(tB_Employee.ImageBase64Data);
-                        System.IO.File.WriteAllBytes(HostingEnvironment.MapPath("~/DocunmentsUpload/" + fileName1 + extension), imageByteData);
-                        tB_Employee.AADHAAR = Master.serverurl + "/DocunmentsUpload/" + fileName1 + extension;
+                        System.IO.File.WriteAllBytes(HostingEnvironment.MapPath("~/UploadedDocuments/" + fileName1 + extension), imageByteData);
+                        tB_Employee.AADHAAR = Master.serverurl + "/UploadedDocuments/" + fileName1 + extension;
                         
                     }
                 }
@@ -265,14 +265,14 @@ namespace FoodOnAdmin.Controllers
                     string extension = tB_Employee.PancardImageExtension;
                     //fileName = "Pancard" + OTP + extension;
                     string fileName1 = fileName;
-                    tB_Employee.PAN = Master.serverurl + "/DocunmentsUpload/" + fileName;
-                    fileName = Path.Combine(Server.MapPath("~/DocunmentsUpload/"), fileName);
+                    tB_Employee.PAN = Master.serverurl + "/UploadedDocuments/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/UploadedDocuments/"), fileName);
 
                     if (tB_Employee.PAN != string.Empty)
                     {
                         byte[] imageByteData = Convert.FromBase64String(tB_Employee.PancardImageBase64Data);
-                        System.IO.File.WriteAllBytes(HostingEnvironment.MapPath("~/DocunmentsUpload/" + fileName1 + extension), imageByteData);
-                        tB_Employee.PAN = Master.serverurl + "/DocunmentsUpload/" + fileName1 + extension;
+                        System.IO.File.WriteAllBytes(HostingEnvironment.MapPath("~/UploadedDocuments/" + fileName1 + extension), imageByteData);
+                        tB_Employee.PAN = Master.serverurl + "/UploadedDocuments/" + fileName1 + extension;
                     }
                 }
                 else

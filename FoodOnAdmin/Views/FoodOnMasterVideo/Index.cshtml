@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<style>
+
+    .flex-container {
+        display: flex;
+    }
+
+    .flex-item {
+        flex: 1;
+        border: 1px solid #000;
+        padding: 10px;
+        margin: 5px;
+    }
+</style>
+<style>
+    .table td, .table th {
+        padding: 0.50rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+</style>
+
+<section class="content" ng-controller="FoodOnVideoCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs" style="background-color:green;color:white"><span class="fa fa-arrow-left"></span></a>
+                            </div>
+                            <div class="col-md-8" style="padding-left:25%;text-align:center;">
+                                <h3 class="card-title"><b>FoodOn Video Master</b></h3>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-sm" style="float:right; background-color:green;color:white" data-toggle="modal" ng-click="AdminClick()">Add Video Url</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="ibox-body">
+                        <div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <input type="text" class="form-control" ng-model="searchCategory" placeholder="Search Category">
+                                    <select id="FOOD_CATEGORY_ID" class="form-control" name="FOOD_CATEGORY_ID" ng-model="FOOD_CATEGORY_ID"
+                                            ng-options="cat.CATEGORY_ID as cat.CATEGORY_NAME for cat in FoodCategoryList | filter: searchCategory"
+                                            ng-selected="cat.CATEGORY_ID == FOOD_CATEGORY_ID">
+                                        <option value="">Select Category</option>
+                                    </select>
+                                </div>
+                                <label style="margin-left:5px">Start Date:</label>
+                                <input class="form-control col-md-2" type="text" id="START_DATE" name="START_DATE" ng-model="START_DATE" />
+                                <label style="margin-left:5px">End Date:</label>
+                                <input class="form-control col-md-2" type="text" id="END_DATE" name="END_DATE" ng-model="END_DATE" />
+
+                                <input type="button" class="form-control btn btn-success col-md-1" style="background-color:green; margin-left: 5px; margin-right: 150px; text-align:center" ng-click="SearchAdmin()" value="Get Data" />
+                                <input class="form-control col-md-3" type="text" style=" margin-left: 5px; padding-right:0px;" placeholder="Search Video" id="CUSTOMER_NAME" name="VIDEO_NAME" ng-change="SearchAdmin()" ng-model="VIDEO_NAME" />
+
+                            </div>
+                            <div class="row" style="margin-bottom:10px">
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" border="1" style="border:2px solid black; width:100%;">
+                                    <tbody>
+                                        <tr style="background-color: #157da9; color: white; font-size: 10px; ">
+                                            <th style="width:50px;">Sr No</th>
+                                            <th>Video Name</th>
+                                            <th>Category Name</th>
+                                            <th style="width:50%;">Video URL</th>
+                                            <th>Status</th>
+                                            <th>Reg Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        <tr ng-repeat="video in AdminList">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{video.VIDEO_NAME}}</td>
+                                            <td>{{video.CATEGORY_NAME}}</td>
+                                            <td style="width:100px;">
+                                                <a target="_blank" href="{{video.VIDEO_URL_LINK}}">
+                                                    {{video.VIDEO_URL_LINK}}
+                                                </a>
+                                            <td><a href="" ng-click="ChangeStatus(video)"><b style="color:red">{{video.STATUS}}</b></a></td>
+                                            <td>{{video.REG_DATE}}</td>
+                                            <td><button type="button" class="btn btn-xs" style="background-color:green;color:white;" data-toggle="modal" ng-click="Update(video)">Edit</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <ul ng-if="pager.pages.length" class="pagination" style="margin-left:30px;">
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(1)">First</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                                </li>
+                                <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+                                    <a ng-click="setPage(page)">{{page}}</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.totalPages)">Last</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal fade" id="Admin_Addupdate">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #157da9; color: black; padding: 10px; ">
+                                        <h5 class="modal-title"><b>{{Admin_Action}}</b></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card-body">
+                                            <form role="form" name="Video" ng-submit="Video(Video.$valid)" data-toggle="validator">
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label style="color:black;font-size:14px;">Food Category Name:</label> <label style="color:red">*</label>
+                                                        <select id="FOOD_CATEGORY_ID1" class="form-control" name="FOOD_CATEGORY_ID1" ng-model="FOOD_CATEGORY_ID1"
+                                                                ng-options="cat.CATEGORY_ID as cat.CATEGORY_NAME for cat in FoodCategoryList"
+                                                                ng-selected="cat.CATEGORY_ID == FOOD_CATEGORY_ID1" required>
+                                                            <option value="">Select Category</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <input type="text" class="form-control" ng-model="VIDEO_BANNER_ID" style="display:none">
+                                                        <div class="form-group">
+                                                            <label style="color:black;font-size:14px;">Video Name:</label> <label style="color:red">*</label>
+                                                            <input type="text" class="form-control" ng-model="VIDEO_NAME1" placeholder="Enter Video Name" required>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <div class="form-group">
+                                                            <label style="color:black;font-size:14px;">Video URL:</label><label style="color:red">*</label>
+                                                            <input type="text" class="form-control" ng-model="VIDEO_URL_LINK" placeholder="Enter Video URL" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-sm" style="color:white;background-color:green" ng-disabled="Video.$invalid" ng-click="AddAdmin()">{{Admin_Action}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+
+    <script src="~/AngularJs/FoodOnMasterVideoURL.js"></script>
+    <link href="~/Css/Paging.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $("#START_DATE").datepicker({ changeMonth: true, changeYear: true, maxDate: 0 });
+        $("#START_DATE").datepicker("option", "dateFormat", "dd/mm/yy");
+        $("#START_DATE").datepicker("option", "monthNamesShort", ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+        $("#START_DATE").datepicker("option", "showMonthAfterYear", false);
+        $("#START_DATE").datepicker("option", "yearRange", "2000:2060");
+
+        $("#END_DATE").datepicker({ changeMonth: true, changeYear: true, maxDate: 0 });
+        $("#END_DATE").datepicker("option", "dateFormat", "dd/mm/yy");
+        $("#END_DATE").datepicker("option", "monthNamesShort", ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+        $("#END_DATE").datepicker("option", "showMonthAfterYear", false);
+        $("#END_DATE").datepicker("option", "yearRange", "2000:2060");
+    </script>
+}

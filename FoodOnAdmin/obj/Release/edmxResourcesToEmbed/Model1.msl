@@ -33,6 +33,14 @@
     <EntitySetMapping Name="TB_Restaurant">
       <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_Restaurant">
         <MappingFragment StoreEntitySet="TB_Restaurant">
+          <ScalarProperty Name="RES_LIKE" ColumnName="RES_LIKE" />
+          <ScalarProperty Name="TIME" ColumnName="TIME" />
+          <ScalarProperty Name="OFFERS_ID" ColumnName="OFFERS_ID" />
+          <ScalarProperty Name="DISTANCE_KM" ColumnName="DISTANCE_KM" />
+          <ScalarProperty Name="RES_RATING" ColumnName="RES_RATING" />
+          <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+          <ScalarProperty Name="QR_CODE" ColumnName="QR_CODE" />
+          <ScalarProperty Name="ADVANCED_AMT" ColumnName="ADVANCED_AMT" />
           <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
           <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
@@ -50,6 +58,338 @@
           <ScalarProperty Name="OWNER_NAME" ColumnName="OWNER_NAME" />
           <ScalarProperty Name="RES_NAME" ColumnName="RES_NAME" />
           <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_AddressConfiguration">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_AddressConfiguration">
+        <MappingFragment StoreEntitySet="TB_AddressConfiguration">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+          <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+          <ScalarProperty Name="PINCODE" ColumnName="PINCODE" />
+          <ScalarProperty Name="OTHER" ColumnName="OTHER" />
+          <ScalarProperty Name="DIRECTION_TO_REACH" ColumnName="DIRECTION_TO_REACH" />
+          <ScalarProperty Name="APARTMENT" ColumnName="APARTMENT" />
+          <ScalarProperty Name="ADDRESS_TYPE" ColumnName="ADDRESS_TYPE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="ADD_ID" ColumnName="ADD_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_BANNER">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_BANNER">
+        <MappingFragment StoreEntitySet="TB_BANNER">
+          <ScalarProperty Name="SUB_BANNER_NAME" ColumnName="SUB_BANNER_NAME" />
+          <ScalarProperty Name="SUB_BANNER_URL" ColumnName="SUB_BANNER_URL" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="BANNER_URL" ColumnName="BANNER_URL" />
+          <ScalarProperty Name="BANNER_NAME" ColumnName="BANNER_NAME" />
+          <ScalarProperty Name="BANNER_ID" ColumnName="BANNER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_CART">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_CART">
+        <MappingFragment StoreEntitySet="TB_CART">
+          <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+          <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="CART_ID" ColumnName="CART_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_Diningrequest">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_Diningrequest">
+        <MappingFragment StoreEntitySet="TB_Diningrequest">
+          <ScalarProperty Name="MINIMUM_BUDGET_DRINKS" ColumnName="MINIMUM_BUDGET_DRINKS" />
+          <ScalarProperty Name="PAYMENT_STATUS" ColumnName="PAYMENT_STATUS" />
+          <ScalarProperty Name="OUT_TIME" ColumnName="OUT_TIME" />
+          <ScalarProperty Name="BOOKING_DATE" ColumnName="BOOKING_DATE" />
+          <ScalarProperty Name="FAMILYRESTRO_TYPE" ColumnName="FAMILYRESTRO_TYPE" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="RESTURANT_LIST" ColumnName="RESTURANT_LIST" />
+          <ScalarProperty Name="REQUEST_TYPE" ColumnName="REQUEST_TYPE" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+          <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="ADDRESS_TYPE" ColumnName="ADDRESS_TYPE" />
+          <ScalarProperty Name="SHOW_MOBILE_NUMBER" ColumnName="SHOW_MOBILE_NUMBER" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="ARRIVAL_TIME" ColumnName="ARRIVAL_TIME" />
+          <ScalarProperty Name="MINIMUM_BUDGET" ColumnName="MINIMUM_BUDGET" />
+          <ScalarProperty Name="NO_OF_PEOPLE" ColumnName="NO_OF_PEOPLE" />
+          <ScalarProperty Name="PREFERENCE" ColumnName="PREFERENCE" />
+          <ScalarProperty Name="CHOICE" ColumnName="CHOICE" />
+          <ScalarProperty Name="DINNER_TYPE" ColumnName="DINNER_TYPE" />
+          <ScalarProperty Name="DINNING_ID" ColumnName="DINNING_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_DinningAnswer">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_DinningAnswer">
+        <MappingFragment StoreEntitySet="TB_DinningAnswer">
+          <ScalarProperty Name="PAYMENT_PHOTO" ColumnName="PAYMENT_PHOTO" />
+          <ScalarProperty Name="ADVANCED_AMOUNT" ColumnName="ADVANCED_AMOUNT" />
+          <ScalarProperty Name="ADVANCED_AMT" ColumnName="ADVANCED_AMT" />
+          <ScalarProperty Name="PAYMENT_AMOUNT" ColumnName="PAYMENT_AMOUNT" />
+          <ScalarProperty Name="PAYMENT_STATUS" ColumnName="PAYMENT_STATUS" />
+          <ScalarProperty Name="DRINK_DISCOUNT" ColumnName="DRINK_DISCOUNT" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="TOTAL_DISCOUNT" ColumnName="TOTAL_DISCOUNT" />
+          <ScalarProperty Name="TOTAL_PRICE" ColumnName="TOTAL_PRICE" />
+          <ScalarProperty Name="DINNING_ID" ColumnName="DINNING_ID" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="DA_ID" ColumnName="DA_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_EMPLOYEE">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_EMPLOYEE">
+        <MappingFragment StoreEntitySet="TB_EMPLOYEE">
+          <ScalarProperty Name="PAN" ColumnName="PAN" />
+          <ScalarProperty Name="AADHAAR" ColumnName="AADHAAR" />
+          <ScalarProperty Name="AreaOfWork" ColumnName="AreaOfWork" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VEHICAL_ID" ColumnName="VEHICAL_ID" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="MOBILE_NO" ColumnName="MOBILE_NO" />
+          <ScalarProperty Name="EMP_NAME" ColumnName="EMP_NAME" />
+          <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_OrderDetails">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_OrderDetails">
+        <MappingFragment StoreEntitySet="TB_OrderDetails">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+          <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+          <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+          <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+          <ScalarProperty Name="OD_ID" ColumnName="OD_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_PreferredMenuAnswer">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PreferredMenuAnswer">
+        <MappingFragment StoreEntitySet="TB_PreferredMenuAnswer">
+          <ScalarProperty Name="DELIVERY_CHARGES" ColumnName="DELIVERY_CHARGES" />
+          <ScalarProperty Name="GST" ColumnName="GST" />
+          <ScalarProperty Name="TOTAL_AMOUNT" ColumnName="TOTAL_AMOUNT" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="PAYMENT_STATUS" ColumnName="PAYMENT_STATUS" />
+          <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+          <ScalarProperty Name="TOTAL_DISCOUNT" ColumnName="TOTAL_DISCOUNT" />
+          <ScalarProperty Name="PreferredMenu_ID" ColumnName="PreferredMenu_ID" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="PMA_ID" ColumnName="PMA_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_ProductMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_ProductMaster">
+        <MappingFragment StoreEntitySet="TB_ProductMaster">
+          <ScalarProperty Name="P_CAT_ID" ColumnName="P_CAT_ID" />
+          <ScalarProperty Name="OFFERS_ID" ColumnName="OFFERS_ID" />
+          <ScalarProperty Name="DISTANACE_KM" ColumnName="DISTANACE_KM" />
+          <ScalarProperty Name="SERVES_COUNT" ColumnName="SERVES_COUNT" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="RATING" ColumnName="RATING" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="PRODUCT_IMAGE" ColumnName="PRODUCT_IMAGE" />
+          <ScalarProperty Name="PRODUCT_TYPE" ColumnName="PRODUCT_TYPE" />
+          <ScalarProperty Name="IS_STOCK" ColumnName="IS_STOCK" />
+          <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+          <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+          <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_Restaurant_Images">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_Restaurant_Images">
+        <MappingFragment StoreEntitySet="TB_Restaurant_Images">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="R_TYPE" ColumnName="R_TYPE" />
+          <ScalarProperty Name="R_PHOTO" ColumnName="R_PHOTO" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="RI_ID" ColumnName="RI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_RestaurantLike">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_RestaurantLike">
+        <MappingFragment StoreEntitySet="TB_RestaurantLike">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="FL_ID" ColumnName="FL_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_RestaurantOffersMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_RestaurantOffersMaster">
+        <MappingFragment StoreEntitySet="TB_RestaurantOffersMaster">
+          <ScalarProperty Name="OFFERS_IMAGE" ColumnName="OFFERS_IMAGE" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="OFFERS_BY_PERCENT" ColumnName="OFFERS_BY_PERCENT" />
+          <ScalarProperty Name="OFFERS_ID" ColumnName="OFFERS_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_Settings">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_Settings">
+        <MappingFragment StoreEntitySet="TB_Settings">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="SETTING_NAME" ColumnName="SETTING_NAME" />
+          <ScalarProperty Name="SETTING_TYPE" ColumnName="SETTING_TYPE" />
+          <ScalarProperty Name="SETTING_ID" ColumnName="SETTING_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_VehicalMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_VehicalMaster">
+        <MappingFragment StoreEntitySet="TB_VehicalMaster">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VEHICAL_NAME" ColumnName="VEHICAL_NAME" />
+          <ScalarProperty Name="VEHICAL_ID" ColumnName="VEHICAL_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_PreferredMenu">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PreferredMenu">
+        <MappingFragment StoreEntitySet="TB_PreferredMenu">
+          <ScalarProperty Name="RATE_STATUS" ColumnName="RATE_STATUS" />
+          <ScalarProperty Name="ORDER_RATING" ColumnName="ORDER_RATING" />
+          <ScalarProperty Name="ORDER_REMARK" ColumnName="ORDER_REMARK" />
+          <ScalarProperty Name="APP_ORDER_ID" ColumnName="APP_ORDER_ID" />
+          <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+          <ScalarProperty Name="DELIVERY_BOY_STATUS" ColumnName="DELIVERY_BOY_STATUS" />
+          <ScalarProperty Name="DELIVERY_BOY_REMARK" ColumnName="DELIVERY_BOY_REMARK" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="SHOW_MOBILE" ColumnName="SHOW_MOBILE" />
+          <ScalarProperty Name="RESTO_LIST" ColumnName="RESTO_LIST" />
+          <ScalarProperty Name="PREFERRED_TYPE" ColumnName="PREFERRED_TYPE" />
+          <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+          <ScalarProperty Name="LATITIUDE" ColumnName="LATITIUDE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="PREFERRED_MENU" ColumnName="PREFERRED_MENU" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="PreferredMenu_ID" ColumnName="PreferredMenu_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_ORDER">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_ORDER">
+        <MappingFragment StoreEntitySet="TB_ORDER">
+          <ScalarProperty Name="RATE_STATUS" ColumnName="RATE_STATUS" />
+          <ScalarProperty Name="ORDER_RATING" ColumnName="ORDER_RATING" />
+          <ScalarProperty Name="ORDER_REMARK" ColumnName="ORDER_REMARK" />
+          <ScalarProperty Name="DELIVERY_BOY_REMARK" ColumnName="DELIVERY_BOY_REMARK" />
+          <ScalarProperty Name="APP_ORDER_ID" ColumnName="APP_ORDER_ID" />
+          <ScalarProperty Name="ORDER_TYPE" ColumnName="ORDER_TYPE" />
+          <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+          <ScalarProperty Name="DELIVERY_BOY_STATUS" ColumnName="DELIVERY_BOY_STATUS" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+          <ScalarProperty Name="GST" ColumnName="GST" />
+          <ScalarProperty Name="DELIVERY_CHARGES" ColumnName="DELIVERY_CHARGES" />
+          <ScalarProperty Name="TOTAL_QUANTITY" ColumnName="TOTAL_QUANTITY" />
+          <ScalarProperty Name="TOTAL_AMOUNT" ColumnName="TOTAL_AMOUNT" />
+          <ScalarProperty Name="ADD_ID" ColumnName="ADD_ID" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_SubscriptionMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_SubscriptionMaster">
+        <MappingFragment StoreEntitySet="TB_SubscriptionMaster">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="PAID_AMOUNT" ColumnName="PAID_AMOUNT" />
+          <ScalarProperty Name="SUB_END_DATE" ColumnName="SUB_END_DATE" />
+          <ScalarProperty Name="SUB_START_DATE" ColumnName="SUB_START_DATE" />
+          <ScalarProperty Name="PACKAGE_ID" ColumnName="PACKAGE_ID" />
+          <ScalarProperty Name="REFERENCE_NO" ColumnName="REFERENCE_NO" />
+          <ScalarProperty Name="TRANSACTION_ID" ColumnName="TRANSACTION_ID" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="SUB_ID" ColumnName="SUB_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_PackageMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PackageMaster">
+        <MappingFragment StoreEntitySet="TB_PackageMaster">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="POST_COUNT" ColumnName="POST_COUNT" />
+          <ScalarProperty Name="PACKAGE_VALIDITY" ColumnName="PACKAGE_VALIDITY" />
+          <ScalarProperty Name="OFFER_PRICE" ColumnName="OFFER_PRICE" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="PACKAGE_DESCRIPTION" ColumnName="PACKAGE_DESCRIPTION" />
+          <ScalarProperty Name="PACKAGE_NAME" ColumnName="PACKAGE_NAME" />
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_PostMaster">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PostMaster">
+        <MappingFragment StoreEntitySet="TB_PostMaster">
+          <ScalarProperty Name="POST_NAME" ColumnName="POST_NAME" />
+          <ScalarProperty Name="OFFER" ColumnName="OFFER" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="POST_END_DATE" ColumnName="POST_END_DATE" />
+          <ScalarProperty Name="POST_START_DATE" ColumnName="POST_START_DATE" />
+          <ScalarProperty Name="AMOUNT_OFF_UPTO" ColumnName="AMOUNT_OFF_UPTO" />
+          <ScalarProperty Name="PERCENTAGE_OFF" ColumnName="PERCENTAGE_OFF" />
+          <ScalarProperty Name="POST_IMAGE" ColumnName="POST_IMAGE" />
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="POST_ID" ColumnName="POST_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_Video_Banner_Image">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_Video_Banner_Image">
+        <MappingFragment StoreEntitySet="TB_Video_Banner_Image">
+          <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+          <ScalarProperty Name="VIDEO_URL_LINK" ColumnName="VIDEO_URL_LINK" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VIDEO_BANNER_URL" ColumnName="VIDEO_BANNER_URL" />
+          <ScalarProperty Name="VIDEO_NAME" ColumnName="VIDEO_NAME" />
+          <ScalarProperty Name="VID_BANNER_ID" ColumnName="VID_BANNER_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

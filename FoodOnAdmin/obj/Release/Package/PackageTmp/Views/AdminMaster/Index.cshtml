@@ -175,25 +175,25 @@
 @section Scripts{
 
 
-    <script src="~/AngularJs/Admin.js"></script>
-    <script src="~/AngularJs/Datefilter.js"></script>
-    <link href="~/Css/Paging.css" rel="stylesheet" />
-    <script>
-        $(document).ready(function () {
-            $("#Admin_Addupdate").modal({
-                show: false,
-                backdrop: 'static'
-            });
+<script src="~/AngularJs/Admin.js"></script>
+<script src="~/AngularJs/Datefilter.js"></script>
+<link href="~/Css/Paging.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        $("#Admin_Addupdate").modal({
+            show: false,
+            backdrop: 'static'
         });
-    </script>
-    <script>
-        function LettersOnly(input) {
-            var regex = /[^a-zA-Z ]/gi;
-            input.value = input.value.replace(regex, "");
-        }
-        function NumbersOnly(input) {
-            var regex1 = /[^0-9]/gi;
-            input.value = input.value.replace(regex1, "");
-        }
-    </script>
+    });
+</script>
+<script>
+    function LettersOnly(input) {
+        var regex = /[^a-zA-Z ]/gi;
+        input.value = input.value.replace(regex, "");
+    }
+    function NumbersOnly(input) {
+        var regex1 = /[^0-9]/gi;
+        input.value = input.value.replace(regex1, "");
+    }
+</script>
 }

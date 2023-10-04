@@ -48,6 +48,10 @@ namespace FoodOnAdmin
         public Nullable<long> OFFERS_ID { get; set; }
         public Nullable<long> TIME { get; set; }
         public string RES_LIKE { get; set; }
+        public string Food { get; set; }
+        public string Sweets { get; set; }
+        public string Juice { get; set; }
+        public string Cafeteria { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_DinningAnswer> TB_DinningAnswer { get; set; }

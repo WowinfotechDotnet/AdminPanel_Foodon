@@ -252,6 +252,10 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
         $scope.PINCODE = "";
         $scope.STATUS = "";
         $scope.DESCRIPTION = "";
+        $scope.Food= "";
+        $scope.Sweets= "";
+        $scope.Juice= "";
+        $scope.Cafeteria= "";            
     }
 
 
@@ -271,7 +275,34 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
         $scope.Admin_Action = "Add Restaurant";
         Clear();
         $("#Admin_Addupdate").modal("show");
+        if ($scope.Food === "True") {
+            $("#Food").prop("checked", true);
+        }
+        else {
+            $("#Food").prop("checked", false);
+        }
 
+        if ($scope.Sweets === "True") {
+            $("#Sweets").prop("checked", true);
+        }
+
+        else {
+            $("#Sweets").prop("checked", false);
+        }
+
+        if ($scope.Juice === "True") {
+            $("#Juice").prop("checked", true);
+        }
+        else {
+            $("#Juice").prop("checked", false);
+        }
+
+        if ($scope.Cafeteria === "True") {
+            $("#Cafeteria").prop("checked", true);
+        }
+        else {
+            $("#Cafeteria").prop("checked", false);
+        }
     };
 
 
@@ -296,6 +327,39 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             $scope.LONGITUDE = $scope._Party.LONGITUDE;
             $scope.PINCODE = $scope._Party.PINCODE;
             $scope.DESCRIPTION = $scope._Party.DESCRIPTION;
+
+            $scope.Food = $scope._Party.Food;
+            if ($scope.Food === "True") {
+                $("#Food").prop("checked", true);
+            }
+            else {
+                $("#Food").prop("checked", false);
+            }
+
+            $scope.Sweets = $scope._Party.Sweets;
+            if ($scope.Sweets === "True") {
+                $("#Sweets").prop("checked", true);
+            }
+            else {
+                $("#Sweets").prop("checked", false);
+            }
+
+            $scope.Juice = $scope._Party.Juice;
+            if ($scope.Juice === "True") {
+                $("#Juice").prop("checked", true);
+            }
+            else {
+                $("#Juice").prop("checked", false);
+            }
+
+            $scope.Cafeteria = $scope._Party.Cafeteria;
+            if ($scope.Cafeteria === "True") {
+                $("#Cafeteria").prop("checked", true);
+            }
+            else {
+                $("#Cafeteria").prop("checked", false);
+            }
+
         });
     };
 
@@ -303,6 +367,10 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
 
     $scope.AddAdmin = function () {
         $("#loader").css("display", '');
+        $scope.Food = $("#Food").is(":checked");
+        $scope.Sweets = $("#Sweets").is(":checked");
+        $scope.Juice = $("#Juice").is(":checked");
+        $scope.Cafeteria = $("#Cafeteria").is(":checked");
         tb_Admin = {
             RES_ID: $scope.RES_ID, //for update table
             RES_NAME: $scope.RES_NAME,
@@ -319,6 +387,10 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             LONGITUDE: $scope.LONGITUDE,
             PINCODE: $scope.PINCODE,
             DESCRIPTION: $scope.DESCRIPTION,
+            Food: $scope.Food,
+            Sweets: $scope.Sweets,
+            Juice: $scope.Juice,
+            Cafeteria: $scope.Cafeteria,
         };
         if ($scope.Admin_Action === "Add Restaurant") {
 

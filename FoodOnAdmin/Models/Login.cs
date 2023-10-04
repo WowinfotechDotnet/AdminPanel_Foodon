@@ -113,6 +113,10 @@ namespace FoodOnAdmin.Models
         public string STATUS { get; set; }
         public string REG_DATE { get; set; }
         public string DESCRIPTION { get; set; }
+        public string Food { get; set; }
+        public string Sweets { get; set; }
+        public string Juice { get; set; }
+        public string Cafeteria { get; set; }
 
         public string ImageBase64Data { get; set; }
         public string ImageName { get; set; }
@@ -143,5 +147,33 @@ namespace FoodOnAdmin.Models
         public string REG_DATE { get; set; }
         public string ACTION { get; set; }
        
+    }
+
+    public class FoodOnVideoURLMaster
+    {
+        public long VID_BANNER_ID { get; set; }
+        public string VIDEO_URL_LINK { get; set; }
+        public string VIDEO_NAME { get; set; }
+        public int? FOOD_CATEGORY_ID { get; set; }
+        public string CATEGORY_NAME { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+        public string ACTION { get; set; }
+
+    }
+
+    public class FoodOnSaleBannerMaster
+    {
+        public long BANNER_ID { get; set; }
+        public int? FOOD_CATEGORY_ID { get; set; }
+        public string BANNER_URL { get; set; }
+        public string BANNER_NAME { get; set; }
+        public string CATEGORY_NAME { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+        public string ACTION { get; set; }
+        public string ImageBase64Data { get; set; }
+        public string ImageName { get; set; }
+        public string ImageExtension { get; set; }
     }
 }

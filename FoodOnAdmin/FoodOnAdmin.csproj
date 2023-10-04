@@ -134,6 +134,8 @@
     <Compile Include="Controllers\DeliveryBoyMasterController.cs" />
     <Compile Include="Controllers\DiningController.cs" />
     <Compile Include="Controllers\FacilitesController.cs" />
+    <Compile Include="Controllers\FoodOnMasterVideoController.cs" />
+    <Compile Include="Controllers\FoodOnSaleBannerMasterController.cs" />
     <Compile Include="Controllers\FoodRequestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
@@ -182,6 +184,15 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_EMPLOYEE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_FoodSale_Banner.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_FOOD_CATEGORY.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_MasterPage_Video_Banner_Image.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_ORDER.cs">
@@ -234,6 +245,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularJs\FoodOnSaleBannerMaster.js" />
+    <Content Include="AngularJs\FoodOnMasterVideoURL.js" />
     <Content Include="AngularJs\RestaurantVideoURL.js" />
     <Content Include="AngularJs\Package.js" />
     <Content Include="AngularJs\Admin.js" />
@@ -273,6 +286,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\CameraImage.png" />
     <Content Include="Images\download %281%29.jpg" />
     <Content Include="Images\download %282%29.jpg" />
     <Content Include="Images\download %283%29.jpg" />
@@ -2876,11 +2890,13 @@
     <Content Include="Views\DeliveryBoyMaster\Index.cshtml" />
     <Content Include="Views\Package\Index.cshtml" />
     <Content Include="Views\RestaurantVideo\Index.cshtml" />
+    <Content Include="Views\FoodOnMasterVideo\Index.cshtml" />
+    <Content Include="Views\FoodOnSaleBannerMaster\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="dist\img\credit\" />
-    <Folder Include="DocunmentsUpload\" />
+    <Folder Include="UploadedDocuments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

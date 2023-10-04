@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+    .flex-container {
+        display: flex;
+    }
+
+    .flex-item {
+        flex: 1;
+        border: 1px solid #000;
+        padding: 10px;
+        margin: 5px;
+    }
+</style>
+<style>
+    .table td, .table th {
+        padding: 0.50rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+    .zoom {
+        transition: transform .1s;
+        width: 400px;
+        height: 210px;
+        margin: 0 auto;
+        z-index: 2021;
+    }
+
+        .zoom:hover {
+            -ms-transform: scale(5.5); /* IE 9 */
+            -webkit-transform: scale(5.5); /* Safari 3-8 */
+            transform: scale(2.6);
+            z-index: 1024;
+        }
+</style>
+
+<section class="content" ng-controller="FoodOnSaleBannerCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs" style="background-color:green;color:white"><span class="fa fa-arrow-left"></span></a>
+                            </div>
+                            <div class="col-md-8" style="padding-left:25%;text-align:center;">
+                                <h3 class="card-title"><b>FoodOn Sale Banner Master</b></h3>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-sm" style="float:right; background-color:green;color:white" data-toggle="modal" ng-click="AdminClick()">Add Banner</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="ibox-body">
+                        <div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <input type="text" class="form-control" ng-model="searchCategory" placeholder="Search Category">
+                                    <select id="FOOD_CATEGORY_ID" class="form-control" name="FOOD_CATEGORY_ID" ng-model="FOOD_CATEGORY_ID"
+                                            ng-options="cat.CATEGORY_ID as cat.CATEGORY_NAME for cat in FoodCategoryList | filter: searchCategory"
+                                            ng-selected="cat.CATEGORY_ID == FOOD_CATEGORY_ID">
+                                        <option value="">Select Category</option>
+                                    </select>
+                                </div>
+                                <label style="margin-left:5px">Start Date:</label>
+                                <input class="form-control col-md-2" type="text" id="START_DATE" name="START_DATE" ng-model="START_DATE" />
+                                <label style="margin-left:5px">End Date:</label>
+                                <input class="form-control col-md-2" type="text" id="END_DATE" name="END_DATE" ng-model="END_DATE" />
+
+                                <input type="button" class="form-control btn btn-success col-md-1" style="background-color:green; margin-left: 5px; margin-right: 150px; text-align:center" ng-click="SearchAdmin()" value="Get Data" />
+                                <input class="form-control col-md-3" type="text" style=" margin-left: 5px; padding-right:0px;" placeholder="Search Banner" id="BANNER_NAME" name="BANNER_NAME" ng-change="SearchAdmin()" ng-model="BANNER_NAME" />
+
+                            </div>
+                            <div class="row" style="margin-bottom:10px">
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" border="1" style="border:2px solid black; width:100%;">
+                                    <tbody>
+                                        <tr style="background-color: #157da9; color: white; font-size: 10px; ">
+                                            <th style="width:50px;">Sr No</th>
+                                            <th>Banner Name</th>
+                                            <th>Category Name</th>
+                                            <th>Banner Image</th>
+                                            <th>Status</th>
+                                            <th>Reg Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        <tr ng-repeat="Banner in AdminList">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{Banner.BANNER_NAME}}</td>
+                                            <td>{{Banner.CATEGORY_NAME}}</td>
+                                            <td>
+                                                <img class="zoom" style="height:100px;width:180px;" src="{{Banner.BANNER_URL}}" />
+                                            </td>
+                                            <td><a href="" ng-click="ChangeStatus(Banner)"><b style="color:red">{{Banner.STATUS}}</b></a></td>
+                                            <td>{{Banner.REG_DATE}}</td>
+                                            <td><button type="button" class="btn btn-xs" style="background-color:green;color:white;" data-toggle="modal" ng-click="Update(Banner)">Edit</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <ul ng-if="pager.pages.length" class="pagination" style="margin-left:30px;">
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(1)">First</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                                </li>
+                                <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+                                    <a ng-click="setPage(page)">{{page}}</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.totalPages)">Last</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal fade" id="Admin_Addupdate">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #157da9; color: black; padding: 10px; ">
+                                        <h5 class="modal-title"><b>{{Admin_Action}}</b></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card-body">
+                                            <form role="form" name="BannerDetails" ng-submit="BannerDetails(BannerDetails.$valid)" data-toggle="validator">
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label style="color:black;font-size:14px;">Food Category Name:</label> <label style="color:red">*</label>
+                                                        <select id="FOOD_CATEGORY_ID1" class="form-control" name="FOOD_CATEGORY_ID1" ng-model="FOOD_CATEGORY_ID1"
+                                                                ng-options="cat.CATEGORY_ID as cat.CATEGORY_NAME for cat in FoodCategoryList"
+                                                                ng-selected="cat.CATEGORY_ID == FOOD_CATEGORY_ID1" required>
+                                                            <option value="">Select Category</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <input type="text" class="form-control" ng-model="BANNER_ID" style="display:none">
+                                                        <div class="form-group">
+                                                            <label style="color:black;font-size:14px;">Banner Name:</label> <label style="color:red">*</label>
+                                                            <input type="text" class="form-control" ng-model="BANNER_NAME1" placeholder="Enter Banner Name" required>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <div class="row" style="margin:0px; padding:0px;">
+                                                            <div class="col-lg-12" style="padding:0px;">
+                                                                <center>
+                                                                    <label style="color:black">Select Banner Image:</label> <label style="color:red">*</label>
+                                                                </center>
+                                                                <div hidden>
+                                                                    <input type="file" id="chooseimageFileUploader_AddBanner"
+                                                                           onchange="angular.element(this).scope().SelectFile(event)"
+                                                                           class="form-control" accept="image/*">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12" style="padding:0px; text-align:center;">
+
+                                                                <div ng-click="OpenFileUploader_AddBanner()">
+
+                                                                    <center>
+                                                                        <div class="ProductImageContaine" style="width: 410px; height: 250px; align-content: center;  cursor: pointer; border: 1px solid silver ">
+                                                                            <a class="a-link-normal bb-s-item-url">
+                                                                                <div class="imageOverlay"></div>
+                                                                                <div class="ItemContainerDiv">
+                                                                                    <div class="ImageDiv" style="height: 100%;">
+                                                                                        <br />
+                                                                                        <span ng-show="PreviewImage.length > 0 ">
+                                                                                            <img id="PostImage_img" width="400" height="210" class="fadeImage PreloadImage currentImage"
+                                                                                                 ng-src="{{PreviewImage}}" />
+                                                                                        </span>
+                                                                                        <span ng-show="!PreviewImage.length > 0">
+                                                                                            <img class="fadeImage PreloadImage currentImage" style="height:100px;"
+                                                                                                 src="~/Images/CameraImage.png" />
+                                                                                        </span>
+                                                                                    </div>
+                                                                                    <br />
+                                                                                </div>
+                                                                            </a>
+                                                                        </div>
+                                                                    </center>
+                                                                </div>
+
+                                                            </div>
+                                                            <center><span style="color: red; margin-left:72px; "><b>Note:Image Size should be less than 467px To 210px </b> </span></center>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-sm" style="color:white;background-color:green" ng-disabled="BannerDetails.$invalid" ng-click="AddAdmin()">{{Admin_Action}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+
+    <script src="~/AngularJs/FoodOnSaleBannerMaster.js"></script>
+    <link href="~/Css/Paging.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $("#START_DATE").datepicker({ changeMonth: true, changeYear: true, maxDate: 0 });
+        $("#START_DATE").datepicker("option", "dateFormat", "dd/mm/yy");
+        $("#START_DATE").datepicker("option", "monthNamesShort", ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+        $("#START_DATE").datepicker("option", "showMonthAfterYear", false);
+        $("#START_DATE").datepicker("option", "yearRange", "2000:2060");
+
+        $("#END_DATE").datepicker({ changeMonth: true, changeYear: true, maxDate: 0 });
+        $("#END_DATE").datepicker("option", "dateFormat", "dd/mm/yy");
+        $("#END_DATE").datepicker("option", "monthNamesShort", ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+        $("#END_DATE").datepicker("option", "showMonthAfterYear", false);
+        $("#END_DATE").datepicker("option", "yearRange", "2000:2060");
+    </script>
+    <script>
+        document.getElementById('hovered-image').addEventListener('click', function () {
+            this.style.display = 'none'; // Hide the hovered image when clicked
+        });
+    </script>
+}

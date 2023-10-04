@@ -121,6 +121,37 @@
     <Property Name="AADHAAR" Type="nvarchar" MaxLength="256" />
     <Property Name="PAN" Type="nvarchar" MaxLength="256" />
   </EntityType>
+  <EntityType Name="TB_FOOD_CATEGORY">
+    <Key>
+      <PropertyRef Name="CATEGORY_ID" />
+    </Key>
+    <Property Name="CATEGORY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CATEGORY_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="STATUS" Type="varchar" MaxLength="20" />
+    <Property Name="REG_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TB_FoodSale_Banner">
+    <Key>
+      <PropertyRef Name="BANNER_ID" />
+    </Key>
+    <Property Name="BANNER_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BANNER_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="BANNER_URL" Type="varchar" MaxLength="200" />
+    <Property Name="STATUS" Type="varchar" MaxLength="100" />
+    <Property Name="REG_DATE" Type="datetime" />
+    <Property Name="FOOD_CATEGORY_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="TB_MasterPage_Video_Banner_Image">
+    <Key>
+      <PropertyRef Name="VID_BANNER_ID" />
+    </Key>
+    <Property Name="VID_BANNER_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VIDEO_NAME" Type="varchar" MaxLength="100" />
+    <Property Name="VIDEO_BANNER_URL" Type="nvarchar" MaxLength="200" />
+    <Property Name="STATUS" Type="varchar" MaxLength="50" />
+    <Property Name="REG_DATE" Type="datetime" />
+    <Property Name="VIDEO_URL_LINK" Type="nvarchar" MaxLength="350" />
+  </EntityType>
   <EntityType Name="TB_ORDER">
     <Key>
       <PropertyRef Name="ORDER_ID" />
@@ -278,6 +309,10 @@
     <Property Name="OFFERS_ID" Type="bigint" />
     <Property Name="TIME" Type="bigint" />
     <Property Name="RES_LIKE" Type="nvarchar" MaxLength="100" />
+    <Property Name="Food" Type="varchar" MaxLength="10" />
+    <Property Name="Sweets" Type="varchar" MaxLength="10" />
+    <Property Name="Juice" Type="varchar" MaxLength="10" />
+    <Property Name="Cafeteria" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="TB_Restaurant_Images">
     <Key>
@@ -417,6 +452,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__TB_FoodSa__FOOD___3552E9B6">
+    <End Role="TB_FOOD_CATEGORY" Type="Self.TB_FOOD_CATEGORY" Multiplicity="0..1" />
+    <End Role="TB_FoodSale_Banner" Type="Self.TB_FoodSale_Banner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_FOOD_CATEGORY">
+        <PropertyRef Name="CATEGORY_ID" />
+      </Principal>
+      <Dependent Role="TB_FoodSale_Banner">
+        <PropertyRef Name="FOOD_CATEGORY_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__TB_PostMa__RES_I__19AACF41">
     <End Role="TB_Restaurant" Type="Self.TB_Restaurant" Multiplicity="0..1" />
     <End Role="TB_PostMaster" Type="Self.TB_PostMaster" Multiplicity="*" />
@@ -473,6 +520,9 @@
     <EntitySet Name="TB_Diningrequest" EntityType="Self.TB_Diningrequest" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_DinningAnswer" EntityType="Self.TB_DinningAnswer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_EMPLOYEE" EntityType="Self.TB_EMPLOYEE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_FOOD_CATEGORY" EntityType="Self.TB_FOOD_CATEGORY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_FoodSale_Banner" EntityType="Self.TB_FoodSale_Banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_MasterPage_Video_Banner_Image" EntityType="Self.TB_MasterPage_Video_Banner_Image" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_ORDER" EntityType="Self.TB_ORDER" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_OrderDetails" EntityType="Self.TB_OrderDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TB_PackageMaster" EntityType="Self.TB_PackageMaster" Schema="dbo" store:Type="Tables" />
@@ -504,6 +554,10 @@
     <AssociationSet Name="FK__TB_Dinnin__USER___403A8C7D" Association="Self.FK__TB_Dinnin__USER___403A8C7D">
       <End Role="TB_UserMaster" EntitySet="TB_UserMaster" />
       <End Role="TB_DinningAnswer" EntitySet="TB_DinningAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TB_FoodSa__FOOD___3552E9B6" Association="Self.FK__TB_FoodSa__FOOD___3552E9B6">
+      <End Role="TB_FOOD_CATEGORY" EntitySet="TB_FOOD_CATEGORY" />
+      <End Role="TB_FoodSale_Banner" EntitySet="TB_FoodSale_Banner" />
     </AssociationSet>
     <AssociationSet Name="FK__TB_PostMa__RES_I__19AACF41" Association="Self.FK__TB_PostMa__RES_I__19AACF41">
       <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />

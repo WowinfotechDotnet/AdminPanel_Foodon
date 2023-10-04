@@ -328,7 +328,7 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
                 $("#loader").css("display", 'none');
             }
             else if (d.data.success === false) {
-                alert("Admin allready added.");
+                alert("Admin already added.");
                 $("#loader").css("display", 'none');
             }
             else {
@@ -357,7 +357,7 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
                 $("#loader").css("display", 'none');
             }
             else if (d.data.success === false) {
-                alert("Admin allready added.");
+                alert("Admin already added.");
                 $("#loader").css("display", 'none');
             }
             else {

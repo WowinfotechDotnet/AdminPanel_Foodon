@@ -126,6 +126,37 @@
           <Property Name="AADHAAR" Type="nvarchar" MaxLength="256" />
           <Property Name="PAN" Type="nvarchar" MaxLength="256" />
         </EntityType>
+        <EntityType Name="TB_FOOD_CATEGORY">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CATEGORY_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="STATUS" Type="varchar" MaxLength="20" />
+          <Property Name="REG_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TB_FoodSale_Banner">
+          <Key>
+            <PropertyRef Name="BANNER_ID" />
+          </Key>
+          <Property Name="BANNER_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BANNER_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="BANNER_URL" Type="varchar" MaxLength="200" />
+          <Property Name="STATUS" Type="varchar" MaxLength="100" />
+          <Property Name="REG_DATE" Type="datetime" />
+          <Property Name="FOOD_CATEGORY_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_MasterPage_Video_Banner_Image">
+          <Key>
+            <PropertyRef Name="VID_BANNER_ID" />
+          </Key>
+          <Property Name="VID_BANNER_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VIDEO_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="VIDEO_BANNER_URL" Type="nvarchar" MaxLength="200" />
+          <Property Name="STATUS" Type="varchar" MaxLength="50" />
+          <Property Name="REG_DATE" Type="datetime" />
+          <Property Name="VIDEO_URL_LINK" Type="nvarchar" MaxLength="350" />
+        </EntityType>
         <EntityType Name="TB_ORDER">
           <Key>
             <PropertyRef Name="ORDER_ID" />
@@ -283,6 +314,10 @@
           <Property Name="OFFERS_ID" Type="bigint" />
           <Property Name="TIME" Type="bigint" />
           <Property Name="RES_LIKE" Type="nvarchar" MaxLength="100" />
+          <Property Name="Food" Type="varchar" MaxLength="10" />
+          <Property Name="Sweets" Type="varchar" MaxLength="10" />
+          <Property Name="Juice" Type="varchar" MaxLength="10" />
+          <Property Name="Cafeteria" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="TB_Restaurant_Images">
           <Key>
@@ -422,6 +457,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__TB_FoodSa__FOOD___3552E9B6">
+          <End Role="TB_FOOD_CATEGORY" Type="Self.TB_FOOD_CATEGORY" Multiplicity="0..1" />
+          <End Role="TB_FoodSale_Banner" Type="Self.TB_FoodSale_Banner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_FOOD_CATEGORY">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="TB_FoodSale_Banner">
+              <PropertyRef Name="FOOD_CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__TB_PostMa__RES_I__19AACF41">
           <End Role="TB_Restaurant" Type="Self.TB_Restaurant" Multiplicity="0..1" />
           <End Role="TB_PostMaster" Type="Self.TB_PostMaster" Multiplicity="*" />
@@ -478,6 +525,9 @@
           <EntitySet Name="TB_Diningrequest" EntityType="Self.TB_Diningrequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_DinningAnswer" EntityType="Self.TB_DinningAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_EMPLOYEE" EntityType="Self.TB_EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_FOOD_CATEGORY" EntityType="Self.TB_FOOD_CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_FoodSale_Banner" EntityType="Self.TB_FoodSale_Banner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_MasterPage_Video_Banner_Image" EntityType="Self.TB_MasterPage_Video_Banner_Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ORDER" EntityType="Self.TB_ORDER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_OrderDetails" EntityType="Self.TB_OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PackageMaster" EntityType="Self.TB_PackageMaster" Schema="dbo" store:Type="Tables" />
@@ -509,6 +559,10 @@
           <AssociationSet Name="FK__TB_Dinnin__USER___403A8C7D" Association="Self.FK__TB_Dinnin__USER___403A8C7D">
             <End Role="TB_UserMaster" EntitySet="TB_UserMaster" />
             <End Role="TB_DinningAnswer" EntitySet="TB_DinningAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_FoodSa__FOOD___3552E9B6" Association="Self.FK__TB_FoodSa__FOOD___3552E9B6">
+            <End Role="TB_FOOD_CATEGORY" EntitySet="TB_FOOD_CATEGORY" />
+            <End Role="TB_FoodSale_Banner" EntitySet="TB_FoodSale_Banner" />
           </AssociationSet>
           <AssociationSet Name="FK__TB_PostMa__RES_I__19AACF41" Association="Self.FK__TB_PostMa__RES_I__19AACF41">
             <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
@@ -587,6 +641,13 @@
             <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
             <End Role="TB_PostMaster" EntitySet="TB_PostMaster" />
           </AssociationSet>
+          <EntitySet Name="TB_MasterPage_Video_Banner_Image" EntityType="DB_FoodOnLinkModel.TB_MasterPage_Video_Banner_Image" />
+          <EntitySet Name="TB_FoodSale_Banner" EntityType="DB_FoodOnLinkModel.TB_FoodSale_Banner" />
+          <EntitySet Name="TB_FOOD_CATEGORY" EntityType="DB_FoodOnLinkModel.TB_FOOD_CATEGORY" />
+          <AssociationSet Name="FK__TB_FoodSa__FOOD___3552E9B6" Association="DB_FoodOnLinkModel.FK__TB_FoodSa__FOOD___3552E9B6">
+            <End Role="TB_FOOD_CATEGORY" EntitySet="TB_FOOD_CATEGORY" />
+            <End Role="TB_FoodSale_Banner" EntitySet="TB_FoodSale_Banner" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="TB_AdminMaster">
           <Key>
@@ -650,6 +711,10 @@
           <NavigationProperty Name="TB_ProductMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" FromRole="TB_Restaurant" ToRole="TB_ProductMaster" />
           <NavigationProperty Name="TB_SubscriptionMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95" FromRole="TB_Restaurant" ToRole="TB_SubscriptionMaster" />
           <NavigationProperty Name="TB_PostMaster" Relationship="DB_FoodOnLinkModel.FK__TB_PostMa__RES_I__19AACF41" FromRole="TB_Restaurant" ToRole="TB_PostMaster" />
+          <Property Name="Food" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Sweets" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Juice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cafeteria" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TB_AddressConfiguration">
           <Key>
@@ -1069,6 +1134,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TB_MasterPage_Video_Banner_Image">
+          <Key>
+            <PropertyRef Name="VID_BANNER_ID" />
+          </Key>
+          <Property Name="VID_BANNER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VIDEO_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VIDEO_BANNER_URL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+          <Property Name="VIDEO_URL_LINK" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_FoodSale_Banner">
+          <Key>
+            <PropertyRef Name="BANNER_ID" />
+          </Key>
+          <Property Name="BANNER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BANNER_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BANNER_URL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+          <Property Name="FOOD_CATEGORY_ID" Type="Int32" />
+          <NavigationProperty Name="TB_FOOD_CATEGORY" Relationship="DB_FoodOnLinkModel.FK__TB_FoodSa__FOOD___3552E9B6" FromRole="TB_FoodSale_Banner" ToRole="TB_FOOD_CATEGORY" />
+        </EntityType>
+        <EntityType Name="TB_FOOD_CATEGORY">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATEGORY_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_FoodSale_Banner" Relationship="DB_FoodOnLinkModel.FK__TB_FoodSa__FOOD___3552E9B6" FromRole="TB_FOOD_CATEGORY" ToRole="TB_FoodSale_Banner" />
+        </EntityType>
+        <Association Name="FK__TB_FoodSa__FOOD___3552E9B6">
+          <End Type="DB_FoodOnLinkModel.TB_FOOD_CATEGORY" Role="TB_FOOD_CATEGORY" Multiplicity="0..1" />
+          <End Type="DB_FoodOnLinkModel.TB_FoodSale_Banner" Role="TB_FoodSale_Banner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_FOOD_CATEGORY">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="TB_FoodSale_Banner">
+              <PropertyRef Name="FOOD_CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1107,6 +1217,10 @@
           <EntitySetMapping Name="TB_Restaurant">
             <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_Restaurant">
               <MappingFragment StoreEntitySet="TB_Restaurant">
+                <ScalarProperty Name="Cafeteria" ColumnName="Cafeteria" />
+                <ScalarProperty Name="Juice" ColumnName="Juice" />
+                <ScalarProperty Name="Sweets" ColumnName="Sweets" />
+                <ScalarProperty Name="Food" ColumnName="Food" />
                 <ScalarProperty Name="RES_LIKE" ColumnName="RES_LIKE" />
                 <ScalarProperty Name="TIME" ColumnName="TIME" />
                 <ScalarProperty Name="OFFERS_ID" ColumnName="OFFERS_ID" />
@@ -1464,6 +1578,40 @@
                 <ScalarProperty Name="VIDEO_BANNER_URL" ColumnName="VIDEO_BANNER_URL" />
                 <ScalarProperty Name="VIDEO_NAME" ColumnName="VIDEO_NAME" />
                 <ScalarProperty Name="VID_BANNER_ID" ColumnName="VID_BANNER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_MasterPage_Video_Banner_Image">
+            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_MasterPage_Video_Banner_Image">
+              <MappingFragment StoreEntitySet="TB_MasterPage_Video_Banner_Image">
+                <ScalarProperty Name="VIDEO_URL_LINK" ColumnName="VIDEO_URL_LINK" />
+                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="VIDEO_BANNER_URL" ColumnName="VIDEO_BANNER_URL" />
+                <ScalarProperty Name="VIDEO_NAME" ColumnName="VIDEO_NAME" />
+                <ScalarProperty Name="VID_BANNER_ID" ColumnName="VID_BANNER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_FoodSale_Banner">
+            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_FoodSale_Banner">
+              <MappingFragment StoreEntitySet="TB_FoodSale_Banner">
+                <ScalarProperty Name="FOOD_CATEGORY_ID" ColumnName="FOOD_CATEGORY_ID" />
+                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="BANNER_URL" ColumnName="BANNER_URL" />
+                <ScalarProperty Name="BANNER_NAME" ColumnName="BANNER_NAME" />
+                <ScalarProperty Name="BANNER_ID" ColumnName="BANNER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_FOOD_CATEGORY">
+            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_FOOD_CATEGORY">
+              <MappingFragment StoreEntitySet="TB_FOOD_CATEGORY">
+                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

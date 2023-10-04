@@ -117,7 +117,7 @@ namespace FoodOnAdmin.Controllers
 
         public JsonResult GetadminById(int id)
         {
-            var _getadmin = db.TB_Restaurant.Where(z => z.RES_ID == id).Select(s => new { s.RES_ID, s.RES_NAME, s.MOBILE_NUMBER, s.FOOD_TYPE, s.PINCODE, s.STATUS, s.REG_DATE, s.ADDRESS, s.PASSWORD,s.CONFIRM_PASSWORD,s.LATITUDE,s.LONGITUDE,s.RES_OPEN_TIME,s.RES_CLOSE_TIME,s.DESCRIPTION,s.OWNER_NAME,s.RES_LOGO }).FirstOrDefault();
+            var _getadmin = db.TB_Restaurant.Where(z => z.RES_ID == id).Select(s => new { s.RES_ID, s.RES_NAME, s.MOBILE_NUMBER, s.FOOD_TYPE, s.PINCODE, s.STATUS, s.REG_DATE, s.ADDRESS, s.PASSWORD,s.CONFIRM_PASSWORD,s.LATITUDE,s.LONGITUDE,s.RES_OPEN_TIME,s.RES_CLOSE_TIME,s.DESCRIPTION,s.OWNER_NAME,s.RES_LOGO,s.Food,s.Sweets,s.Juice,s.Cafeteria }).FirstOrDefault();
             return Json(_getadmin, JsonRequestBehavior.AllowGet);
         }
 
@@ -175,6 +175,10 @@ namespace FoodOnAdmin.Controllers
                 cmd.Parameters.AddWithValue("@LONGITUDE", tB_admin.LONGITUDE);
                 cmd.Parameters.AddWithValue("@PINCODE", tB_admin.PINCODE);
                 cmd.Parameters.AddWithValue("@DESCRIPTION", tB_admin.DESCRIPTION);
+                cmd.Parameters.AddWithValue("@Food", tB_admin.Food);
+                cmd.Parameters.AddWithValue("@Sweets", tB_admin.Sweets);
+                cmd.Parameters.AddWithValue("@Juice", tB_admin.Juice);
+                cmd.Parameters.AddWithValue("@Cafeteria", tB_admin.Cafeteria);
                 cmd.Connection = con;
                 if (con.State == System.Data.ConnectionState.Open)
                 {
@@ -251,6 +255,10 @@ namespace FoodOnAdmin.Controllers
                 cmd.Parameters.AddWithValue("@LONGITUDE", tB_admin.LONGITUDE);
                 cmd.Parameters.AddWithValue("@PINCODE", tB_admin.PINCODE);
                 cmd.Parameters.AddWithValue("@DESCRIPTION", tB_admin.DESCRIPTION);
+                cmd.Parameters.AddWithValue("@Food", tB_admin.Food);
+                cmd.Parameters.AddWithValue("@Sweets", tB_admin.Sweets);
+                cmd.Parameters.AddWithValue("@Juice", tB_admin.Juice);
+                cmd.Parameters.AddWithValue("@Cafeteria", tB_admin.Cafeteria);
                 cmd.Parameters.AddWithValue("@RES_ID", tB_admin.RES_ID);
                 cmd.Connection = con;
                 if (con.State == System.Data.ConnectionState.Open)
@@ -307,7 +315,7 @@ namespace FoodOnAdmin.Controllers
         public JsonResult GetallShopdetails()
         {
             long id = Convert.ToInt64(Session["SHOP_ID"]);
-            var _getadmin = db.TB_Restaurant.Where(z => z.RES_ID == id).Select(s => new { s.RES_ID, s.RES_NAME, s.MOBILE_NUMBER, s.FOOD_TYPE, s.PINCODE, s.STATUS, s.REG_DATE, s.ADDRESS, s.PASSWORD, s.CONFIRM_PASSWORD, s.LATITUDE, s.LONGITUDE, s.RES_OPEN_TIME, s.RES_CLOSE_TIME, s.DESCRIPTION, s.OWNER_NAME, s.RES_LOGO }).ToList();
+            var _getadmin = db.TB_Restaurant.Where(z => z.RES_ID == id).Select(s => new { s.RES_ID, s.RES_NAME, s.MOBILE_NUMBER, s.FOOD_TYPE, s.PINCODE, s.STATUS, s.REG_DATE, s.ADDRESS, s.PASSWORD, s.CONFIRM_PASSWORD, s.LATITUDE, s.LONGITUDE, s.RES_OPEN_TIME, s.RES_CLOSE_TIME, s.DESCRIPTION, s.OWNER_NAME, s.RES_LOGO, s.Food, s.Sweets, s.Juice, s.Cafeteria }).ToList();
             return Json(_getadmin, JsonRequestBehavior.AllowGet);
         }
 
