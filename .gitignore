@@ -378,3 +378,5 @@ FodyWeavers.xsd
 /FoodOnAdmin/obj/Debug/FoodOnAdmin.dll
 /FoodOnAdmin/obj/Debug/FoodOnAdmin.pdb
 /FoodOnAdmin/obj/Debug/FoodOnAdmin.csproj.FileListAbsolute.txt
+/FoodOnAdmin/Properties/PublishProfiles/FolderProfile.pubxml.user
+/FoodOnAdmin/FoodOnAdmin.csproj.user
