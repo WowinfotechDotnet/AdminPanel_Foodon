@@ -33,6 +33,10 @@
     <EntitySetMapping Name="TB_Restaurant">
       <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_Restaurant">
         <MappingFragment StoreEntitySet="TB_Restaurant">
+          <ScalarProperty Name="Cafeteria" ColumnName="Cafeteria" />
+          <ScalarProperty Name="Juice" ColumnName="Juice" />
+          <ScalarProperty Name="Sweets" ColumnName="Sweets" />
+          <ScalarProperty Name="Food" ColumnName="Food" />
           <ScalarProperty Name="RES_LIKE" ColumnName="RES_LIKE" />
           <ScalarProperty Name="TIME" ColumnName="TIME" />
           <ScalarProperty Name="OFFERS_ID" ColumnName="OFFERS_ID" />
@@ -390,6 +394,40 @@
           <ScalarProperty Name="VIDEO_BANNER_URL" ColumnName="VIDEO_BANNER_URL" />
           <ScalarProperty Name="VIDEO_NAME" ColumnName="VIDEO_NAME" />
           <ScalarProperty Name="VID_BANNER_ID" ColumnName="VID_BANNER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_MasterPage_Video_Banner_Image">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_MasterPage_Video_Banner_Image">
+        <MappingFragment StoreEntitySet="TB_MasterPage_Video_Banner_Image">
+          <ScalarProperty Name="VIDEO_URL_LINK" ColumnName="VIDEO_URL_LINK" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="VIDEO_BANNER_URL" ColumnName="VIDEO_BANNER_URL" />
+          <ScalarProperty Name="VIDEO_NAME" ColumnName="VIDEO_NAME" />
+          <ScalarProperty Name="VID_BANNER_ID" ColumnName="VID_BANNER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_FoodSale_Banner">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_FoodSale_Banner">
+        <MappingFragment StoreEntitySet="TB_FoodSale_Banner">
+          <ScalarProperty Name="FOOD_CATEGORY_ID" ColumnName="FOOD_CATEGORY_ID" />
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="BANNER_URL" ColumnName="BANNER_URL" />
+          <ScalarProperty Name="BANNER_NAME" ColumnName="BANNER_NAME" />
+          <ScalarProperty Name="BANNER_ID" ColumnName="BANNER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TB_FOOD_CATEGORY">
+      <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_FOOD_CATEGORY">
+        <MappingFragment StoreEntitySet="TB_FOOD_CATEGORY">
+          <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
+          <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

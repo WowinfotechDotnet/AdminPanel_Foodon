@@ -56,6 +56,13 @@
       <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
       <End Role="TB_PostMaster" EntitySet="TB_PostMaster" />
     </AssociationSet>
+    <EntitySet Name="TB_MasterPage_Video_Banner_Image" EntityType="DB_FoodOnLinkModel.TB_MasterPage_Video_Banner_Image" />
+    <EntitySet Name="TB_FoodSale_Banner" EntityType="DB_FoodOnLinkModel.TB_FoodSale_Banner" />
+    <EntitySet Name="TB_FOOD_CATEGORY" EntityType="DB_FoodOnLinkModel.TB_FOOD_CATEGORY" />
+    <AssociationSet Name="FK__TB_FoodSa__FOOD___3552E9B6" Association="DB_FoodOnLinkModel.FK__TB_FoodSa__FOOD___3552E9B6">
+      <End Role="TB_FOOD_CATEGORY" EntitySet="TB_FOOD_CATEGORY" />
+      <End Role="TB_FoodSale_Banner" EntitySet="TB_FoodSale_Banner" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="TB_AdminMaster">
     <Key>
@@ -119,6 +126,10 @@
     <NavigationProperty Name="TB_ProductMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" FromRole="TB_Restaurant" ToRole="TB_ProductMaster" />
     <NavigationProperty Name="TB_SubscriptionMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95" FromRole="TB_Restaurant" ToRole="TB_SubscriptionMaster" />
     <NavigationProperty Name="TB_PostMaster" Relationship="DB_FoodOnLinkModel.FK__TB_PostMa__RES_I__19AACF41" FromRole="TB_Restaurant" ToRole="TB_PostMaster" />
+    <Property Name="Food" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Sweets" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Juice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Cafeteria" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="TB_AddressConfiguration">
     <Key>
@@ -535,6 +546,51 @@
       </Principal>
       <Dependent Role="TB_PostMaster">
         <PropertyRef Name="RES_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TB_MasterPage_Video_Banner_Image">
+    <Key>
+      <PropertyRef Name="VID_BANNER_ID" />
+    </Key>
+    <Property Name="VID_BANNER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VIDEO_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="VIDEO_BANNER_URL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+    <Property Name="VIDEO_URL_LINK" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TB_FoodSale_Banner">
+    <Key>
+      <PropertyRef Name="BANNER_ID" />
+    </Key>
+    <Property Name="BANNER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BANNER_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="BANNER_URL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+    <Property Name="FOOD_CATEGORY_ID" Type="Int32" />
+    <NavigationProperty Name="TB_FOOD_CATEGORY" Relationship="DB_FoodOnLinkModel.FK__TB_FoodSa__FOOD___3552E9B6" FromRole="TB_FoodSale_Banner" ToRole="TB_FOOD_CATEGORY" />
+  </EntityType>
+  <EntityType Name="TB_FOOD_CATEGORY">
+    <Key>
+      <PropertyRef Name="CATEGORY_ID" />
+    </Key>
+    <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CATEGORY_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TB_FoodSale_Banner" Relationship="DB_FoodOnLinkModel.FK__TB_FoodSa__FOOD___3552E9B6" FromRole="TB_FOOD_CATEGORY" ToRole="TB_FoodSale_Banner" />
+  </EntityType>
+  <Association Name="FK__TB_FoodSa__FOOD___3552E9B6">
+    <End Type="DB_FoodOnLinkModel.TB_FOOD_CATEGORY" Role="TB_FOOD_CATEGORY" Multiplicity="0..1" />
+    <End Type="DB_FoodOnLinkModel.TB_FoodSale_Banner" Role="TB_FoodSale_Banner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_FOOD_CATEGORY">
+        <PropertyRef Name="CATEGORY_ID" />
+      </Principal>
+      <Dependent Role="TB_FoodSale_Banner">
+        <PropertyRef Name="FOOD_CATEGORY_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
