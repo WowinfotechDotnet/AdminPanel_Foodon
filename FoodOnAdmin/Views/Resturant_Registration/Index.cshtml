@@ -320,6 +320,7 @@
             noCalendar: true, // Disable the calendar
             dateFormat: "h:i K", // Set the desired time format with AM/PM
             time_24hr: false, // Ensure 12-hour format with AM/PM
+            minuteIncrement: 1,
             onChange: function (selectedDates, dateStr, instance) {
                 // Manually set the formatted time value in the input field
                 instance.input.value = formatDate(selectedDates[0]);
@@ -331,6 +332,7 @@
             noCalendar: true, // Disable the calendar
             dateFormat: "h:i K", // Set the desired time format with AM/PM
             time_24hr: false, // Ensure 12-hour format with AM/PM
+            minuteIncrement: 1,
             onChange: function (selectedDates, dateStr, instance) {
                 // Manually set the formatted time value in the input field
                 instance.input.value = formatDate(selectedDates[0]);
