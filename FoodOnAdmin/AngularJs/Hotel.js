@@ -366,7 +366,35 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
 
 
     $scope.AddAdmin = function () {
-        $("#loader").css("display", '');
+        
+
+        $scope.LATITUDE = $("#latitude").val();
+        $scope.LONGITUDE = $("#longitude").val();
+        $scope.PINCODE = $("#pincode").val();
+        //$scope.RES_OPEN_TIME = $("#ResOpenTime").val();
+        //$scope.RES_CLOSE_TIME = $("#ResCloseTime").val();
+
+        if ($scope.LATITUDE === undefined || $scope.LATITUDE === "" || $scope.LATITUDE === null) {
+            alert("Please Enter Latitude!");
+            return;
+        }
+        if ($scope.LONGITUDE === undefined || $scope.LONGITUDE === "" || $scope.LONGITUDE === null) {
+            alert("Please Enter Longitude!");
+            return;
+        }
+        if ($scope.PINCODE === undefined || $scope.PINCODE === "" || $scope.PINCODE === null) {
+            alert("Please Enter Pincode!");
+            return;
+        }
+        if ($scope.RES_OPEN_TIME === undefined || $scope.RES_OPEN_TIME === "" || $scope.RES_OPEN_TIME === null) {
+            alert("Please Select Open Time!");
+            return;
+        }
+        if ($scope.RES_CLOSE_TIME === undefined || $scope.RES_CLOSE_TIME === "" || $scope.RES_CLOSE_TIME === null) {
+            alert("Please Enter Close Time!");
+            return;
+        }
+
         $scope.Food = $("#Food").is(":checked");
         $scope.Sweets = $("#Sweets").is(":checked");
         $scope.Juice = $("#Juice").is(":checked");
