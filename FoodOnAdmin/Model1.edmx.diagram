@@ -40,6 +40,7 @@
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_FoodSale_Banner" Width="1.5" PointX="15.375" PointY="6.75" />
         <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_FOOD_CATEGORY" Width="1.5" PointX="13.125" PointY="21" />
         <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_FoodSa__FOOD___3552E9B6" />
+        <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_Master__FOOD___36470DEF" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

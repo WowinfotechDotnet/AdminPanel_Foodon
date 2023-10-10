@@ -113,6 +113,9 @@ namespace FoodOnAdmin.Models
         public string STATUS { get; set; }
         public string REG_DATE { get; set; }
         public string DESCRIPTION { get; set; }
+        public decimal FOODON_RATING { get; set; }
+        public string RESTRO_BOOKING { get; set; }
+        public string FOOD_DELIVERY { get; set; }
         public string Food { get; set; }
         public string Sweets { get; set; }
         public string Juice { get; set; }

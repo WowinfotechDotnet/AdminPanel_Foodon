@@ -252,6 +252,9 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
         $scope.PINCODE = "";
         $scope.STATUS = "";
         $scope.DESCRIPTION = "";
+        $scope.FOODON_RATING = "";
+        $scope.RESTRO_BOOKING = "";
+        $scope.FOOD_DELIVERY = "";
         $scope.Food= "";
         $scope.Sweets= "";
         $scope.Juice= "";
@@ -275,6 +278,21 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
         $scope.Admin_Action = "Add Restaurant";
         Clear();
         $("#Admin_Addupdate").modal("show");
+
+        if ($scope.RESTRO_BOOKING === "True") {
+            $("#RESTRO_BOOKING").prop("checked", true);
+        }
+        else {
+            $("#RESTRO_BOOKING").prop("checked", false);
+        }
+
+        if ($scope.FOOD_DELIVERY === "True") {
+            $("#FOOD_DELIVERY").prop("checked", true);
+        }
+        else {
+            $("#FOOD_DELIVERY").prop("checked", false);
+        }
+
         if ($scope.Food === "True") {
             $("#Food").prop("checked", true);
         }
@@ -314,6 +332,7 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             $scope._Party = response.data;
             $scope.RES_NAME = $scope._Party.RES_NAME;
             $scope.MOBILE_NUMBER = parseInt($scope._Party.MOBILE_NUMBER);
+            $scope.FOODON_RATING = parseFloat($scope._Party.RES_RATING.toFixed(1));
             $scope.ADDRESS = $scope._Party.ADDRESS;
             $scope.OWNER_NAME = $scope._Party.OWNER_NAME;
             $scope.PASSWORD = $scope._Party.PASSWORD;
@@ -322,11 +341,38 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             $scope.RES_ID = $scope._Party.RES_ID; 
             $scope.FOOD_TYPE = $scope._Party.FOOD_TYPE;
             $scope.RES_OPEN_TIME = $scope._Party.RES_OPEN_TIME;
+            $("#ResOpenTime").val($scope._Party.RES_OPEN_TIME);
+            const timePicker = document.querySelector("#ResOpenTime");
+            const selectedTime = $scope.RES_OPEN_TIME; // 2:30 PM in 24-hour format
+            timePicker._flatpickr.setDate(selectedTime, true);
+
             $scope.RES_CLOSE_TIME = $scope._Party.RES_CLOSE_TIME;
+            $("#ResCloseTime").val($scope._Party.RES_CLOSE_TIME);
+            const timePicker2 = document.querySelector("#ResCloseTime");
+            const selectedTime2 = $scope.RES_CLOSE_TIME; // 2:30 PM in 24-hour format
+            timePicker2._flatpickr.setDate(selectedTime2, true);
+
             $scope.LATITUDE = $scope._Party.LATITUDE;
             $scope.LONGITUDE = $scope._Party.LONGITUDE;
             $scope.PINCODE = $scope._Party.PINCODE;
             $scope.DESCRIPTION = $scope._Party.DESCRIPTION;
+
+
+            $scope.RESTRO_BOOKING = $scope._Party.RESTRO_BOOKING;
+            if ($scope.RESTRO_BOOKING === "True") {
+                $("#RESTRO_BOOKING").prop("checked", true);
+            }
+            else {
+                $("#RESTRO_BOOKING").prop("checked", false);
+            }
+
+            $scope.FOOD_DELIVERY = $scope._Party.FOOD_DELIVERY;
+            if ($scope.FOOD_DELIVERY === "True") {
+                $("#FOOD_DELIVERY").prop("checked", true);
+            }
+            else {
+                $("#FOOD_DELIVERY").prop("checked", false);
+            }
 
             $scope.Food = $scope._Party.Food;
             if ($scope.Food === "True") {
@@ -395,6 +441,8 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             return;
         }
 
+        $scope.RESTRO_BOOKING = $("#RESTRO_BOOKING").is(":checked");
+        $scope.FOOD_DELIVERY = $("#FOOD_DELIVERY").is(":checked");
         $scope.Food = $("#Food").is(":checked");
         $scope.Sweets = $("#Sweets").is(":checked");
         $scope.Juice = $("#Juice").is(":checked");
@@ -404,6 +452,7 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             RES_NAME: $scope.RES_NAME,
             OWNER_NAME: $scope.OWNER_NAME,
             MOBILE_NUMBER: $scope.MOBILE_NUMBER,
+            FOODON_RATING: parseFloat($scope.FOODON_RATING).toFixed(1),
             FOOD_TYPE: $scope.FOOD_TYPE,
             PASSWORD: $scope.PASSWORD,
             CONFIRM_PASSWORD: $scope.CONFIRM_PASSWORD,
@@ -415,6 +464,8 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             LONGITUDE: $scope.LONGITUDE,
             PINCODE: $scope.PINCODE,
             DESCRIPTION: $scope.DESCRIPTION,
+            RESTRO_BOOKING: $scope.RESTRO_BOOKING,
+            FOOD_DELIVERY: $scope.FOOD_DELIVERY,
             Food: $scope.Food,
             Sweets: $scope.Sweets,
             Juice: $scope.Juice,

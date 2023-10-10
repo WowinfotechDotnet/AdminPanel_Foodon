@@ -52,6 +52,8 @@ namespace FoodOnAdmin
         public string Sweets { get; set; }
         public string Juice { get; set; }
         public string Cafeteria { get; set; }
+        public string RESTRO_BOOKING { get; set; }
+        public string FOOD_DELIVERY { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_DinningAnswer> TB_DinningAnswer { get; set; }

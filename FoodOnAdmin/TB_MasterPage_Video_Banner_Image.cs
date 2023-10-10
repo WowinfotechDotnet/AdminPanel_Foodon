@@ -20,5 +20,8 @@ namespace FoodOnAdmin
         public string STATUS { get; set; }
         public Nullable<System.DateTime> REG_DATE { get; set; }
         public string VIDEO_URL_LINK { get; set; }
+        public Nullable<int> FOOD_CATEGORY_ID { get; set; }
+    
+        public virtual TB_FOOD_CATEGORY TB_FOOD_CATEGORY { get; set; }
     }
 }

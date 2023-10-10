@@ -18,6 +18,7 @@ namespace FoodOnAdmin
         public TB_FOOD_CATEGORY()
         {
             this.TB_FoodSale_Banner = new HashSet<TB_FoodSale_Banner>();
+            this.TB_MasterPage_Video_Banner_Image = new HashSet<TB_MasterPage_Video_Banner_Image>();
         }
     
         public int CATEGORY_ID { get; set; }
@@ -27,5 +28,7 @@ namespace FoodOnAdmin
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_FoodSale_Banner> TB_FoodSale_Banner { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_MasterPage_Video_Banner_Image> TB_MasterPage_Video_Banner_Image { get; set; }
     }
 }
