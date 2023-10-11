@@ -127,7 +127,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label style="color:black;font-size:14px;">FoodOn Rating:</label><label style="color:red">*</label>
-                                                        <input class="form-control" type="number" min="0" max="5" onkeyup="if (this.value < min) { this.value = min; return false; } if(this.value > max) { this.value = max; return false; }" step="0.1" id="FOODON_RATING" ng-model="FOODON_RATING" placeholder="Enter FoodOn Rating" required />
+                                                        <input class="form-control" type="number" min="0" max="5" value="0" onkeyup="if (this.value < parseFloat(min)) { this.value = min; return false; } if(this.value > parseFloat(max)) { this.value = max; return false; }" step="0.1" id="FOODON_RATING" ng-model="FOODON_RATING" placeholder="Enter FoodOn Rating" required />
                                                     </div>
                                                 </div>
 

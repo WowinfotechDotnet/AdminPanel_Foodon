@@ -18,9 +18,9 @@ namespace FoodOnAdmin
         public TB_Restaurant()
         {
             this.TB_DinningAnswer = new HashSet<TB_DinningAnswer>();
+            this.TB_PostMaster = new HashSet<TB_PostMaster>();
             this.TB_ProductMaster = new HashSet<TB_ProductMaster>();
             this.TB_SubscriptionMaster = new HashSet<TB_SubscriptionMaster>();
-            this.TB_PostMaster = new HashSet<TB_PostMaster>();
         }
     
         public long RES_ID { get; set; }
@@ -43,7 +43,7 @@ namespace FoodOnAdmin
         public string ADVANCED_AMT { get; set; }
         public string QR_CODE { get; set; }
         public string CATEGORY { get; set; }
-        public Nullable<double> RES_RATING { get; set; }
+        public Nullable<decimal> RES_RATING { get; set; }
         public Nullable<double> DISTANCE_KM { get; set; }
         public Nullable<long> OFFERS_ID { get; set; }
         public Nullable<long> TIME { get; set; }
@@ -58,10 +58,10 @@ namespace FoodOnAdmin
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_DinningAnswer> TB_DinningAnswer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_PostMaster> TB_PostMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_ProductMaster> TB_ProductMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_SubscriptionMaster> TB_SubscriptionMaster { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_PostMaster> TB_PostMaster { get; set; }
     }
 }

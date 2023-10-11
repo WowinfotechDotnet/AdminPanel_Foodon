@@ -31,7 +31,7 @@ namespace FoodOnAdmin
         public string PAYMENT_PHOTO { get; set; }
     
         public virtual TB_Diningrequest TB_Diningrequest { get; set; }
-        public virtual TB_Restaurant TB_Restaurant { get; set; }
         public virtual TB_UserMaster TB_UserMaster { get; set; }
+        public virtual TB_Restaurant TB_Restaurant { get; set; }
     }
 }

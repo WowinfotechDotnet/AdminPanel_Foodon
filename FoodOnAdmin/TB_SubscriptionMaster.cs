@@ -25,7 +25,7 @@ namespace FoodOnAdmin
         public string STATUS { get; set; }
         public Nullable<System.DateTime> REG_DATE { get; set; }
     
-        public virtual TB_Restaurant TB_Restaurant { get; set; }
         public virtual TB_PackageMaster TB_PackageMaster { get; set; }
+        public virtual TB_Restaurant TB_Restaurant { get; set; }
     }
 }

@@ -27,7 +27,6 @@ namespace FoodOnAdmin
     
         public virtual DbSet<TB_AdminMaster> TB_AdminMaster { get; set; }
         public virtual DbSet<TB_UserMaster> TB_UserMaster { get; set; }
-        public virtual DbSet<TB_Restaurant> TB_Restaurant { get; set; }
         public virtual DbSet<TB_AddressConfiguration> TB_AddressConfiguration { get; set; }
         public virtual DbSet<TB_BANNER> TB_BANNER { get; set; }
         public virtual DbSet<TB_CART> TB_CART { get; set; }
@@ -51,5 +50,6 @@ namespace FoodOnAdmin
         public virtual DbSet<TB_MasterPage_Video_Banner_Image> TB_MasterPage_Video_Banner_Image { get; set; }
         public virtual DbSet<TB_FoodSale_Banner> TB_FoodSale_Banner { get; set; }
         public virtual DbSet<TB_FOOD_CATEGORY> TB_FOOD_CATEGORY { get; set; }
+        public virtual DbSet<TB_Restaurant> TB_Restaurant { get; set; }
     }
 }
