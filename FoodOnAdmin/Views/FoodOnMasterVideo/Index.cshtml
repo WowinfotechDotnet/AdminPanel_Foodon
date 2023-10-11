@@ -28,18 +28,18 @@
 
 <section class="content" ng-controller="FoodOnVideoCtrl">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <div class="col-lg-12">
                         <div class="row">
-                            <div class="col-md-1">
+                            <div class="col-lg-1">
                                 <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs" style="background-color:green;color:white"><span class="fa fa-arrow-left"></span></a>
                             </div>
-                            <div class="col-md-8" style="padding-left:25%;text-align:center;">
+                            <div class="col-lg-8" style="padding-left:25%;text-align:center;">
                                 <h3 class="card-title"><b>FoodOn Video Master</b></h3>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-lg-3">
                                 <button type="button" class="btn btn-sm" style="float:right; background-color:green;color:white" data-toggle="modal" ng-click="AdminClick()">Add Video Url</button>
                             </div>
                         </div>
@@ -49,21 +49,21 @@
                     <div class="ibox-body">
                         <div>
                             <div class="row">
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-lg-3">
                                     <input type="text" class="form-control" ng-model="searchCategory" placeholder="Search Category">
                                     <select id="FOOD_CATEGORY_ID" class="form-control" name="FOOD_CATEGORY_ID" ng-model="FOOD_CATEGORY_ID"
                                             ng-options="cat.CATEGORY_ID as cat.CATEGORY_NAME for cat in FoodCategoryList | filter: searchCategory"
-                                            ng-selected="cat.CATEGORY_ID == FOOD_CATEGORY_ID">
+                                            ng-selected="cat.CATEGORY_ID == FOOD_CATEGORY_ID" ng-change="UpdateSearchName()">
                                         <option value="">Select Category</option>
                                     </select>
                                 </div>
-                                <label style="margin-left:5px">Start Date:</label>
-                                <input class="form-control col-md-2" type="text" id="START_DATE" name="START_DATE" ng-model="START_DATE" />
-                                <label style="margin-left:5px">End Date:</label>
-                                <input class="form-control col-md-2" type="text" id="END_DATE" name="END_DATE" ng-model="END_DATE" />
+                                <label style="margin-left:5px">From Date:</label>
+                                <input class="form-control col-lg-2" type="text" id="START_DATE" name="START_DATE" ng-model="START_DATE" />
+                                <label style="margin-left:5px">To Date:</label>
+                                <input class="form-control col-lg-2" type="text" id="END_DATE" name="END_DATE" ng-model="END_DATE" />
 
-                                <input type="button" class="form-control btn btn-success col-md-1" style="background-color:green; margin-left: 5px; margin-right: 150px; text-align:center" ng-click="SearchAdmin()" value="Get Data" />
-                                <input class="form-control col-md-3" type="text" style=" margin-left: 5px; padding-right:0px;" placeholder="Search Video" id="CUSTOMER_NAME" name="VIDEO_NAME" ng-change="SearchAdmin()" ng-model="VIDEO_NAME" />
+                                <input type="button" class="form-control btn btn-success col-md-1" style="margin-left:15px;background-color:green; padding:5px; text-align:center" ng-click="SearchAdmin()" value="Get Data" />
+                                <input class="form-control col-lg-3" type="text" style=" margin-left: 5px; padding-right:0px;" placeholder="Search Video by Name" id="CUSTOMER_NAME" name="VIDEO_NAME" ng-change="SearchAdmin()" ng-model="VIDEO_NAME" />
 
                             </div>
                             <div class="row" style="margin-bottom:10px">
@@ -150,6 +150,7 @@
                                                         <div class="form-group">
                                                             <label style="color:black;font-size:14px;">Video URL:</label><label style="color:red">*</label>
                                                             <input type="text" class="form-control" ng-model="VIDEO_URL_LINK" placeholder="Enter Video URL" required>
+                                                            <span style="color:red;"> Note* : URL should be in the following format <br /> <span style=" color:black;cursor:none;">https://www.youtube.com/watch?v=W-ajXnrpkio</span></span>
                                                         </div>
                                                     </div>
                                                 </div>

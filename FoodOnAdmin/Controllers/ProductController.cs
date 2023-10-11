@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FoodOnAdmin.Controllers
 {
+    [VerifyUserAttribute]
     public class ProductController : Controller
     {
         public ActionResult Index()

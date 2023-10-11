@@ -14,7 +14,7 @@ using System.Drawing.Imaging;
 
 namespace FoodOnAdmin.Controllers
 {
-
+    [VerifyUserAttribute]
     public class Resturant_RegistrationController : Controller
     {
         private DB_FoodOnLinkEntities db = new DB_FoodOnLinkEntities();

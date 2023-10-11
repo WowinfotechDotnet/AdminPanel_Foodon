@@ -11,6 +11,8 @@ namespace FoodOnAdmin.Controllers
     public class HomeController : Controller
     {
         private DB_FoodOnLinkEntities db = new DB_FoodOnLinkEntities();
+        
+        [VerifyUserAttribute]
         public ActionResult Index()
         {
             return View();

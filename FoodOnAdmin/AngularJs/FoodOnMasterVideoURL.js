@@ -244,6 +244,10 @@ app.controller("FoodOnVideoCtrl", function ($scope, AdminService) {
 
     
 
+    $scope.UpdateSearchName = function () {
+        var Cat = $scope.FoodCategoryList.filter(x => x.CATEGORY_ID == $scope.FOOD_CATEGORY_ID)[0];
+        $scope.searchCategory = Cat.CATEGORY_NAME;
+    };
 
 
 

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace FoodOnAdmin.Controllers
 {
+    [VerifyUserAttribute]
     public class PackageController : Controller
     {
         private DB_FoodOnLinkEntities db = new DB_FoodOnLinkEntities();

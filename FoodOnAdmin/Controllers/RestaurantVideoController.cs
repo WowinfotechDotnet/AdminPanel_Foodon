@@ -10,6 +10,7 @@ using FoodOnAdmin.Models;
 
 namespace FoodOnAdmin.Controllers
 {
+    [VerifyUserAttribute]
     public class RestaurantVideoController : Controller
     {
         private DB_FoodOnLinkEntities db = new DB_FoodOnLinkEntities();

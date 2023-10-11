@@ -15,6 +15,7 @@ using System.Web.Hosting;
 
 namespace FoodOnAdmin.Controllers
 {
+    [VerifyUserAttribute]
     public class FoodOnSaleBannerMasterController : Controller
     {
         private DB_FoodOnLinkEntities db = new DB_FoodOnLinkEntities();
