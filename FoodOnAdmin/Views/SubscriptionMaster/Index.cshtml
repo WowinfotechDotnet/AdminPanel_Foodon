@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+    .flex-container {
+        display: flex;
+    }
+
+    .flex-item {
+        flex: 1;
+        border: 1px solid #000;
+        padding: 10px;
+        margin: 5px;
+    }
+</style>
+<style>
+    .table td, .table th {
+        padding: 0.50rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+
+    .zoom {
+        transition: transform .1s;
+        width: 400px;
+        height: 210px;
+        margin: 0 auto;
+        z-index: 2021;
+    }
+
+        .zoom:hover {
+            -ms-transform: scale(5.5); /* IE 9 */
+            -webkit-transform: scale(5.5); /* Safari 3-8 */
+            transform: scale(2.6);
+            z-index: 1024;
+        }
+</style>
+
+<section class="content" ng-controller="SubscriptionCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs" style="background-color:green;color:white"><span class="fa fa-arrow-left"></span></a>
+                            </div>
+                            <div class="col-md-8" style="padding-left:25%;text-align:center;">
+                                <h3 class="card-title"><b>Subscription Master</b></h3>
+                            </div>
+                            <div class="col-md-3" style="float:right">
+                                <input class="form-control" type="text" id="RESTAURANT_NAME" name="RESTAURANT_NAME" ng-model="RESTAURANT_NAME" ng-change="SearchAdmin()" placeholder="Search"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="ibox-body">
+                        <div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <select id="RES_ID" class="form-control" name="RES_ID" ng-model="RES_ID"
+                                            ng-options="res.RES_ID as res.RES_NAME for res in RestaurantList"
+                                            ng-selected="res.RES_ID == RES_ID">
+                                        <option value="">All Restaurants</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <select id="PACKAGE_ID" class="form-control" name="PACKAGE_ID" ng-model="PACKAGE_ID"
+                                            ng-options="p.P_ID as p.PACKAGE_NAME for p in PackageList"
+                                            ng-selected="p.P_ID == PACKAGE_ID">
+                                        <option value="">All Packages</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    
+                                </div>
+                                <label style="margin-left:5px">From Date:</label>
+                                <input class="form-control col-md-2" type="text" id="START_DATE" name="START_DATE" ng-model="START_DATE" />
+                                <label style="margin-left:5px">To Date:</label>
+                                <input class="form-control col-md-2" type="text" id="END_DATE" name="END_DATE" ng-model="END_DATE" />
+
+                                <input type="button" class="form-control btn btn-success col-md-2" style="background-color: green; margin-left: 5px; margin-right: 5px;text-align: center" ng-click="SearchAdmin()" value="Get Data" />
+
+                            </div>
+                            <div class="row" style="margin-bottom:10px">
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" border="1" style="border:2px solid black; width:100%;">
+                                    <tbody>
+                                        <tr style="background-color: #157da9; color: white; font-size: 10px; ">
+                                            <th style="width:50px;">Sr No</th>
+                                            <th>Restaurant Name</th>
+                                            <th>Package Name</th>
+                                            <th>Post Count</th>
+                                            <th>Package Validity(Days)</th>
+                                            <th>Subscribed Date</th>
+                                            <th>Expiry Date</th>
+                                            <th>Status</th>
+                                            <th>Reg Date</th>
+                                        </tr>
+                                        <tr ng-repeat="sub in AdminList">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{sub.RES_NAME}}</td>
+                                            <td>{{sub.PACKAGE_NAME}}</td>
+                                            <td>{{sub.POST_COUNT}}</td>
+                                            <td>{{sub.PACKAGE_VALIDITY}}</td>
+                                            <td>{{sub.SUB_START_DATE}}</td>
+                                            <td>{{sub.SUB_END_DATE}}</td>
+                                            <td ng-show="sub.STATUS==='Deactive'" ><a href="" ng-click="ChangeStatus(sub)" style="color:red"><b>{{sub.STATUS}}</b></a></td>
+                                            <td ng-show="sub.STATUS==='Active'" ><a href="" ng-click="ChangeStatus(sub)" style="color:green"><b>{{sub.STATUS}}</b></a></td>
+                                            <td>{{sub.REG_DATE}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <ul ng-if="pager.pages.length" class="pagination" style="margin-left:30px;">
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(1)">First</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                                </li>
+                                <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+                                    <a ng-click="setPage(page)">{{page}}</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.totalPages)">Last</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+
+    <script src="~/AngularJs/SubscriptionMaster.js"></script>
+    <link href="~/Css/Paging.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $("#START_DATE").datepicker({ changeMonth: true, changeYear: true, maxDate: 0 });
+        $("#START_DATE").datepicker("option", "dateFormat", "dd/mm/yy");
+        $("#START_DATE").datepicker("option", "monthNamesShort", ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+        $("#START_DATE").datepicker("option", "showMonthAfterYear", false);
+        $("#START_DATE").datepicker("option", "yearRange", "2000:2060");
+
+        $("#END_DATE").datepicker({ changeMonth: true, changeYear: true, maxDate: 0 });
+        $("#END_DATE").datepicker("option", "dateFormat", "dd/mm/yy");
+        $("#END_DATE").datepicker("option", "monthNamesShort", ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+        $("#END_DATE").datepicker("option", "showMonthAfterYear", false);
+        $("#END_DATE").datepicker("option", "yearRange", "2000:2060");
+    </script>
+}
+

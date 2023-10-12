@@ -117,7 +117,7 @@ namespace FoodOnAdmin.Controllers
 
         public JsonResult GetadminById(int id)
         {
-            var _getadmin = db.TB_Restaurant.Where(z => z.RES_ID == id).Select(s => new { s.RES_ID, s.RES_NAME, s.MOBILE_NUMBER, s.FOOD_TYPE, s.PINCODE, s.STATUS, s.REG_DATE, s.ADDRESS, s.PASSWORD,s.CONFIRM_PASSWORD,s.LATITUDE,s.LONGITUDE,s.RES_OPEN_TIME,s.RES_CLOSE_TIME,s.DESCRIPTION,s.OWNER_NAME,s.RES_LOGO,s.Food,s.Sweets,s.Juice,s.Cafeteria,s.RES_RATING,s.RESTRO_BOOKING,s.FOOD_DELIVERY }).FirstOrDefault();
+            var _getadmin = db.TB_Restaurant.Where(z => z.RES_ID == id).Select(s => new { s.RES_ID, s.RES_NAME, s.MOBILE_NUMBER, s.FOOD_TYPE, s.PINCODE, s.STATUS, s.REG_DATE, s.ADDRESS, s.PASSWORD,s.CONFIRM_PASSWORD,s.LATITUDE,s.LONGITUDE,s.RES_OPEN_TIME,s.RES_CLOSE_TIME,s.DESCRIPTION,s.OWNER_NAME,s.RES_LOGO,s.Food,s.Sweets,s.Juice,s.Cafeteria,s.RES_RATING,s.RESTRO_BOOKING,s.FOOD_DELIVERY,s.CATEGORY }).FirstOrDefault();
             return Json(_getadmin, JsonRequestBehavior.AllowGet);
         }
 
@@ -182,6 +182,7 @@ namespace FoodOnAdmin.Controllers
                 cmd.Parameters.AddWithValue("@Sweets", tB_admin.Sweets);
                 cmd.Parameters.AddWithValue("@Juice", tB_admin.Juice);
                 cmd.Parameters.AddWithValue("@Cafeteria", tB_admin.Cafeteria);
+                cmd.Parameters.AddWithValue("@CATEGORY", tB_admin.CATEGORY);
                 cmd.Connection = con;
                 if (con.State == System.Data.ConnectionState.Open)
                 {
@@ -265,6 +266,7 @@ namespace FoodOnAdmin.Controllers
                 cmd.Parameters.AddWithValue("@Sweets", tB_admin.Sweets);
                 cmd.Parameters.AddWithValue("@Juice", tB_admin.Juice);
                 cmd.Parameters.AddWithValue("@Cafeteria", tB_admin.Cafeteria);
+                cmd.Parameters.AddWithValue("@CATEGORY", tB_admin.CATEGORY);
                 cmd.Parameters.AddWithValue("@RES_ID", tB_admin.RES_ID);
                 cmd.Connection = con;
                 if (con.State == System.Data.ConnectionState.Open)

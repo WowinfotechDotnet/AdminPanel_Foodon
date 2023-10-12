@@ -54,7 +54,7 @@
                                     <select id="FOOD_CATEGORY_ID" class="form-control" name="FOOD_CATEGORY_ID" ng-model="FOOD_CATEGORY_ID"
                                             ng-options="cat.CATEGORY_ID as cat.CATEGORY_NAME for cat in FoodCategoryList | filter: searchCategory"
                                             ng-selected="cat.CATEGORY_ID == FOOD_CATEGORY_ID" ng-change="UpdateSearchName()">
-                                        <option value="">Select Category</option>
+                                       <option value="">All Category</option>
                                     </select>
                                 </div>
                                 <label style="margin-left:5px">From Date:</label>

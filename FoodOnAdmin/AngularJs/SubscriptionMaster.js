@@ -3,7 +3,7 @@
     this.TotalRecordCount = function (SearchingConditions) {
         var response = $http({
             method: "POST",
-            url: "/FoodOnMasterVideo/TotalRecordCount",
+            url: "/SubscriptionMaster/TotalRecordCount",
             data: JSON.stringify(SearchingConditions)
         });
         return response;
@@ -13,18 +13,8 @@
     this.getRecordbyPaging = function (SearchingConditions) {
         var response = $http({
             method: "POST",
-            url: "/FoodOnMasterVideo/GetallAdmin",
+            url: "/SubscriptionMaster/GetallAdmin",
             data: JSON.stringify(SearchingConditions)
-        });
-        return response;
-    };
-
-    this.AddUpdateAdmin = function (tb_Admin) {
-        var response = $http({
-            method: "POST",
-            url: "/FoodOnMasterVideo/AddUpdateFoodOnVideoURLs",
-            data: JSON.stringify(tb_Admin),
-            dataType: "json"
         });
         return response;
     };
@@ -32,7 +22,7 @@
     this.ChangeStatus = function (id) {
         var response = $http({
             method: "POST",
-            url: "/FoodOnMasterVideo/ChangeStatus",
+            url: "/SubscriptionMaster/ChangeStatus",
             params: {
                 id: JSON.stringify(id)
             }
@@ -40,31 +30,40 @@
         return response;
     };
 
-    this.GetAllFoodCategory = function () {
+    this.GetAllRestaurants = function () {
         var response = $http({
             method: "POST",
-            url: "/FoodOnSaleBannerMaster/GetAllFoodCategory"
+            url: "/SubscriptionMaster/GetAllRestaurants"
         });
         return response;
     };
 
-   
+    this.GetAllPackages = function () {
+        var response = $http({
+            method: "POST",
+            url: "/SubscriptionMaster/GetAllPackages"
+        });
+        return response;
+    };
+
 
 
 
 
 });
 
-app.controller("FoodOnVideoCtrl", function ($scope, AdminService) {
+app.controller("SubscriptionCtrl", function ($scope, AdminService) {
 
     
    
     $scope.PageNo = 1;
     $scope.pageSize = 50;
-    $scope.VIDEO_NAME = null;
-    $scope.FOOD_CATEGORY_ID = null;
+    $scope.RESTAURANT_NAME = null;
+    $scope.RES_ID = null;
+    $scope.PACKAGE_ID = null;
     GetTotalcount();
-    GetAllFoodCategory();
+    GetAllRestaurants();
+    GetAllPackages();
 
     function GetTotalcount() {
 
@@ -88,15 +87,19 @@ app.controller("FoodOnVideoCtrl", function ($scope, AdminService) {
 
     function GetSearchingConditions() {
 
-        if ($scope.VIDEO_NAME === undefined || $scope.VIDEO_NAME === "" || $scope.VIDEO_NAME === null) {
-            $scope.VIDEO_NAME = null;
+        if ($scope.RESTAURANT_NAME === undefined || $scope.RESTAURANT_NAME === "" || $scope.RESTAURANT_NAME === null) {
+            $scope.RESTAURANT_NAME = null;
         }
-        if ($scope.FOOD_CATEGORY_ID === undefined || $scope.FOOD_CATEGORY_ID === "" || $scope.FOOD_CATEGORY_ID === null) {
-            $scope.FOOD_CATEGORY_ID = null;
+        if ($scope.RES_ID === undefined || $scope.RES_ID === "" || $scope.RES_ID === null) {
+            $scope.RES_ID = null;
+        }
+        if ($scope.PACKAGE_ID === undefined || $scope.PACKAGE_ID === "" || $scope.PACKAGE_ID === null) {
+            $scope.PACKAGE_ID = null;
         }
         
         $scope.START_DATE = $("#START_DATE").val();
         $scope.END_DATE = $("#END_DATE").val();
+
         if ($("#START_DATE").val() === undefined || $("#START_DATE").val() === null || $("#START_DATE").val() === "") {
             $scope.START_DATE = null;
         }
@@ -108,8 +111,9 @@ app.controller("FoodOnVideoCtrl", function ($scope, AdminService) {
         var SearchingConditions = {
             PageNo: $scope.PageNo,
             pageSize: $scope.pageSize,
-            VIDEO_NAME: $scope.VIDEO_NAME,
-            FOOD_CATEGORY_ID: $scope.FOOD_CATEGORY_ID,
+            RESTAURANT_NAME: $scope.RESTAURANT_NAME,
+            RES_ID: $scope.RES_ID,
+            PACKAGE_ID: $scope.PACKAGE_ID,
             START_DATE: $scope.START_DATE,
             END_DATE: $scope.END_DATE,
 
@@ -226,134 +230,25 @@ app.controller("FoodOnVideoCtrl", function ($scope, AdminService) {
     };
 
 
+    function GetAllRestaurants() {
 
-    function Clear() {
-        $scope.FOOD_CATEGORY_ID1 = "";
-        $scope.VID_BANNER_ID = "";
-        $scope.VIDEO_NAME1 = "";
-        $scope.VIDEO_URL_LINK = "";
-    }
-
-    function GetAllFoodCategory() {
-
-        var getAdmin = AdminService.GetAllFoodCategory();
+        var getAdmin = AdminService.GetAllRestaurants();
         getAdmin.then(function (response) {
-            $scope.FoodCategoryList = response.data;
+            $scope.RestaurantList = response.data;
         });
     };
 
-    
+    function GetAllPackages() {
 
-    $scope.UpdateSearchName = function () {
-        if ($scope.FOOD_CATEGORY_ID === "" || $scope.FOOD_CATEGORY_ID === null || $scope.FOOD_CATEGORY_ID === undefined) {
-            $scope.searchCategory = "";
-        }
-        else {
-            var Cat = $scope.FoodCategoryList.filter(x => x.CATEGORY_ID == $scope.FOOD_CATEGORY_ID)[0];
-            $scope.searchCategory = Cat.CATEGORY_NAME;
-        }
-        
+        var getAdmin = AdminService.GetAllPackages();
+        getAdmin.then(function (response) {
+            $scope.PackageList = response.data;
+        });
     };
-
-
-
-    $scope.AdminClick = function () {
-        $scope.Admin_Action = "Add Video Details";
-        $scope.ACTION = "ADD";
-        Clear();
-        $("#Admin_Addupdate").modal("show");
-        GetAllFoodCategory();
-    };
-
-
-    $scope.Update = function (admin) {
-        Clear();
-        $scope.Admin_Action = "Update Video Details";
-        $scope.ACTION = "UPDATE";
-        $("#Admin_Addupdate").modal("show");
-        $scope.VIDEO_NAME1 = admin.VIDEO_NAME;
-        $scope.VID_BANNER_ID = admin.VID_BANNER_ID;
-        $scope.VIDEO_URL_LINK = admin.VIDEO_URL_LINK;
-        $scope.FOOD_CATEGORY_ID1 = admin.FOOD_CATEGORY_ID;
-        GetAllFoodCategory();
-    };
-
-
-
-    $scope.AddAdmin = function () {
-        tb_Admin = {
-            VIDEO_NAME: $scope.VIDEO_NAME1,
-            VID_BANNER_ID: parseInt($scope.VID_BANNER_ID), // for Video URL Update
-            VIDEO_URL_LINK: $scope.VIDEO_URL_LINK,
-            FOOD_CATEGORY_ID: parseInt($scope.FOOD_CATEGORY_ID1), 
-            ACTION: $scope.ACTION,
-        };
-        if ($scope.Admin_Action === "Add Video Details") {
-            AddAdminRecord(tb_Admin);
-        }
-        else if ($scope.Admin_Action === "Update Video Details") {
-            EditAdminRecord(tb_Admin);
-        }
-    };
-
-
-
-    function AddAdminRecord(tb_Admin) {
-        var datalist = AdminService.AddUpdateAdmin(tb_Admin);
-        datalist.then(function (d) {
-            if (d.data.success === true) {
-                Clear(); GetRecordbyPaging();
-                alert("Video Details added successfully.");
-                $("#Admin_Addupdate").modal("hide");
-                
-            }
-            else if (d.data.success === false) {
-                alert("Video Details already added.");
-                
-            }
-            else {
-                alert("Error.");
-                
-            }
-        },
-            function () {
-
-                alert("Error.");
-                
-            });
-    }
-
-
-
-
-
-    function EditAdminRecord(tb_Admin) {
-        var datalist = AdminService.AddUpdateAdmin(tb_Admin);
-        datalist.then(function (d) {
-            if (d.data.success === true) {
-                Clear(); GetRecordbyPaging();
-                alert("Video Details Updated successfully.");
-                $("#Admin_Addupdate").modal("hide");
-            }
-            else if (d.data.success === false) {
-                alert("Video Details already added.");
-            }
-            else {
-                alert("Error.");
-            }
-        },
-            function () {
-
-                alert("Error.");
-                
-            });
-    }
-
-
 
     $scope.ChangeStatus = function (admin) {
        
-        var getStatus = AdminService.ChangeStatus(admin.VID_BANNER_ID);
+        var getStatus = AdminService.ChangeStatus(admin.SUB_ID);
         getStatus.then(function (response) {
             GetRecordbyPaging();
             //$.notify(response.data, "error");

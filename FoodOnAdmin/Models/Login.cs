@@ -120,6 +120,7 @@ namespace FoodOnAdmin.Models
         public string Sweets { get; set; }
         public string Juice { get; set; }
         public string Cafeteria { get; set; }
+        public string CATEGORY { get; set; }
 
         public string ImageBase64Data { get; set; }
         public string ImageName { get; set; }
@@ -178,5 +179,20 @@ namespace FoodOnAdmin.Models
         public string ImageBase64Data { get; set; }
         public string ImageName { get; set; }
         public string ImageExtension { get; set; }
+    }
+
+    public class SubscriptionMaster
+    {
+        public long RES_ID { get; set; }
+        public long SUB_ID { get; set; }
+        public long PACKAGE_ID { get; set; }
+        public long PACKAGE_VALIDITY { get; set; }
+        public long POST_COUNT { get; set; }
+        public string RES_NAME { get; set; }
+        public string PACKAGE_NAME { get; set; }
+        public string SUB_START_DATE { get; set; }
+        public string SUB_END_DATE { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
     }
 }

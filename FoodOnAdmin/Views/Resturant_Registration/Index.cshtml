@@ -93,7 +93,7 @@
 
 
                     <div class="modal fade" id="Admin_Addupdate">
-                        <div class="modal-dialog modal-md">
+                        <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header" style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black;padding:10px; ">
                                     <h5 class="modal-title"><b>{{Admin_Action}}</b></h5>
@@ -115,7 +115,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label style="color:black;font-size:14px;">Mobile Number:</label><label style="color:red">*</label>
-                                                        <input type="text" maxlength="10" onkeyup="NumbersOnly(this)" class="form-control" ng-model="MOBILE_NUMBER" placeholder="Enter Mobile Number" required>
+                                                        <input type="text" maxlength="12" onkeyup="NumbersOnly(this)" class="form-control" ng-model="MOBILE_NUMBER" placeholder="Enter Mobile Number" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -127,10 +127,15 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label style="color:black;font-size:14px;">FoodOn Rating:</label><label style="color:red">*</label>
-                                                        <input class="form-control" type="number" min="0" max="5" value="0" onkeyup="if (this.value < parseFloat(min)) { this.value = min; return false; } if(this.value > parseFloat(max)) { this.value = max; return false; }" step="0.1" id="FOODON_RATING" ng-model="FOODON_RATING" placeholder="Enter FoodOn Rating" required />
+                                                        <input class="form-control" type="text" min="0" max="5" step="0.1" onkeyup="DecimalOnly(this)" id="FOODON_RATING" ng-model="FOODON_RATING" placeholder="Enter FoodOn Rating" required />
                                                     </div>
                                                 </div>
-
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label style="color:black;font-size:14px;">Food Categories:</label><label style="color:red">*</label>
+                                                        <textarea rows="2" class="form-control" ng-model="CATEGORY" placeholder="Enter Food Categories" required></textarea>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -190,7 +195,7 @@
                                                     <div class="form-group">
                                                         <label style="color:black;font-size:14px;">Open Time:</label><label style="color:red">*</label>
                                                         <div style="display: flex; align-items: center;">
-                                                            <input class="form-control" style="flex:1" type="text" id="ResOpenTime" name="ResOpenTime" ng-model="RES_OPEN_TIME" />
+                                                            <input class="form-control" style="flex: 1; background-color: #ffffff;" type="text" id="ResOpenTime" name="ResOpenTime" ng-model="RES_OPEN_TIME" />
                                                             <span>
                                                                 <label class="fa fa-clock"></label>
                                                             </span>
@@ -204,7 +209,7 @@
                                                         <label style="color:black;font-size:14px;">Close Time:</label><label style="color:red">*</label>
 
                                                         <div style="display: flex; align-items: center;">
-                                                            <input class="form-control" style="flex:1" type="text" id="ResCloseTime" name="ResCloseTime" ng-model="RES_CLOSE_TIME" />
+                                                            <input class="form-control" style="flex:1 ; background-color:#ffffff;" type="text" id="ResCloseTime" name="ResCloseTime" ng-model="RES_CLOSE_TIME" />
                                                             <span>
                                                                 <label class="fa fa-clock"></label>
                                                             </span>
@@ -214,15 +219,15 @@
 
 
                                                 @*<div class="col-lg-12">
-                <div class="form-group">
-                    <label style="color: black; font-size: 14px;">Shop Image:</label><label style="color:red">*</label>
-                    <input type="file" ng-model="RES_LOGO" class="form-control" accept="image/*" style="height:38px;" id="Profile_photo">
-                    <label style="color:green;font-size:14px;">Note:Image size should be less than 500 kb and Dimension: 512 * 220 pixels.</label>
-                    <a href="#" style="display:none" id="divProfile">
-                        <img src={{_admin.RES_LOGO}} style="height: 100px; width: 100px; object-fit: contain;">&nbsp; &nbsp; &nbsp;
-                    </a>
-                </div>
-            </div>*@
+                                                        <div class="form-group">
+                                                            <label style="color: black; font-size: 14px;">Shop Image:</label><label style="color:red">*</label>
+                                                            <input type="file" ng-model="RES_LOGO" class="form-control" accept="image/*" style="height:38px;" id="Profile_photo">
+                                                            <label style="color:green;font-size:14px;">Note:Image size should be less than 500 kb and Dimension: 512 * 220 pixels.</label>
+                                                            <a href="#" style="display:none" id="divProfile">
+                                                                <img src={{_admin.RES_LOGO}} style="height: 100px; width: 100px; object-fit: contain;">&nbsp; &nbsp; &nbsp;
+                                                            </a>
+                                                        </div>
+                                                    </div>*@
 
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
@@ -327,11 +332,11 @@
     <script src="~/AngularJs/Hotel.js"></script>
     <script src="~/AngularJs/Datefilter.js"></script>
     <link href="~/Css/Paging.css" rel="stylesheet" />
-
+    
     @* Time Picker *@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+    <link rel="stylesheet" href="~/Css/TimePicker.css"> 
 
     <script>
         flatpickr("#ResOpenTime", {
@@ -512,6 +517,23 @@
         function NumbersOnly(input) {
             var regex1 = /[^0-9]/gi;
             input.value = input.value.replace(regex1, "");
+        }
+        function DecimalOnly(input) {
+            if (input.value < parseFloat(input.min)) { input.value = input.min; return false; }
+            if (input.value > parseFloat(input.max)) { input.value = input.max; return false; }
+            var regex1 = /^\d+(\.\d{0,1})?$/;
+
+            input.value = input.value.split(/\s+/).map(function (number) {
+                if (regex1.test(number)) {
+                    return number;
+                } else {
+                    return "";
+                }
+            }).join(" ");
+
+
+
+
         }
     </script>
 }

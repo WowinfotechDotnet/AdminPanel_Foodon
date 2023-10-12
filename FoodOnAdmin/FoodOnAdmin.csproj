@@ -143,6 +143,7 @@
     <Compile Include="Controllers\RestaurantVideoController.cs" />
     <Compile Include="Controllers\Resturant_RegistrationController.cs" />
     <Compile Include="Controllers\ShopInformationController.cs" />
+    <Compile Include="Controllers\SubscriptionMasterController.cs" />
     <Compile Include="Controllers\UserMasterController.cs" />
     <Compile Include="Controllers\VerifyUserAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -246,6 +247,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularJs\SubscriptionMaster.js" />
     <Content Include="AngularJs\FoodOnSaleBannerMaster.js" />
     <Content Include="AngularJs\FoodOnMasterVideoURL.js" />
     <Content Include="AngularJs\RestaurantVideoURL.js" />
@@ -267,6 +269,7 @@
     <Content Include="Css\MyCart.css" />
     <Content Include="Css\Paging.css" />
     <Content Include="Css\ProductDetails.css" />
+    <Content Include="Css\TimePicker.css" />
     <Content Include="dist\css\adminlte.css" />
     <Content Include="dist\css\adminlte.min.css" />
     <Content Include="dist\css\alt\adminlte.components.css" />
@@ -2897,6 +2900,7 @@
     <Content Include="Views\RestaurantVideo\Index.cshtml" />
     <Content Include="Views\FoodOnMasterVideo\Index.cshtml" />
     <Content Include="Views\FoodOnSaleBannerMaster\Index.cshtml" />
+    <Content Include="Views\SubscriptionMaster\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

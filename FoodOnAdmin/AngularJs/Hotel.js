@@ -241,6 +241,7 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
         $scope.OWNER_NAME = "";
         $scope.MOBILE_NUMBER = "";
         $scope.FOOD_TYPE = "";
+        $scope.CATEGORY = "";
         $scope.PASSWORD = "";
         $scope.CONFIRM_PASSWORD = "";
         $scope.RES_LOGO = "";
@@ -332,7 +333,11 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             $scope._Party = response.data;
             $scope.RES_NAME = $scope._Party.RES_NAME;
             $scope.MOBILE_NUMBER = parseInt($scope._Party.MOBILE_NUMBER);
-            $scope.FOODON_RATING = parseFloat($scope._Party.RES_RATING.toFixed(1));
+            if ($scope._Party.RES_RATING === null || $scope._Party.RES_RATING === "" || $scope._Party.RES_RATING === undefined) {
+                $scope.FOODON_RATING = "";
+            } else {
+                $scope.FOODON_RATING = parseFloat($scope._Party.RES_RATING.toFixed(1));
+            }
             $scope.ADDRESS = $scope._Party.ADDRESS;
             $scope.OWNER_NAME = $scope._Party.OWNER_NAME;
             $scope.PASSWORD = $scope._Party.PASSWORD;
@@ -340,6 +345,7 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             $scope.RES_LOGO = $scope._Party.RES_LOGO;
             $scope.RES_ID = $scope._Party.RES_ID; 
             $scope.FOOD_TYPE = $scope._Party.FOOD_TYPE;
+            $scope.CATEGORY = $scope._Party.CATEGORY;
             $scope.RES_OPEN_TIME = $scope._Party.RES_OPEN_TIME;
             $("#ResOpenTime").val($scope._Party.RES_OPEN_TIME);
             const timePicker = document.querySelector("#ResOpenTime");
@@ -454,6 +460,7 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             MOBILE_NUMBER: $scope.MOBILE_NUMBER,
             FOODON_RATING: parseFloat($scope.FOODON_RATING).toFixed(1),
             FOOD_TYPE: $scope.FOOD_TYPE,
+            CATEGORY: $scope.CATEGORY,
             PASSWORD: $scope.PASSWORD,
             CONFIRM_PASSWORD: $scope.CONFIRM_PASSWORD,
             RES_LOGO: $scope.RES_LOGO,
