@@ -195,4 +195,15 @@ namespace FoodOnAdmin.Models
         public string STATUS { get; set; }
         public string REG_DATE { get; set; }
     }
+
+    public class ProductCategoryMaster
+    {
+        public long P_CAT_ID { get; set; }
+        public string CATEGORY_NAME { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+        public string ACTION { get; set; }
+
+    }
+
 }

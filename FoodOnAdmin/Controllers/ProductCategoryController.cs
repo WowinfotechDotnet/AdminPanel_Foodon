@@ -1,17 +1,17 @@
-﻿using System;
+﻿using FoodOnAdmin.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using FoodOnAdmin.Models;
 
 namespace FoodOnAdmin.Controllers
 {
     [VerifyUserAttribute]
-    public class SubscriptionMasterController : Controller
+    public class ProductCategoryController : Controller
     {
         private DB_FoodOnLinkEntities db = new DB_FoodOnLinkEntities();
         public static string connectionString = ConfigurationManager.ConnectionStrings["DB_FoodOnLink"].ConnectionString;
@@ -20,20 +20,19 @@ namespace FoodOnAdmin.Controllers
         static SqlDataAdapter sda;
 
         static DataTable dt;
-
-        // GET: SubscriptionMaster
+        // GET: ProductCategory
         public ActionResult Index()
         {
             return View();
         }
 
+
+
         public class Search_Admin
         {
             public int PageNo { get; set; }
             public int PageSize { get; set; }
-            public string RESTAURANT_NAME { get; set; }
-            public long RES_ID { get; set; }
-            public long PACKAGE_ID { get; set; }
+            public string CATEGORY_NAME { get; set; }
             public string START_DATE { get; set; }
             public string END_DATE { get; set; }
         }
@@ -43,11 +42,9 @@ namespace FoodOnAdmin.Controllers
             int i = 0;
             try
             {
-                cmd = new SqlCommand("Get_Subscription_Count", con);
+                cmd = new SqlCommand("Get_TB_ProductCategoryCount", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@RESTAURANT_NAME", tB_Admin.RESTAURANT_NAME);
-                cmd.Parameters.AddWithValue("@RES_ID", tB_Admin.RES_ID);
-                cmd.Parameters.AddWithValue("@PACKAGE_ID", tB_Admin.PACKAGE_ID);
+                cmd.Parameters.AddWithValue("@CATEGORY_NAME", tB_Admin.CATEGORY_NAME);
                 cmd.Parameters.AddWithValue("@START_DATE", tB_Admin.START_DATE);
                 cmd.Parameters.AddWithValue("@END_DATE", tB_Admin.END_DATE);
                 cmd.Connection = con;
@@ -69,15 +66,14 @@ namespace FoodOnAdmin.Controllers
 
         public JsonResult GetallAdmin(Search_Admin tB_Admin)
         {
-            cmd = new SqlCommand("Panel_GetSubscriptionList", con);
+            cmd = new SqlCommand("Panel_GetTB_ProductCategoryList", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@PageSize", tB_Admin.PageSize);
             cmd.Parameters.AddWithValue("@PageNo", tB_Admin.PageNo - 1);
-            cmd.Parameters.AddWithValue("@RESTAURANT_NAME", tB_Admin.RESTAURANT_NAME);
-            cmd.Parameters.AddWithValue("@RES_ID", tB_Admin.RES_ID);
-            cmd.Parameters.AddWithValue("@PACKAGE_ID", tB_Admin.PACKAGE_ID);
+            cmd.Parameters.AddWithValue("@CATEGORY_NAME", tB_Admin.CATEGORY_NAME);
             cmd.Parameters.AddWithValue("@START_DATE", tB_Admin.START_DATE);
             cmd.Parameters.AddWithValue("@END_DATE", tB_Admin.END_DATE);
+
             if (con.State == System.Data.ConnectionState.Open)
             {
                 con.Close();
@@ -87,24 +83,17 @@ namespace FoodOnAdmin.Controllers
             sda = new SqlDataAdapter(cmd);
             sda.Fill(dt);
             con.Close();
-            SubscriptionMaster rt;
-            List<SubscriptionMaster> FinalreportList = new List<SubscriptionMaster>();
+            ProductCategoryMaster rt;
+            List<ProductCategoryMaster> FinalreportList = new List<ProductCategoryMaster>();
             if (dt != null)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    rt = new SubscriptionMaster();
+                    rt = new ProductCategoryMaster();
                     try
                     {
-                        rt.RES_ID = Convert.ToInt64(dt.Rows[i]["RES_ID"]);
-                        rt.SUB_ID = Convert.ToInt64(dt.Rows[i]["SUB_ID"]);
-                        rt.PACKAGE_ID = Convert.ToInt64(dt.Rows[i]["PACKAGE_ID"]);
-                        rt.PACKAGE_VALIDITY = Convert.ToInt64(dt.Rows[i]["PACKAGE_VALIDITY"]);
-                        rt.POST_COUNT = Convert.ToInt64(dt.Rows[i]["POST_COUNT"]);
-                        rt.RES_NAME = (dt.Rows[i]["RES_NAME"].ToString());
-                        rt.PACKAGE_NAME = (dt.Rows[i]["PACKAGE_NAME"].ToString());
-                        rt.SUB_START_DATE = (dt.Rows[i]["SUB_START_DATE"].ToString());
-                        rt.SUB_END_DATE = (dt.Rows[i]["SUB_END_DATE"]).ToString();
+                        rt.P_CAT_ID = Convert.ToInt64(dt.Rows[i]["P_CAT_ID"]);
+                        rt.CATEGORY_NAME = (dt.Rows[i]["CATEGORY_NAME"].ToString());
                         rt.STATUS = (dt.Rows[i]["STATUS"]).ToString();
                         rt.REG_DATE = (dt.Rows[i]["REG_DATE"]).ToString();
                     }
@@ -119,21 +108,49 @@ namespace FoodOnAdmin.Controllers
             return Json(_Monthlyreport, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetAllRestaurants()
+
+        public ActionResult AddUpdateProductCategory(ProductCategoryMaster tB_admin)
         {
-            var _getadmin = db.TB_Restaurant.Where(z => z.STATUS == "Active").Select(s => new { s.RES_ID, s.RES_NAME, s.STATUS, s.REG_DATE }).ToList();
-            return Json(_getadmin, JsonRequestBehavior.AllowGet);
+
+            try
+            {
+                cmd = new SqlCommand("InsertUpdate_TB_ProductCategory", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@P_CAT_ID", tB_admin.P_CAT_ID);
+                cmd.Parameters.AddWithValue("@CATEGORY_NAME", tB_admin.CATEGORY_NAME);
+                cmd.Parameters.AddWithValue("@ACTION", tB_admin.ACTION);
+                cmd.Connection = con;
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+                con.Open();
+                int i = Convert.ToInt32(cmd.ExecuteScalar());
+                con.Close();
+                if (i == -1)
+                {
+                    return Json(new { success = false });
+
+                }
+                else
+                {
+                    return Json(new { success = true });
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+
+            return View("Index");
         }
 
-        public JsonResult GetAllPackages()
-        {
-            var _getadmin = db.TB_PackageMaster.Where(z => z.STATUS == "Active").Select(s => new { s.P_ID, s.PACKAGE_NAME, s.STATUS, s.REG_DATE }).ToList();
-            return Json(_getadmin, JsonRequestBehavior.AllowGet);
-        }
+
 
         public string ChangeStatus(long id)
         {
-            TB_SubscriptionMaster tB_Admin = db.TB_SubscriptionMaster.Where(b => b.SUB_ID == id).SingleOrDefault();
+            TB_ProductCategory tB_Admin = db.TB_ProductCategory.Where(b => b.P_CAT_ID == id).SingleOrDefault();
             if (tB_Admin.STATUS == "Active")
             {
                 tB_Admin.STATUS = "Deactive";

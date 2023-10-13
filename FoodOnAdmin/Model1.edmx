@@ -265,6 +265,15 @@
           <Property Name="GST" Type="bigint" />
           <Property Name="DELIVERY_CHARGES" Type="bigint" />
         </EntityType>
+        <EntityType Name="TB_ProductCategory">
+          <Key>
+            <PropertyRef Name="P_CAT_ID" />
+          </Key>
+          <Property Name="P_CAT_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CATEGORY_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="STATUS" Type="varchar" MaxLength="100" />
+          <Property Name="REG_DATE" Type="datetime" />
+        </EntityType>
         <EntityType Name="TB_ProductMaster">
           <Key>
             <PropertyRef Name="PRODUCT_ID" />
@@ -549,6 +558,7 @@
           <EntitySet Name="TB_PostMaster" EntityType="Self.TB_PostMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PreferredMenu" EntityType="Self.TB_PreferredMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PreferredMenuAnswer" EntityType="Self.TB_PreferredMenuAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_ProductCategory" EntityType="Self.TB_ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ProductMaster" EntityType="Self.TB_ProductMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_Restaurant" EntityType="Self.TB_Restaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_Restaurant_Images" EntityType="Self.TB_Restaurant_Images" Schema="dbo" store:Type="Tables" />
@@ -671,6 +681,7 @@
             <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
             <End Role="TB_SubscriptionMaster" EntitySet="TB_SubscriptionMaster" />
           </AssociationSet>
+          <EntitySet Name="TB_ProductCategory" EntityType="DB_FoodOnLinkModel.TB_ProductCategory" />
         </EntityContainer>
         <EntityType Name="TB_AdminMaster">
           <Key>
@@ -1219,6 +1230,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TB_ProductCategory">
+          <Key>
+            <PropertyRef Name="P_CAT_ID" />
+          </Key>
+          <Property Name="P_CAT_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATEGORY_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1655,6 +1675,16 @@
                 <ScalarProperty Name="OWNER_NAME" ColumnName="OWNER_NAME" />
                 <ScalarProperty Name="RES_NAME" ColumnName="RES_NAME" />
                 <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ProductCategory">
+            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_ProductCategory">
+              <MappingFragment StoreEntitySet="TB_ProductCategory">
+                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
+                <ScalarProperty Name="P_CAT_ID" ColumnName="P_CAT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

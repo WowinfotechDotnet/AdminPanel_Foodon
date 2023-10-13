@@ -51,5 +51,6 @@ namespace FoodOnAdmin
         public virtual DbSet<TB_FoodSale_Banner> TB_FoodSale_Banner { get; set; }
         public virtual DbSet<TB_FOOD_CATEGORY> TB_FOOD_CATEGORY { get; set; }
         public virtual DbSet<TB_Restaurant> TB_Restaurant { get; set; }
+        public virtual DbSet<TB_ProductCategory> TB_ProductCategory { get; set; }
     }
 }

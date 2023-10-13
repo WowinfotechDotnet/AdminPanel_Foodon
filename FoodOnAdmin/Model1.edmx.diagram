@@ -41,6 +41,7 @@
         <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_PostMa__RES_I__19AACF41" />
         <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" />
         <AssociationConnector Association="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95" />
+        <EntityTypeShape EntityType="DB_FoodOnLinkModel.TB_ProductCategory" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
