@@ -173,11 +173,11 @@
                                                     </span>
 
                                                     <span>
-                                                        <span class="catmenu_button_Desc catStyle_Desc" id="2_catId_Desc" ng-click="OnCategoryClick('2')" style="padding:5px; margin:5px;font-size:12px;">Information</span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="2_catId_Desc" ng-click="OnCategoryClick('2')" style="padding:5px; margin:5px;font-size:12px;">Facility</span>
                                                     </span>
 
                                                     <span>
-                                                        <span class="catmenu_button_Desc catStyle_Desc" id="3_catId_Desc" ng-click="OnCategoryClick('3')" style="padding:5px; margin:5px;font-size:12px;">Facility</span>
+                                                        <span class="catmenu_button_Desc catStyle_Desc" id="3_catId_Desc" ng-click="OnCategoryClick('3')" style="padding:5px; margin:5px;font-size:12px;">Reviews</span>
                                                     </span>
                                                     <span>
                                                         <span class="catmenu_button_Desc catStyle_Desc" id="4_catId_Desc" ng-click="OnCategoryClick('4')" style="padding:5px; margin:5px;font-size:12px;">Todays Food Enquiry</span>
@@ -225,7 +225,9 @@
                                                     <td>
                                                         <img src="{{images.R_PHOTO}}" style="height:90px;width:250px;">
                                                     </td>
-                                                    <td>{{images.STATUS}}</td>         
+                                                    <td ng-if="images.STATUS==='Active'" style="color:green;"><b>{{images.STATUS}}</b></td>         
+                                                    <td ng-if="images.STATUS==='Deactive'" style="color:red;"><b>{{images.STATUS}}</b></td>         
+                                                             
                                                 </tr>         
                                             </tbody>
                                         </table>
@@ -239,7 +241,7 @@
                                             <thead>
                                                 <tr style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black ">
                                                     <th>Sr.No</th>
-                                                    <th>Information</th>
+                                                    <th>Facility</th>
                                                     <th>Status</th>
                                                     
                                                 </tr>
@@ -251,7 +253,8 @@
                                                         {{info.R_PHOTO}}
                                                     </td>
 
-                                                    <td>{{info.STATUS}}</td>
+                                                    <td ng-if="info.STATUS==='Active'" style="color:green;"><b>{{info.STATUS}}</b></td>
+                                                    <td ng-if="info.STATUS==='Deactive'" style="color:red;"><b>{{info.STATUS}}</b></td>
 
                                                 </tr>
 
@@ -268,7 +271,7 @@
                                             <thead>
                                                 <tr style="background-image: linear-gradient(to right,#13b757f2,#eba60a); color: black ">
                                                     <th>Sr.No</th>
-                                                    <th>Facility</th>
+                                                    <th>Review</th>
                                                     <th>Status</th>
                                                    
                                                 </tr>
@@ -280,8 +283,9 @@
                                                         {{Review.R_PHOTO}}
                                                     </td>
 
-                                                    <td>{{Review.STATUS}}</td>
-                                                   
+                                                    <td ng-if="Review.STATUS==='Active'" style="color:green;"><b>{{Review.STATUS}}</b></td>
+                                                    <td ng-if="Review.STATUS==='Deactive'" style="color:red;"><b>{{Review.STATUS}}</b></td>
+
                                                 </tr>
                                                 
                                                 
