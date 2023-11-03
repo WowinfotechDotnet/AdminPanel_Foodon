@@ -120,6 +120,7 @@ namespace FoodOnAdmin.Controllers
             }
             try
             {
+                long adminId = Convert.ToInt64(Session["ADMIN_ID"]);
                 cmd = new SqlCommand("INSERT_DELIVERYBOY", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@EMP_NAME", tB_Employee.EMP_NAME);
@@ -131,6 +132,7 @@ namespace FoodOnAdmin.Controllers
                 cmd.Parameters.AddWithValue("@AreaOfWork", tB_Employee.AreaOfWork);
                 cmd.Parameters.AddWithValue("@AADHAAR", tB_Employee.AADHAAR);
                 cmd.Parameters.AddWithValue("@PAN", tB_Employee.PAN);
+                cmd.Parameters.AddWithValue("@ADMIN_ID", adminId);
 
                 cmd.Connection = con;
                 if (con.State == System.Data.ConnectionState.Open)
@@ -292,13 +294,14 @@ namespace FoodOnAdmin.Controllers
             {
             }
 
-           
+                long adminId = Convert.ToInt64(Session["ADMIN_ID"]);
                 cmd = new SqlCommand("UPLOAD_TB_EMPLOYEE_DOCUMENT", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@EMPLOYEE_ID", tB_Employee.EMP_ID);
                 cmd.Parameters.AddWithValue("@ADHARCARD_COPY", tB_Employee.AADHAAR);
                 cmd.Parameters.AddWithValue("@PANCARD_COPY", tB_Employee.PAN);
                 cmd.Parameters.AddWithValue("@DOCUMENT_TYPE", tB_Employee.DOCUMENT_TYPE);
+                cmd.Parameters.AddWithValue("@ADMIN_ID", adminId);
                 cmd.Connection = con;
                 if (con.State == System.Data.ConnectionState.Open)
                 {
