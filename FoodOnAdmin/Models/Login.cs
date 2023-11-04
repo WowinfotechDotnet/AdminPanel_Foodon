@@ -217,4 +217,121 @@ namespace FoodOnAdmin.Models
 
     }
 
+
+    public class DinningMaster
+    {
+        public long DINNING_ID { get; set; }
+        public long USER_ID { get; set; }
+        public long RES_ID { get; set; }
+        public string DINNER_TYPE { get; set; }
+        public string PAYMENT_STATUS { get; set; }
+        public string MOBILE_NUMBER { get; set; }
+        public string USER_NAME { get; set; }
+        public string CHOICE { get; set; }
+        public string FAMILYRESTRO_TYPE { get; set; }
+        public string PREFERENCE { get; set; }
+        public string DRINK_DISCOUNT { get; set; }
+        public string ADVANCED_AMT { get; set; }
+        public decimal TOTAL_PRICE { get; set; }
+        public string TOTAL_DISCOUNT { get; set; }
+        public string PAYMENT_AMOUNT { get; set; }
+        public string ADMIN_STATUS { get; set; }
+        public string RES_REMARK { get; set; }
+        public string NO_OF_PEOPLE { get; set; }
+        public string MINIMUM_BUDGET { get; set; }
+        public string MINIMUM_BUDGET_DRINKS { get; set; }
+        public string ARRIVAL_TIME { get; set; }
+        public string REMARK { get; set; }
+        public string SHOW_MOBILE_NUMBER { get; set; }
+        public string ADDRESS_TYPE { get; set; }
+        public string ADDRESS { get; set; }
+        public string LATITUDE { get; set; }
+        public string LONGITUDE { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+        public string BOOKING_DATE { get; set; }
+        public string REQUEST_TYPE { get; set; }
+        public string RESTURANT_LIST { get; set; }
+        public string OUT_TIME { get; set; }
+        public string PAYMENT_PHOTO { get; set; }
+
+    }
+
+    public class FoodRequestMaster
+    {
+        public long ORDER_ID { get; set; }
+        public long USER_ID { get; set; }
+        public long RES_ID { get; set; }
+        public string ORDER_TYPE { get; set; }
+        public string PAYMENT_STATUS { get; set; }
+        public string MOBILE_NUMBER { get; set; }
+        public string USER_NAME { get; set; }
+        public string NOTE { get; set; }
+        public decimal? TOTAL_AMOUNT { get; set; }
+        public long? TOTAL_QUANTITY { get; set; }
+        public decimal? DISCOUNT { get; set; }
+        public string REMARK { get; set; }
+        public string RES_REMARK { get; set; }
+        public string ORDER_REMARK { get; set; }
+        public decimal? ORDER_RATING { get; set; }
+        public decimal? DELIVERY_CHARGES { get; set; }
+        public decimal? GST { get; set; }
+        public string ADDRESS { get; set; }
+        public string DELIVERY_BOY_STATUS { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+        public string ORDER_TIME { get; set; }
+        public List<FoodRequestCart> FoodRequestProductList { get; set; }
+
+    }
+
+    public class FoodRequestCart
+    {
+        public long OD_ID { get; set; }
+        public long ORDER_ID { get; set; }
+        public long PRODUCT_ID { get; set; }
+        public long P_CAT_ID { get; set; }
+        public string PRODUCT_NAME { get; set; }
+        public string PRODUCT_TYPE { get; set; }
+        public string CATEGORY_NAME { get; set; }
+        public decimal? AMOUNT { get; set; }
+        public long QUANTITY { get; set; }
+    }
+
+
+    public class PreferredMenuMaster
+    {
+        public long PreferredMenu_ID { get; set; }
+        public long USER_ID { get; set; }
+        public string PREFERRED_MENU { get; set; }
+        public string PAYMENT_STATUS { get; set; }
+        public string SHOW_MOBILE { get; set; }
+        public string MOBILE_NUMBER { get; set; }
+        public decimal? TOTAL_AMOUNT { get; set; }
+        public decimal? DELIVERY_CHARGES { get; set; }
+        public string REMARK { get; set; }
+        public string USER_NAME { get; set; }
+        public int? TOTAL_QUANTITY { get; set; }
+        public decimal? TOTAL_DISCOUNT { get; set; }
+        public decimal? GST { get; set; }
+        public string ADDRESS { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+        public string ORDER_TIME { get; set; }
+
+    }
+
+    public class PreferredMenuCart
+    {
+        public long PMCART_ID { get; set; }
+        public long PreferredMenu_ID { get; set; }
+        public long USER_ID { get; set; }
+        public long PRODUCT_ID { get; set; }
+        public string PRODUCT_NAME { get; set; }
+        public string PRODUCT_TYPE { get; set; }
+        public decimal AMOUNT { get; set; }
+        public long RES_ID { get; set; }
+        public long QUANTITY { get; set; }
+    }
+
 }

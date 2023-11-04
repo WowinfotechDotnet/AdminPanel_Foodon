@@ -1,0 +1,295 @@
+﻿
+@{
+    ViewBag.Title = "FoodRequestDetails";
+}
+
+
+<style>
+    .paper .b-r-cta {
+        border: 1px solid #17a2b8;
+        background-color: #17a2b8;
+        background-image: linear-gradient(180deg,#544427,#17a2b8);
+        text-shadow: 0 1px 1px rgba(0,0,0,.2);
+        padding: 5px 15px;
+    }
+
+        .paper .b-r-cta:focus, .paper .b-r-cta:hover {
+            transition: all .3s ease;
+            background-image: linear-gradient(180deg,#544427,#e86700);
+        }
+
+    .paper * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /*background-image: linear-gradient(180deg,orange,#ff7302);*/
+    }
+
+    .invalid-blink {
+        background-color: green;
+        color: white;
+    }
+</style>
+<style>
+    .catStyle_Desc {
+        color: orangered;
+        cursor: pointer;
+        font-size: 15px;
+        border: 1px solid #077F7B;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .catStyle_active_Desc {
+        color: white;
+        background-color: #077F7B;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 5px 10px;
+        border: 1px solid #077F7B;
+        border-radius: 5px;
+    }
+</style>
+
+<style>
+    .table td, .table th {
+        padding: 0.30rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+</style>
+<style>
+    input[type=checkbox] + label {
+        display: block;
+        margin: 0.2em;
+        cursor: pointer;
+        padding: 0.2em;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+        input[type=checkbox] + label:before {
+            content: "\2714";
+            border: 0.1em solid #F1511B;
+            border-radius: 0.2em;
+            /*border-radius: 50%;*/
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            padding-left: 0.2em;
+            padding-bottom: 1.5em;
+            margin-right: 0.2em;
+            vertical-align: middle;
+            color: transparent;
+            transition: .2s;
+        }
+
+        input[type=checkbox] + label:active:before {
+            transform: scale(0);
+        }
+
+        input[type=checkbox]:checked + label:before {
+            background-color: #F1511B;
+            border-color: #F1511B;
+            color: #fff;
+        }
+
+        input[type=checkbox]:disabled + label:before {
+            transform: scale(1);
+            border-color: #aaa;
+        }
+
+        input[type=checkbox]:checked:disabled + label:before {
+            transform: scale(1);
+            background-color: #F1511B;
+            border-color: #F1511B;
+        }
+</style>
+<link href="~/Css/ProductDetails.css" rel="stylesheet" />
+<link href="~/Css/MyCart.css" rel="stylesheet" />
+
+<section class="content" ng-controller="FoodRequestDetailsCtrl">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+
+
+                    <div class="col-lg-12">
+
+                        <div class="row" style="font-size:15px;font-weight:bold">
+                            <div class="col-12">
+                                <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs btn-success"><span class="fa fa-arrow-left" style="color:white;"></span></a>
+
+                                Customer Name:-(<span style="color:red">{{FoodRequestDetailsList[0].USER_NAME}}</span>)/
+                                <span style="color:forestgreen">(Food Order)</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12" style="overflow-y: auto;">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%" style="font-size: 0.8rem; ">
+                                <thead style="color: white; background-color: gray;">
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th>Mobile Number</th>
+                                        <th>Address</th>
+                                        <th>Order Type</th>
+                                        <th>Total Products</th>
+                                        <th>Note</th>
+                                        <th>Order Date</th>
+                                        <th>Order Time</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{FoodRequestDetailsList[0].USER_NAME}}</td>
+                                        <td>{{FoodRequestDetailsList[0].MOBILE_NUMBER}}</td>
+                                        <td>{{FoodRequestDetailsList[0].ADDRESS}}</td>
+                                        <td ng-show="FoodRequestDetailsList[0].ORDER_TYPE==='Preferred Menu'">Preferred Menu</td>
+                                        <td ng-show="FoodRequestDetailsList[0].ORDER_TYPE==='DIRECT_ORDER'">Direct Order</td>
+                                        <td ng-show="FoodRequestDetailsList[0].ORDER_TYPE==='WAIT_FOR_DISCOUNT'">Wait For Discount</td>
+                                        <td>{{FoodRequestDetailsList[0].TOTAL_QUANTITY}}</td>
+                                        <td>{{FoodRequestDetailsList[0].NOTE}}</td>
+                                        <td>{{FoodRequestDetailsList[0].REG_DATE}}</td>
+                                        <td>{{FoodRequestDetailsList[0].ORDER_TIME}}</td>
+                                        <td ng-show="FoodRequestDetailsList[0].STATUS=='Confirm'" style="color:green;font-weight:bold">Confirm</td>
+                                        <td ng-show="FoodRequestDetailsList[0].STATUS=='Details Send'" style="color:blue;font-weight:bold">Details Send</td>
+                                        <td ng-show="FoodRequestDetailsList[0].STATUS=='Pending'" style="color: darkgoldenrod; font-weight: bold">Pending</td>
+                                        <td ng-show="FoodRequestDetailsList[0].STATUS=='Cancel'" style="color:red;font-weight:bold">Cancel</td>
+                                        <td ng-show="FoodRequestDetailsList[0].STATUS=='Complete'" style="color:darkgreen;font-weight:bold">Complete</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body" id="Demoexample_1">
+                                    <div class="ibox-body" style="height:70vh;">
+                                        <div class="row col-lg-12" style="width:100%">
+                                            <div class="col-lg-6">
+                                                <div style="overflow-y:auto;height:70vh;">
+                                                    <label class="col-lg-12" style="text-align: center; background-color: #009ad9; color: white; "> Order Items</label>
+                                                    <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                                                        <thead style="background-color:#077F7B; color: white ">
+                                                            <tr>
+                                                                <th>Sr. No.</th>
+                                                                <th>Product Name</th>
+                                                                <th>Product type</th>
+                                                                <th>Category type</th>
+                                                                <th>Quantity</th>
+                                                                <th>Price</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="prod in FoodRequestDetailsList[0].FoodRequestProductList">
+                                                                <td>{{$index+1}}</td>
+                                                                <td>{{prod.PRODUCT_NAME}}</td>
+                                                                <td>{{prod.PRODUCT_TYPE}}</td>
+                                                                <td>{{prod.CATEGORY_NAME}}</td>
+                                                                <td>{{prod.QUANTITY}}</td>
+                                                                <td>{{prod.AMOUNT}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div style="overflow-y:auto;height:70vh;">
+                                                    <label class="col-lg-12" style="text-align: center; background-color: #009ad9; color: white;"> Order Details</label>
+                                                    <div class="row invoice-info">
+                                                        <div class="col-lg-12">
+                                                            <form name="Order" role="form" ng-submit="Order(Order.$valid)" data-toggle="validator">
+                                                                <table class="table table-bordered table-md">
+
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Total Product:</span></td>
+                                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{FoodRequestDetailsList[0].TOTAL_QUANTITY}}<span></span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Total Price:</span></td>
+                                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{FoodRequestDetailsList[0].TOTAL_AMOUNT}}/-<span></span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> GST (18%):</span></td>
+                                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{FoodRequestDetailsList[0].GST}}/-<span></span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Discount(%):</span><span style="color:red;">*</span></td>
+                                                                            <td>
+                                                                                <input type="number" name="DISCOUNT" class="form-control" ng-model="DISCOUNT" readonly placeholder=" Discount" />
+
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Remark:</span></td>
+                                                                            <td>
+                                                                                <textarea class="form-control" id="REMARK" ng-model="REMARK" placeholder=" Remark" readonly></textarea>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            @*<td colspan="4" style="text-align: left; font-weight: bold"><span> Enter Fuel Charges:</span></td>*@
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Delivery Charges:</span></td>
+                                                                            <td>
+                                                                                <input type="text" name="DELIVERY_CHARGES" class="form-control" ng-model="DELIVERY_CHARGES" readonly placeholder="Delivery Charges" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; color: red; font-weight: bold"><span> Grand Amount:</span></td>
+                                                                            <td colspan="2" style="text-align: left; color: red;font-size:17px;font-weight:bold">
+                                                                                <input type="text" name="FINAL_TOTAL" class="form-control" style="color:red;" ng-model="FINAL_TOTAL" value="0" readonly />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Order Status:</span><span style="color:red;">*</span></td>
+                                                                            <td>
+                                                                                <select class="form-control" name="ORDER_STATUS" ng-model="ORDER_STATUS" ng-disabled="true" >
+                                                                                    <option ng-show="FoodRequestDetailsList[0].STATUS === 'Pending' && FoodRequestDetailsList[0].STATUS !== 'Details Send' && FoodRequestDetailsList[0].STATUS !== 'Complete' && FoodRequestDetailsList[0].STATUS !== 'Confirm' " value="Details Send">Details Send</option>
+                                                                                    <option ng-show="FoodRequestDetailsList[0].STATUS === 'Pending' && FoodRequestDetailsList[0].STATUS !== 'Cancel' && FoodRequestDetailsList[0].STATUS !== 'Complete' && FoodRequestDetailsList[0].STATUS !== 'Confirm' " value="Cancel">Cancel</option>
+                                                                                    <option ng-show="FoodRequestDetailsList[0].STATUS !== 'Pending' && FoodRequestDetailsList[0].STATUS === 'Cancel' && FoodRequestDetailsList[0].STATUS !== 'Details Send' && FoodRequestDetailsList[0].STATUS !== 'Complete' && FoodRequestDetailsList[0].STATUS !== 'Confirm' " value="Cancel">Cancel</option>
+                                                                                    <option ng-show="FoodRequestDetailsList[0].STATUS !== 'Pending' && FoodRequestDetailsList[0].STATUS === 'Details Send' && FoodRequestDetailsList[0].STATUS !== 'Cancel' && FoodRequestDetailsList[0].STATUS !== 'Complete' && FoodRequestDetailsList[0].STATUS !== 'Confirm' " value="Details Send">Details Send</option>
+                                                                                    <option ng-show="FoodRequestDetailsList[0].STATUS === 'Confirm' " value="Confirm">Confirm</option>
+                                                                                    <option ng-show="FoodRequestDetailsList[0].STATUS === 'Confirm' || FoodRequestDetailsList[0].STATUS === 'Complete'" value="Complete">Complete</option>
+                                                                                </select>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </form>
+                                                            @*<div>
+                                                                <center>
+                                                                    <button type="button" class="btn btn-sm" style="background-color:green;color:white" ng-hide="FoodRequestDetailsList[0].STATUS === 'Complete' || FoodRequestDetailsList[0].STATUS === 'Cancel'" ng-disabled="FoodRequestDetailsList[0].STATUS === 'Complete' || Order.$invalid" >Send Details</button>
+                                                                    <button type="button" class="btn btn-sm" style="background-color:green;color:white" ng-show="FoodRequestDetailsList[0].STATUS === 'Complete' || FoodRequestDetailsList[0].STATUS === 'Cancel'" ng-disabled="FoodRequestDetailsList[0].STATUS === 'Complete' || FoodRequestDetailsList[0].STATUS === 'Cancel' || Order.$invalid" >Details Sent</button>
+                                                                </center>
+                                                            </div>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/AngularJs/FoodRequestDetails.js"></script>
+
+}

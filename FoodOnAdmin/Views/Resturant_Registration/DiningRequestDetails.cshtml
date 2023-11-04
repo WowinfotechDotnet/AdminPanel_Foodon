@@ -1,0 +1,377 @@
+﻿
+@{
+    ViewBag.Title = "DiningRequestDetails";
+}
+
+
+
+<style>
+    .paper .b-r-cta {
+        border: 1px solid #17a2b8;
+        background-color: #17a2b8;
+        background-image: linear-gradient(180deg,#544427,#17a2b8);
+        text-shadow: 0 1px 1px rgba(0,0,0,.2);
+        padding: 5px 15px;
+    }
+
+        .paper .b-r-cta:focus, .paper .b-r-cta:hover {
+            transition: all .3s ease;
+            background-image: linear-gradient(180deg,#544427,#e86700);
+        }
+
+    .paper * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /*background-image: linear-gradient(180deg,orange,#ff7302);*/
+    }
+
+    .invalid-blink {
+        background-color: green;
+        color: white;
+    }
+</style>
+<style>
+    .catStyle_Desc {
+        color: orangered;
+        cursor: pointer;
+        font-size: 15px;
+        border: 1px solid #077F7B;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .catStyle_active_Desc {
+        color: white;
+        background-color: #077F7B;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 5px 10px;
+        border: 1px solid #077F7B;
+        border-radius: 5px;
+    }
+</style>
+
+<style>
+    .table td, .table th {
+        padding: 0.30rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+</style>
+<style>
+    input[type=checkbox] + label {
+        display: block;
+        margin: 0.2em;
+        cursor: pointer;
+        padding: 0.2em;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+        input[type=checkbox] + label:before {
+            content: "\2714";
+            border: 0.1em solid #F1511B;
+            border-radius: 0.2em;
+            /*border-radius: 50%;*/
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            padding-left: 0.2em;
+            padding-bottom: 1.5em;
+            margin-right: 0.2em;
+            vertical-align: middle;
+            color: transparent;
+            transition: .2s;
+        }
+
+        input[type=checkbox] + label:active:before {
+            transform: scale(0);
+        }
+
+        input[type=checkbox]:checked + label:before {
+            background-color: #F1511B;
+            border-color: #F1511B;
+            color: #fff;
+        }
+
+        input[type=checkbox]:disabled + label:before {
+            transform: scale(1);
+            border-color: #aaa;
+        }
+
+        input[type=checkbox]:checked:disabled + label:before {
+            transform: scale(1);
+            background-color: #F1511B;
+            border-color: #F1511B;
+        }
+</style>
+
+<style>
+    /*  .zoom {
+        transition: transform .1s;
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+        z-index: 1;
+    }
+
+        .zoom:hover {
+            -ms-transform: scale(5.5);
+            -webkit-transform: scale(5.5);
+            transform: scale(1.5);
+            z-index: 1;
+            transition: all ease 1s;
+            top: 60%;
+            left: 50%;
+        }*/
+    .zoom {
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        z-index: 1;
+        transition: transform .1s, top 1s, left 1s;
+    }
+
+        .zoom:hover {
+            -ms-transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+            top: 100%; /* Adjust these values to position the zoomed element */
+            z-index: 2;
+        }
+</style>
+<link href="~/Css/ProductDetails.css" rel="stylesheet" />
+<link href="~/Css/MyCart.css" rel="stylesheet" />
+
+<section class="content" ng-controller="DinningdeatilsCtrl">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-lg-12">
+                        <div class="row" style="font-size:15px;font-weight:bold">
+                            <div class="col-1">
+                                <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs btn-success"><span class="fa fa-arrow-left" style="color:white;"></span></a>
+                            </div>
+                            <div class="col-11">
+                                Customer Name:-(<span style="color:red">{{DinningDeatils[0].USER_NAME}}</span>)/
+                                <span style="color:forestgreen">(Dinning Order)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="height:700px">
+                    <div class="row">
+                        <div class="col-md-12" style="overflow-y: auto;">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%" style="font-size: 0.8rem; ">
+                                <thead style="color: white; background-color: gray;">
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th ng-show="DinningDeatils[0].SHOW_MOBILE_NUMBER ==='Yes'">Mobile Number</th>
+                                        <th>Address</th>
+                                        @*<th>Food Category</th>
+                                            <th>Food Type</th>
+                                            <th>Dinning Type</th>
+                                            <th>Estimated Food Budget</th>
+                                            <th>Estimated Drinks Budget</th>
+                                            <th>Total People</th>*@
+                                        @*<th>Remark</th>*@
+                                        <th>Enquiry Date</th>
+                                        @*<th>Arrival Time</th>
+                                            <th>Max Arrival Time</th>*@
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{DinningDeatils[0].USER_NAME}}</td>
+                                        <td ng-show="DinningDeatils[0].SHOW_MOBILE_NUMBER ==='Yes'">{{DinningDeatils[0].MOBILE_NUMBER}}</td>
+                                        <td>{{DinningDeatils[0].ADDRESS}}</td>
+                                        @*<td>{{DinningDeatils[0].CHOICE}}</td>
+                                            <td>{{DinningDeatils[0].DINNER_TYPE}}</td>
+                                            <td>{{DinningDeatils[0].FAMILYRESTRO_TYPE}}</td>
+                                            <td>{{DinningDeatils[0].MINIMUM_BUDGET}}</td>
+                                            <td>{{DinningDeatils[0].MINIMUM_BUDGET_DRINKS}}</td>
+                                            <td>{{DinningDeatils[0].NO_OF_PEOPLE}}</td>*@
+                                        @*<td>{{DinningDeatils[0].REMARK}}</td>*@
+                                        <td>{{DinningDeatils[0].REG_DATE}}</td>
+                                        @*<td>{{DinningDeatils[0].ARRIVAL_TIME}}</td>
+                                            <td>{{DinningDeatils[0].OUT_TIME}}</td>*@
+                                        <td ng-show="DinningDeatils[0].STATUS=='Pending'" style="color:darkgoldenrod;font-weight:bold">Pending</td>
+                                        <td ng-show="DinningDeatils[0].STATUS=='Send'" style="color:blue;font-weight:bold">Details Send</td>
+                                        <td ng-show="DinningDeatils[0].STATUS=='Confirm'" style="color:green;font-weight:bold">Confirm</td>
+                                        <td ng-show="DinningDeatils[0].STATUS=='Cancel'" style="color:red;font-weight:bold">Cancel</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="row" style="width:100%">
+                            <div class="col-md-6">
+                                <div class="ibox">
+                                    <div class="ibox-head" style="background-color: #077F7B;color:white; height: 30px">
+                                        <div class="ibox-title" style="font-size:20px;font-weight:bold;text-align:center">Customer Requirement</div>
+                                        <div class="ibox-tools">
+                                            <a class="ibox-collapse"></a>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-body" style="padding: 11px 11px 11px 15px;">
+                                        <div class="row invoice-info">
+                                            <div class="col-sm-5 invoice-col">
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <table class="table table-bordered table-md">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Total No Of People:</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{DinningDeatils[0].NO_OF_PEOPLE}}<span></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Estimated Food Budget:</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">Rs.{{DinningDeatils[0].MINIMUM_BUDGET}}<span></span></td>
+                                                        </tr>
+                                                        <tr ng-show="DinningDeatils[0].FAMILYRESTRO_TYPE=='Family and Bar'">
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Estimated Drink Budget:</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">Rs.{{DinningDeatils[0].MINIMUM_BUDGET_DRINKS}}<span></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Enquiry Date</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{DinningDeatils[0].REG_DATE}}<span></span></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Booking Date</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{DinningDeatils[0].BOOKING_DATE}}<span></span></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Arrival Time</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{DinningDeatils[0].ARRIVAL_TIME}}<span></span></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Max Arrival Time</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{DinningDeatils[0].OUT_TIME}}<span></span></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Food Category</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{DinningDeatils[0].DINNER_TYPE}}<span></span></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Food Type</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{DinningDeatils[0].CHOICE}}<span></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Dinning Type</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{DinningDeatils[0].FAMILYRESTRO_TYPE}}<span></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; color: red; font-weight: bold"><span>Remark</span></td>
+                                                            <td colspan="4" style="text-align: left; color: red; font-weight: bold"><span>{{DinningDeatils[0].REMARK}}</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Payment ScreenShot</span></td>
+                                                            <td colspan="2" style="text-align: left; font-weight: bold">
+                                                                <span>
+                                                                    <img class="zoom" ng-src="{{DinningDeatils[0].PAYMENT_PHOTO}}" style="width: 150px;text-align:center; height: 150px; border-radius: 0px;" />
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="ibox">
+                                    <div class="ibox-head" style="background-color: #077F7B;color:white; height: 30px">
+                                        <div class="ibox-title" style="font-size:20px;font-weight:bold;text-align:center">Dinning Details</div>
+                                        <div class="ibox-tools">
+                                            <a class="ibox-collapse"></a>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-body" style="height: 250px; padding: 11px 11px 11px 15px;">
+                                        <div class="row invoice-info">
+                                            <div class="col-sm-5 invoice-col">
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <table class="table table-bordered table-md">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Food Discount(%):</span></td>
+                                                            <td>
+                                                                <input type="number" name="TOTAL_DISCOUNT" class="form-control" ng-model="TOTAL_DISCOUNT"  readonly placeholder=" Food Discount" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-show="DinningDeatils[0].FAMILYRESTRO_TYPE=='Family and Bar'">
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Drink Discount(%):</span></td>
+                                                            <td>
+                                                                <input type="number" name="DRINK_DISCOUNT" class="form-control" ng-model="DRINK_DISCOUNT"  readonly placeholder=" Drink Discount" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Remark:</span></td>
+                                                            <td>
+                                                                <input type="text" name="REMARK" class="form-control" ng-model="REMARK" readonly placeholder=" Remark" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Advanced Amount:</span></td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <select ng-model="ADVANCED_AMT" class="form-control" id="ADVANCED_AMT" name="ADVANCED_AMT"  ng-disabled="true">
+                                                                        <option value="">Select Type</option>
+                                                                        <option value="Yes">Yes</option>
+                                                                        <option value="No">No</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Advanced Amount(Rs.):</span></td>
+                                                            <td>
+                                                                <input type="text" name="ADVANCED_AMOUNT" class="form-control" ng-model="ADVANCED_AMOUNT" readonly placeholder=" Advanced Amount" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                @*<div ng-show="DinningDeatils[0].STATUS !=='Pending'">
+                                                    <center>
+                                                        <button type="button" class="btn btn-sm" style="background-color:green;color:white;cursor:not-allowed" data-toggle="modal">Details Sent</button>
+                                                    </center>
+                                                </div>
+                                                <div ng-show="DinningDeatils[0].STATUS =='Pending'">
+                                                    <center>
+                                                        <button type="button" class="btn btn-sm" style="background-color:green;color:white" data-toggle="modal">Send Details</button>
+                                                    </center>
+                                                </div>*@
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/AngularJs/Dinningdetails.js"></script>
+    
+}

@@ -14,6 +14,12 @@ namespace FoodOnAdmin
     
     public partial class TB_PreferredMenu
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_PreferredMenu()
+        {
+            this.TB_ORDER = new HashSet<TB_ORDER>();
+        }
+    
         public long PreferredMenu_ID { get; set; }
         public Nullable<long> USER_ID { get; set; }
         public string PREFERRED_MENU { get; set; }
@@ -32,5 +38,9 @@ namespace FoodOnAdmin
         public string ORDER_REMARK { get; set; }
         public Nullable<double> ORDER_RATING { get; set; }
         public string RATE_STATUS { get; set; }
+        public string PAYMENT_STATUS { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_ORDER> TB_ORDER { get; set; }
     }
 }

@@ -34,5 +34,12 @@ namespace FoodOnAdmin
         public string ORDER_REMARK { get; set; }
         public Nullable<double> ORDER_RATING { get; set; }
         public string RATE_STATUS { get; set; }
+        public string PAYMENT_STATUS { get; set; }
+        public string PAYMENT_SOURCE { get; set; }
+        public string RES_REMARK { get; set; }
+        public Nullable<long> PreferredMenu_ID { get; set; }
+        public string ADDRESS { get; set; }
+    
+        public virtual TB_PreferredMenu TB_PreferredMenu { get; set; }
     }
 }

@@ -251,6 +251,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularJs\Dinningdetails.js" />
+    <Content Include="AngularJs\PreferredMenuDetails.js" />
+    <Content Include="AngularJs\FoodRequestDetails.js" />
     <Content Include="AngularJs\Home.js" />
     <Content Include="AngularJs\ProductCategory.js" />
     <Content Include="AngularJs\SubscriptionMaster.js" />
@@ -2910,6 +2913,9 @@
     <Content Include="Views\FoodOnSaleBannerMaster\Index.cshtml" />
     <Content Include="Views\SubscriptionMaster\Index.cshtml" />
     <Content Include="Views\ProductCategory\Index.cshtml" />
+    <Content Include="Views\Resturant_Registration\FoodRequestDetails.cshtml" />
+    <Content Include="Views\Resturant_Registration\DiningRequestDetails.cshtml" />
+    <Content Include="Views\Resturant_Registration\PreferredMenuDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,7 +18,7 @@ namespace FoodOnAdmin
         public Nullable<long> USER_ID { get; set; }
         public Nullable<long> RES_ID { get; set; }
         public Nullable<long> DINNING_ID { get; set; }
-        public Nullable<double> TOTAL_PRICE { get; set; }
+        public Nullable<decimal> TOTAL_PRICE { get; set; }
         public Nullable<double> TOTAL_DISCOUNT { get; set; }
         public string REMARK { get; set; }
         public string STATUS { get; set; }
@@ -31,7 +31,7 @@ namespace FoodOnAdmin
         public string PAYMENT_PHOTO { get; set; }
     
         public virtual TB_Diningrequest TB_Diningrequest { get; set; }
-        public virtual TB_UserMaster TB_UserMaster { get; set; }
         public virtual TB_Restaurant TB_Restaurant { get; set; }
+        public virtual TB_UserMaster TB_UserMaster { get; set; }
     }
 }

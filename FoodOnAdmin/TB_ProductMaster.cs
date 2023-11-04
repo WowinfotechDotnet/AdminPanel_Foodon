@@ -17,8 +17,8 @@ namespace FoodOnAdmin
         public long PRODUCT_ID { get; set; }
         public Nullable<long> RES_ID { get; set; }
         public string PRODUCT_NAME { get; set; }
-        public Nullable<double> PRICE { get; set; }
-        public Nullable<double> DISCOUNT { get; set; }
+        public Nullable<decimal> PRICE { get; set; }
+        public Nullable<decimal> DISCOUNT { get; set; }
         public string IS_STOCK { get; set; }
         public string PRODUCT_TYPE { get; set; }
         public string PRODUCT_IMAGE { get; set; }

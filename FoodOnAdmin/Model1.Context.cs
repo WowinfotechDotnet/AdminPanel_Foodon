@@ -31,11 +31,9 @@ namespace FoodOnAdmin
         public virtual DbSet<TB_BANNER> TB_BANNER { get; set; }
         public virtual DbSet<TB_CART> TB_CART { get; set; }
         public virtual DbSet<TB_Diningrequest> TB_Diningrequest { get; set; }
-        public virtual DbSet<TB_DinningAnswer> TB_DinningAnswer { get; set; }
         public virtual DbSet<TB_EMPLOYEE> TB_EMPLOYEE { get; set; }
         public virtual DbSet<TB_OrderDetails> TB_OrderDetails { get; set; }
         public virtual DbSet<TB_PreferredMenuAnswer> TB_PreferredMenuAnswer { get; set; }
-        public virtual DbSet<TB_ProductMaster> TB_ProductMaster { get; set; }
         public virtual DbSet<TB_Restaurant_Images> TB_Restaurant_Images { get; set; }
         public virtual DbSet<TB_RestaurantLike> TB_RestaurantLike { get; set; }
         public virtual DbSet<TB_RestaurantOffersMaster> TB_RestaurantOffersMaster { get; set; }
@@ -52,5 +50,7 @@ namespace FoodOnAdmin
         public virtual DbSet<TB_FOOD_CATEGORY> TB_FOOD_CATEGORY { get; set; }
         public virtual DbSet<TB_Restaurant> TB_Restaurant { get; set; }
         public virtual DbSet<TB_ProductCategory> TB_ProductCategory { get; set; }
+        public virtual DbSet<TB_ProductMaster> TB_ProductMaster { get; set; }
+        public virtual DbSet<TB_DinningAnswer> TB_DinningAnswer { get; set; }
     }
 }

@@ -1,0 +1,356 @@
+﻿
+@{
+    ViewBag.Title = "PreferredMenuDetails";
+}
+
+
+<style>
+    .paper .b-r-cta {
+        border: 1px solid #17a2b8;
+        background-color: #17a2b8;
+        background-image: linear-gradient(180deg,#544427,#17a2b8);
+        text-shadow: 0 1px 1px rgba(0,0,0,.2);
+        padding: 5px 15px;
+    }
+
+        .paper .b-r-cta:focus, .paper .b-r-cta:hover {
+            transition: all .3s ease;
+            background-image: linear-gradient(180deg,#544427,#e86700);
+        }
+
+    .paper * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /*background-image: linear-gradient(180deg,orange,#ff7302);*/
+    }
+
+    .invalid-blink {
+        background-color: green;
+        color: white;
+    }
+</style>
+<style>
+    .catStyle_Desc {
+        color: orangered;
+        cursor: pointer;
+        font-size: 15px;
+        border: 1px solid #077F7B;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .catStyle_active_Desc {
+        color: white;
+        background-color: #077F7B;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 5px 10px;
+        border: 1px solid #077F7B;
+        border-radius: 5px;
+    }
+</style>
+
+<style>
+    .table td, .table th {
+        padding: 0.30rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+</style>
+<style>
+    input[type=checkbox] + label {
+        display: block;
+        margin: 0.2em;
+        cursor: pointer;
+        padding: 0.2em;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+        input[type=checkbox] + label:before {
+            content: "\2714";
+            border: 0.1em solid #F1511B;
+            border-radius: 0.2em;
+            /*border-radius: 50%;*/
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            padding-left: 0.2em;
+            padding-bottom: 1.5em;
+            margin-right: 0.2em;
+            vertical-align: middle;
+            color: transparent;
+            transition: .2s;
+        }
+
+        input[type=checkbox] + label:active:before {
+            transform: scale(0);
+        }
+
+        input[type=checkbox]:checked + label:before {
+            background-color: #F1511B;
+            border-color: #F1511B;
+            color: #fff;
+        }
+
+        input[type=checkbox]:disabled + label:before {
+            transform: scale(1);
+            border-color: #aaa;
+        }
+
+        input[type=checkbox]:checked:disabled + label:before {
+            transform: scale(1);
+            background-color: #F1511B;
+            border-color: #F1511B;
+        }
+</style>
+<link href="~/Css/ProductDetails.css" rel="stylesheet" />
+<link href="~/Css/MyCart.css" rel="stylesheet" />
+
+<section class="content" ng-controller="PreferredMenuDetailsController">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+
+
+                    <div class="col-lg-12">
+
+                        <div class="row" style="font-size:15px;font-weight:bold">
+                            <div class="col-12">
+                                <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs btn-success"><span class="fa fa-arrow-left"></span></a>
+
+                                Customer Name:-(<span style="color:red">{{PreferredMenuDetailsList[0].USER_NAME}}</span>)/
+                                <span style="color:forestgreen">(Preferred Order)</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12" style="overflow-y: auto;">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%" style="font-size: 0.8rem; ">
+                                <thead style="color: white; background-color: gray;">
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th ng-show="SHOW_MOBILE === 'Yes'">Mobile Number</th>
+                                        <th @*ng-show="SHOW_MOBILE === 'Yes'"*@>Address</th>
+                                        <th>Preferred Menu</th>
+                                        <th>Order Date</th>
+                                        <th>Order Time</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{PreferredMenuDetailsList[0].USER_NAME}}</td>
+                                        <td ng-show="SHOW_MOBILE === 'Yes'">{{PreferredMenuDetailsList[0].MOBILE_NUMBER}}</td>
+                                        <td @*ng-show="SHOW_MOBILE === 'Yes'"*@>{{PreferredMenuDetailsList[0].ADDRESS}}</td>
+                                        <td>{{PreferredMenuDetailsList[0].PREFERRED_MENU}}</td>
+                                        <td>{{PreferredMenuDetailsList[0].REG_DATE}}</td>
+                                        <td>{{PreferredMenuDetailsList[0].ORDER_TIME}}</td>
+                                        <td ng-show="PreferredMenuDetailsList[0].STATUS === 'Confirm'"><span style="color:green">{{PreferredMenuDetailsList[0].STATUS}}</span></td>
+                                        <td ng-show="PreferredMenuDetailsList[0].STATUS === 'Cancel'"><span style="color:red">{{PreferredMenuDetailsList[0].STATUS}}</span></td>
+                                        <td ng-show="PreferredMenuDetailsList[0].STATUS === 'Details Send'"><span style="color:blue">{{PreferredMenuDetailsList[0].STATUS}}</span></td>
+                                        <td ng-show="PreferredMenuDetailsList[0].STATUS === 'Pending'"><span style="color:darkgoldenrod">{{PreferredMenuDetailsList[0].STATUS}}</span></td>
+
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body" id="Demoexample_1">
+                                    <div class="row" style="width:100%">
+                                        <div class="ibox-body" style="height:120vh;">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div style="overflow-y:auto;height:110vh;">
+                                                        <table class="table table-striped table-bordered table-hover" id="productTable" cellspacing="0" width="100%">
+                                                            <thead style="background-color:#077F7B; color: white ">
+                                                                <tr>
+                                                                    <th>Product Name</th>
+                                                                    <th>Product type</th>
+                                                                    <th>Price</th>
+                                                                    <th>Discount</th>
+                                                                    <th>Serve Count</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>
+                                                                        <input style="width:150PX" id="searchInTb" class="form-control" type="text" placeholder="Search Product" />
+                                                                    </th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                                <tr ng-repeat="prod in ProductList ">
+                                                                    <td>{{prod.PRODUCT_NAME}}</td>
+                                                                    <td>{{prod.PRODUCT_TYPE}}</td>
+                                                                    <td>{{prod.PRICE}}</td>
+                                                                    <td>{{prod.DISCOUNT}}</td>
+                                                                    <td>{{prod.SERVES_COUNT}}</td>
+                                                                    
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div style="overflow-y:auto;height:110vh;">
+                                                        <table class="table table-striped table-bordered table-hover" id="cartTable" cellspacing="0" width="100%">
+                                                            <thead style="background-color:#077F7B; color: white ">
+                                                                <tr>
+                                                                    <th width="10px">Sr. No.</th>
+                                                                    <th width="10px">Product Name</th>
+                                                                    <th>Product type</th>
+                                                                    <th>Price</th>
+                                                                    <th width="90px">Qty</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>
+                                                                        <input style="width:150PX" id="searchInTb2" class="form-control" type="text" placeholder="Search Product" />
+                                                                    </th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="product in PreferredMenuProductList ">
+                                                                    <td>{{$index+1}}</td>
+                                                                    <td>{{product.PRODUCT_NAME}}</td>
+                                                                    <td>{{product.PRODUCT_TYPE}}</td>
+                                                                    <td>{{product.AMOUNT}}</td>
+                                                                    <td>{{product.QUANTITY}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="row invoice-info">
+                                                            <div class="col-lg-12">
+                                                                <table class="table table-bordered table-md">
+
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Total Products:</span></td>
+                                                                            <td colspan="2" style="text-align: left; font-weight: bold">{{PRODUCT_QUANTITY1}}<span></span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Total Amount:</span></td>
+                                                                            <td colspan="2" style="text-align: left; font-weight: bold">Rs.{{TOTAL_AMOUNT}}/-<span></span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Discount(%):</span></td>
+                                                                            <td>
+                                                                                <input type="number" name="TOTAL_DISCOUNT" class="form-control"  ng-model="TOTAL_DISCOUNT"  ng-disabled="PreferredMenuDetailsList[0].STATUS === 'Confirm'" readonly placeholder=" Discount" />
+
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>GST (18%):</span></td>
+                                                                            <td>
+                                                                                <input type="text" name="DELIVERY_CHARGES" class="form-control" ng-model="GST" readonly placeholder="GST" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span>Delivery Charges:</span></td>
+                                                                            <td>
+                                                                                <input type="text" name="DELIVERY_CHARGES" class="form-control" ng-model="DELIVERY_CHARGES" readonly placeholder="Delivery Charges" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; font-weight: bold"><span> Remark:</span></td>
+                                                                            <td>
+                                                                                <textarea class="form-control" ng-model="REMARK" ng-disabled="PreferredMenuDetailsList[0].STATUS === 'Confirm'" readonly placeholder="Enter Remark"></textarea>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" style="text-align: left; color: red; font-weight: bold"><span> Grand Amount:</span></td>
+                                                                            <td colspan="2" style="text-align: left; color: red;font-size:17px;font-weight:bold">
+                                                                                <input type="text" name="FINAL_TOTAL" class="form-control" style="color:red;" ng-model="FINAL_TOTAL" value="0" readonly />
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                @*<div>
+                                                                    <center>
+                                                                        <button type="button" class="btn btn-sm" style="background-color:green;color:white" ng-disabled="PreferredMenuDetailsList[0].STATUS === 'Confirm'" >Send Details</button>
+                                                                    </center>
+                                                                </div>*@
+                                                                <br />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/AngularJs/PreferredMenuDetails.js"></script>
+    <script>
+        // Write on keyup event of keyword input element
+        $("#searchInTb").keyup(function () {
+
+            var searchText = $(this).val().toLowerCase();
+
+            // Show only matching TR, hide rest of them
+            $.each($("#productTable tbody tr"), function () {
+                //alert(searchText);
+                if ($(this).text().toLowerCase().indexOf(searchText) === -1)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        });
+        //const tr05 = ($("#example-table tr:eq(05)"))[0];
+        //alert();
+        //const tr10OffsetTop = tr05.clientHeight + tr05.offsetTop;
+        // alert('jj');
+        //$('.wrapper').css('max-height', tr10OffsetTop);
+
+
+        $("#searchInTb2").keyup(function () {
+
+            var searchText = $(this).val().toLowerCase();
+
+            // Show only matching TR, hide rest of them
+            $.each($("#cartTable tbody tr"), function () {
+                //alert(searchText);
+                if ($(this).text().toLowerCase().indexOf(searchText) === -1)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        });
+
+    </script>
+
+
+}
+
+

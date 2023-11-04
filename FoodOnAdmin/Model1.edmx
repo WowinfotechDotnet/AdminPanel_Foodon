@@ -97,7 +97,7 @@
           <Property Name="USER_ID" Type="bigint" />
           <Property Name="RES_ID" Type="bigint" />
           <Property Name="DINNING_ID" Type="bigint" />
-          <Property Name="TOTAL_PRICE" Type="float" />
+          <Property Name="TOTAL_PRICE" Type="decimal" Precision="8" Scale="2" />
           <Property Name="TOTAL_DISCOUNT" Type="float" />
           <Property Name="REMARK" Type="nvarchar(max)" />
           <Property Name="STATUS" Type="nvarchar(max)" />
@@ -182,6 +182,11 @@
           <Property Name="ORDER_REMARK" Type="nvarchar" MaxLength="200" />
           <Property Name="ORDER_RATING" Type="float" />
           <Property Name="RATE_STATUS" Type="nvarchar" MaxLength="100" />
+          <Property Name="PAYMENT_STATUS" Type="varchar" MaxLength="20" />
+          <Property Name="PAYMENT_SOURCE" Type="varchar" MaxLength="50" />
+          <Property Name="RES_REMARK" Type="nvarchar(max)" />
+          <Property Name="PreferredMenu_ID" Type="bigint" />
+          <Property Name="ADDRESS" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TB_OrderDetails">
           <Key>
@@ -247,6 +252,7 @@
           <Property Name="ORDER_REMARK" Type="nvarchar" MaxLength="200" />
           <Property Name="ORDER_RATING" Type="float" />
           <Property Name="RATE_STATUS" Type="nvarchar" MaxLength="100" />
+          <Property Name="PAYMENT_STATUS" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="TB_PreferredMenuAnswer">
           <Key>
@@ -256,14 +262,14 @@
           <Property Name="USER_ID" Type="bigint" />
           <Property Name="RES_ID" Type="bigint" />
           <Property Name="PreferredMenu_ID" Type="bigint" />
-          <Property Name="TOTAL_DISCOUNT" Type="bigint" />
+          <Property Name="TOTAL_DISCOUNT" Type="decimal" Precision="8" Scale="2" />
           <Property Name="REMARK" Type="nvarchar" MaxLength="200" />
           <Property Name="PAYMENT_STATUS" Type="nvarchar" MaxLength="200" />
           <Property Name="STATUS" Type="nvarchar" MaxLength="200" />
           <Property Name="REG_DATE" Type="datetime" />
-          <Property Name="TOTAL_AMOUNT" Type="bigint" />
-          <Property Name="GST" Type="bigint" />
-          <Property Name="DELIVERY_CHARGES" Type="bigint" />
+          <Property Name="TOTAL_AMOUNT" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="GST" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="DELIVERY_CHARGES" Type="decimal" Precision="8" Scale="2" />
         </EntityType>
         <EntityType Name="TB_ProductCategory">
           <Key>
@@ -281,8 +287,8 @@
           <Property Name="PRODUCT_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RES_ID" Type="bigint" />
           <Property Name="PRODUCT_NAME" Type="nvarchar" MaxLength="100" />
-          <Property Name="PRICE" Type="float" />
-          <Property Name="DISCOUNT" Type="float" />
+          <Property Name="PRICE" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DISCOUNT" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IS_STOCK" Type="nvarchar" MaxLength="100" />
           <Property Name="PRODUCT_TYPE" Type="nvarchar" MaxLength="100" />
           <Property Name="PRODUCT_IMAGE" Type="nvarchar(max)" />
@@ -386,6 +392,8 @@
           <Property Name="PAID_AMOUNT" Type="money" />
           <Property Name="STATUS" Type="varchar" MaxLength="20" />
           <Property Name="REG_DATE" Type="datetime" />
+          <Property Name="PAY_STATUS" Type="nvarchar" MaxLength="100" />
+          <Property Name="PAY_SOURCE" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TB_UserMaster">
           <Key>
@@ -493,6 +501,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__TB_ORDER__Prefer__54CB950F">
+          <End Role="TB_PreferredMenu" Type="Self.TB_PreferredMenu" Multiplicity="0..1" />
+          <End Role="TB_ORDER" Type="Self.TB_ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_PreferredMenu">
+              <PropertyRef Name="PreferredMenu_ID" />
+            </Principal>
+            <Dependent Role="TB_ORDER">
+              <PropertyRef Name="PreferredMenu_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__TB_PostMa__RES_I__19AACF41">
           <End Role="TB_Restaurant" Type="Self.TB_Restaurant" Multiplicity="0..1" />
           <End Role="TB_PostMaster" Type="Self.TB_PostMaster" Multiplicity="*" />
@@ -593,6 +613,10 @@
             <End Role="TB_FOOD_CATEGORY" EntitySet="TB_FOOD_CATEGORY" />
             <End Role="TB_MasterPage_Video_Banner_Image" EntitySet="TB_MasterPage_Video_Banner_Image" />
           </AssociationSet>
+          <AssociationSet Name="FK__TB_ORDER__Prefer__54CB950F" Association="Self.FK__TB_ORDER__Prefer__54CB950F">
+            <End Role="TB_PreferredMenu" EntitySet="TB_PreferredMenu" />
+            <End Role="TB_ORDER" EntitySet="TB_ORDER" />
+          </AssociationSet>
           <AssociationSet Name="FK__TB_PostMa__RES_I__19AACF41" Association="Self.FK__TB_PostMa__RES_I__19AACF41">
             <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
             <End Role="TB_PostMaster" EntitySet="TB_PostMaster" />
@@ -621,11 +645,9 @@
           <EntitySet Name="TB_BANNER" EntityType="DB_FoodOnLinkModel.TB_BANNER" />
           <EntitySet Name="TB_CART" EntityType="DB_FoodOnLinkModel.TB_CART" />
           <EntitySet Name="TB_Diningrequest" EntityType="DB_FoodOnLinkModel.TB_Diningrequest" />
-          <EntitySet Name="TB_DinningAnswer" EntityType="DB_FoodOnLinkModel.TB_DinningAnswer" />
           <EntitySet Name="TB_EMPLOYEE" EntityType="DB_FoodOnLinkModel.TB_EMPLOYEE" />
           <EntitySet Name="TB_OrderDetails" EntityType="DB_FoodOnLinkModel.TB_OrderDetails" />
           <EntitySet Name="TB_PreferredMenuAnswer" EntityType="DB_FoodOnLinkModel.TB_PreferredMenuAnswer" />
-          <EntitySet Name="TB_ProductMaster" EntityType="DB_FoodOnLinkModel.TB_ProductMaster" />
           <EntitySet Name="TB_Restaurant_Images" EntityType="DB_FoodOnLinkModel.TB_Restaurant_Images" />
           <EntitySet Name="TB_RestaurantLike" EntityType="DB_FoodOnLinkModel.TB_RestaurantLike" />
           <EntitySet Name="TB_RestaurantOffersMaster" EntityType="DB_FoodOnLinkModel.TB_RestaurantOffersMaster" />
@@ -634,14 +656,6 @@
           <AssociationSet Name="FK__TB_Dining__USER___3B75D760" Association="DB_FoodOnLinkModel.FK__TB_Dining__USER___3B75D760">
             <End Role="TB_UserMaster" EntitySet="TB_UserMaster" />
             <End Role="TB_Diningrequest" EntitySet="TB_Diningrequest" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TB_Dinnin__DINNI__4222D4EF" Association="DB_FoodOnLinkModel.FK__TB_Dinnin__DINNI__4222D4EF">
-            <End Role="TB_Diningrequest" EntitySet="TB_Diningrequest" />
-            <End Role="TB_DinningAnswer" EntitySet="TB_DinningAnswer" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TB_Dinnin__USER___403A8C7D" Association="DB_FoodOnLinkModel.FK__TB_Dinnin__USER___403A8C7D">
-            <End Role="TB_UserMaster" EntitySet="TB_UserMaster" />
-            <End Role="TB_DinningAnswer" EntitySet="TB_DinningAnswer" />
           </AssociationSet>
           <EntitySet Name="TB_PreferredMenu" EntityType="DB_FoodOnLinkModel.TB_PreferredMenu" />
           <EntitySet Name="TB_ORDER" EntityType="DB_FoodOnLinkModel.TB_ORDER" />
@@ -665,23 +679,37 @@
             <End Role="TB_MasterPage_Video_Banner_Image" EntitySet="TB_MasterPage_Video_Banner_Image" />
           </AssociationSet>
           <EntitySet Name="TB_Restaurant" EntityType="DB_FoodOnLinkModel.TB_Restaurant" />
-          <AssociationSet Name="FK__TB_Dinnin__RES_I__412EB0B6" Association="DB_FoodOnLinkModel.FK__TB_Dinnin__RES_I__412EB0B6">
-            <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
-            <End Role="TB_DinningAnswer" EntitySet="TB_DinningAnswer" />
-          </AssociationSet>
           <AssociationSet Name="FK__TB_PostMa__RES_I__19AACF41" Association="DB_FoodOnLinkModel.FK__TB_PostMa__RES_I__19AACF41">
             <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
             <End Role="TB_PostMaster" EntitySet="TB_PostMaster" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TB_Produc__RES_I__31EC6D26" Association="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26">
-            <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
-            <End Role="TB_ProductMaster" EntitySet="TB_ProductMaster" />
           </AssociationSet>
           <AssociationSet Name="FK__TB_Subscr__RES_I__0E391C95" Association="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95">
             <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
             <End Role="TB_SubscriptionMaster" EntitySet="TB_SubscriptionMaster" />
           </AssociationSet>
           <EntitySet Name="TB_ProductCategory" EntityType="DB_FoodOnLinkModel.TB_ProductCategory" />
+          <EntitySet Name="TB_ProductMaster" EntityType="DB_FoodOnLinkModel.TB_ProductMaster" />
+          <AssociationSet Name="FK__TB_ORDER__Prefer__54CB950F" Association="DB_FoodOnLinkModel.FK__TB_ORDER__Prefer__54CB950F">
+            <End Role="TB_PreferredMenu" EntitySet="TB_PreferredMenu" />
+            <End Role="TB_ORDER" EntitySet="TB_ORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_Produc__RES_I__31EC6D26" Association="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26">
+            <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
+            <End Role="TB_ProductMaster" EntitySet="TB_ProductMaster" />
+          </AssociationSet>
+          <EntitySet Name="TB_DinningAnswer" EntityType="DB_FoodOnLinkModel.TB_DinningAnswer" />
+          <AssociationSet Name="FK__TB_Dinnin__DINNI__4222D4EF" Association="DB_FoodOnLinkModel.FK__TB_Dinnin__DINNI__4222D4EF">
+            <End Role="TB_Diningrequest" EntitySet="TB_Diningrequest" />
+            <End Role="TB_DinningAnswer" EntitySet="TB_DinningAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_Dinnin__RES_I__412EB0B6" Association="DB_FoodOnLinkModel.FK__TB_Dinnin__RES_I__412EB0B6">
+            <End Role="TB_Restaurant" EntitySet="TB_Restaurant" />
+            <End Role="TB_DinningAnswer" EntitySet="TB_DinningAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_Dinnin__USER___403A8C7D" Association="DB_FoodOnLinkModel.FK__TB_Dinnin__USER___403A8C7D">
+            <End Role="TB_UserMaster" EntitySet="TB_UserMaster" />
+            <End Role="TB_DinningAnswer" EntitySet="TB_DinningAnswer" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="TB_AdminMaster">
           <Key>
@@ -784,29 +812,6 @@
           <NavigationProperty Name="TB_UserMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Dining__USER___3B75D760" FromRole="TB_Diningrequest" ToRole="TB_UserMaster" />
           <NavigationProperty Name="TB_DinningAnswer" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__DINNI__4222D4EF" FromRole="TB_Diningrequest" ToRole="TB_DinningAnswer" />
         </EntityType>
-        <EntityType Name="TB_DinningAnswer">
-          <Key>
-            <PropertyRef Name="DA_ID" />
-          </Key>
-          <Property Name="DA_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USER_ID" Type="Int64" />
-          <Property Name="RES_ID" Type="Int64" />
-          <Property Name="DINNING_ID" Type="Int64" />
-          <Property Name="TOTAL_PRICE" Type="Double" />
-          <Property Name="TOTAL_DISCOUNT" Type="Double" />
-          <Property Name="REMARK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="STATUS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
-          <Property Name="DRINK_DISCOUNT" Type="Int32" />
-          <Property Name="PAYMENT_STATUS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PAYMENT_AMOUNT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ADVANCED_AMT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ADVANCED_AMOUNT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PAYMENT_PHOTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TB_Diningrequest" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__DINNI__4222D4EF" FromRole="TB_DinningAnswer" ToRole="TB_Diningrequest" />
-          <NavigationProperty Name="TB_UserMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__USER___403A8C7D" FromRole="TB_DinningAnswer" ToRole="TB_UserMaster" />
-          <NavigationProperty Name="TB_Restaurant" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__RES_I__412EB0B6" FromRole="TB_DinningAnswer" ToRole="TB_Restaurant" />
-        </EntityType>
         <EntityType Name="TB_EMPLOYEE">
           <Key>
             <PropertyRef Name="EMP_ID" />
@@ -852,28 +857,6 @@
           <Property Name="TOTAL_AMOUNT" Type="Int64" />
           <Property Name="GST" Type="Int64" />
           <Property Name="DELIVERY_CHARGES" Type="Int64" />
-        </EntityType>
-        <EntityType Name="TB_ProductMaster">
-          <Key>
-            <PropertyRef Name="PRODUCT_ID" />
-          </Key>
-          <Property Name="PRODUCT_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RES_ID" Type="Int64" />
-          <Property Name="PRODUCT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PRICE" Type="Double" />
-          <Property Name="DISCOUNT" Type="Double" />
-          <Property Name="IS_STOCK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_TYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
-          <Property Name="RATING" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SERVES_COUNT" Type="Int64" />
-          <Property Name="DISTANACE_KM" Type="Double" />
-          <Property Name="OFFERS_ID" Type="Int64" />
-          <Property Name="P_CAT_ID" Type="Int64" />
-          <NavigationProperty Name="TB_Restaurant" Relationship="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" FromRole="TB_ProductMaster" ToRole="TB_Restaurant" />
         </EntityType>
         <EntityType Name="TB_Restaurant_Images">
           <Key>
@@ -937,30 +920,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TB_Dinnin__DINNI__4222D4EF">
-          <End Type="DB_FoodOnLinkModel.TB_Diningrequest" Role="TB_Diningrequest" Multiplicity="0..1" />
-          <End Type="DB_FoodOnLinkModel.TB_DinningAnswer" Role="TB_DinningAnswer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_Diningrequest">
-              <PropertyRef Name="DINNING_ID" />
-            </Principal>
-            <Dependent Role="TB_DinningAnswer">
-              <PropertyRef Name="DINNING_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TB_Dinnin__USER___403A8C7D">
-          <End Type="DB_FoodOnLinkModel.TB_UserMaster" Role="TB_UserMaster" Multiplicity="0..1" />
-          <End Type="DB_FoodOnLinkModel.TB_DinningAnswer" Role="TB_DinningAnswer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_UserMaster">
-              <PropertyRef Name="USER_ID" />
-            </Principal>
-            <Dependent Role="TB_DinningAnswer">
-              <PropertyRef Name="USER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="TB_PreferredMenu">
           <Key>
             <PropertyRef Name="PreferredMenu_ID" />
@@ -983,6 +942,8 @@
           <Property Name="ORDER_REMARK" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ORDER_RATING" Type="Double" />
           <Property Name="RATE_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PAYMENT_STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_ORDER" Relationship="DB_FoodOnLinkModel.FK__TB_ORDER__Prefer__54CB950F" FromRole="TB_PreferredMenu" ToRole="TB_ORDER" />
         </EntityType>
         <EntityType Name="TB_ORDER">
           <Key>
@@ -1008,6 +969,12 @@
           <Property Name="ORDER_REMARK" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ORDER_RATING" Type="Double" />
           <Property Name="RATE_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PAYMENT_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAYMENT_SOURCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RES_REMARK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreferredMenu_ID" Type="Int64" />
+          <Property Name="ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_PreferredMenu" Relationship="DB_FoodOnLinkModel.FK__TB_ORDER__Prefer__54CB950F" FromRole="TB_ORDER" ToRole="TB_PreferredMenu" />
         </EntityType>
         <EntityType Name="TB_SubscriptionMaster">
           <Key>
@@ -1025,6 +992,8 @@
           <Property Name="REG_DATE" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TB_PackageMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__PACKA__0F2D40CE" FromRole="TB_SubscriptionMaster" ToRole="TB_PackageMaster" />
           <NavigationProperty Name="TB_Restaurant" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95" FromRole="TB_SubscriptionMaster" ToRole="TB_Restaurant" />
+          <Property Name="PAY_STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PAY_SOURCE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TB_PackageMaster">
           <Key>
@@ -1177,23 +1146,11 @@
           <Property Name="Cafeteria" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="RESTRO_BOOKING" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="FOOD_DELIVERY" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TB_DinningAnswer" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__RES_I__412EB0B6" FromRole="TB_Restaurant" ToRole="TB_DinningAnswer" />
           <NavigationProperty Name="TB_PostMaster" Relationship="DB_FoodOnLinkModel.FK__TB_PostMa__RES_I__19AACF41" FromRole="TB_Restaurant" ToRole="TB_PostMaster" />
-          <NavigationProperty Name="TB_ProductMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" FromRole="TB_Restaurant" ToRole="TB_ProductMaster" />
           <NavigationProperty Name="TB_SubscriptionMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Subscr__RES_I__0E391C95" FromRole="TB_Restaurant" ToRole="TB_SubscriptionMaster" />
+          <NavigationProperty Name="TB_ProductMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" FromRole="TB_Restaurant" ToRole="TB_ProductMaster" />
+          <NavigationProperty Name="TB_DinningAnswer" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__RES_I__412EB0B6" FromRole="TB_Restaurant" ToRole="TB_DinningAnswer" />
         </EntityType>
-        <Association Name="FK__TB_Dinnin__RES_I__412EB0B6">
-          <End Type="DB_FoodOnLinkModel.TB_Restaurant" Role="TB_Restaurant" Multiplicity="0..1" />
-          <End Type="DB_FoodOnLinkModel.TB_DinningAnswer" Role="TB_DinningAnswer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_Restaurant">
-              <PropertyRef Name="RES_ID" />
-            </Principal>
-            <Dependent Role="TB_DinningAnswer">
-              <PropertyRef Name="RES_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__TB_PostMa__RES_I__19AACF41">
           <End Type="DB_FoodOnLinkModel.TB_Restaurant" Role="TB_Restaurant" Multiplicity="0..1" />
           <End Type="DB_FoodOnLinkModel.TB_PostMaster" Role="TB_PostMaster" Multiplicity="*" />
@@ -1202,18 +1159,6 @@
               <PropertyRef Name="RES_ID" />
             </Principal>
             <Dependent Role="TB_PostMaster">
-              <PropertyRef Name="RES_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TB_Produc__RES_I__31EC6D26">
-          <End Type="DB_FoodOnLinkModel.TB_Restaurant" Role="TB_Restaurant" Multiplicity="0..1" />
-          <End Type="DB_FoodOnLinkModel.TB_ProductMaster" Role="TB_ProductMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_Restaurant">
-              <PropertyRef Name="RES_ID" />
-            </Principal>
-            <Dependent Role="TB_ProductMaster">
               <PropertyRef Name="RES_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1239,6 +1184,111 @@
           <Property Name="STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="REG_DATE" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="TB_ProductMaster">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RES_ID" Type="Int64" />
+          <Property Name="PRODUCT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PRICE" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DISCOUNT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IS_STOCK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_TYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+          <Property Name="RATING" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SERVES_COUNT" Type="Int64" />
+          <Property Name="DISTANACE_KM" Type="Double" />
+          <Property Name="OFFERS_ID" Type="Int64" />
+          <Property Name="P_CAT_ID" Type="Int64" />
+          <NavigationProperty Name="TB_Restaurant" Relationship="DB_FoodOnLinkModel.FK__TB_Produc__RES_I__31EC6D26" FromRole="TB_ProductMaster" ToRole="TB_Restaurant" />
+        </EntityType>
+        <Association Name="FK__TB_ORDER__Prefer__54CB950F">
+          <End Type="DB_FoodOnLinkModel.TB_PreferredMenu" Role="TB_PreferredMenu" Multiplicity="0..1" />
+          <End Type="DB_FoodOnLinkModel.TB_ORDER" Role="TB_ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_PreferredMenu">
+              <PropertyRef Name="PreferredMenu_ID" />
+            </Principal>
+            <Dependent Role="TB_ORDER">
+              <PropertyRef Name="PreferredMenu_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_Produc__RES_I__31EC6D26">
+          <End Type="DB_FoodOnLinkModel.TB_Restaurant" Role="TB_Restaurant" Multiplicity="0..1" />
+          <End Type="DB_FoodOnLinkModel.TB_ProductMaster" Role="TB_ProductMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Restaurant">
+              <PropertyRef Name="RES_ID" />
+            </Principal>
+            <Dependent Role="TB_ProductMaster">
+              <PropertyRef Name="RES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TB_DinningAnswer">
+          <Key>
+            <PropertyRef Name="DA_ID" />
+          </Key>
+          <Property Name="DA_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="RES_ID" Type="Int64" />
+          <Property Name="DINNING_ID" Type="Int64" />
+          <Property Name="TOTAL_PRICE" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="TOTAL_DISCOUNT" Type="Double" />
+          <Property Name="REMARK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="REG_DATE" Type="DateTime" Precision="3" />
+          <Property Name="DRINK_DISCOUNT" Type="Int32" />
+          <Property Name="PAYMENT_STATUS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PAYMENT_AMOUNT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ADVANCED_AMT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ADVANCED_AMOUNT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PAYMENT_PHOTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_Diningrequest" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__DINNI__4222D4EF" FromRole="TB_DinningAnswer" ToRole="TB_Diningrequest" />
+          <NavigationProperty Name="TB_Restaurant" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__RES_I__412EB0B6" FromRole="TB_DinningAnswer" ToRole="TB_Restaurant" />
+          <NavigationProperty Name="TB_UserMaster" Relationship="DB_FoodOnLinkModel.FK__TB_Dinnin__USER___403A8C7D" FromRole="TB_DinningAnswer" ToRole="TB_UserMaster" />
+        </EntityType>
+        <Association Name="FK__TB_Dinnin__DINNI__4222D4EF">
+          <End Type="DB_FoodOnLinkModel.TB_Diningrequest" Role="TB_Diningrequest" Multiplicity="0..1" />
+          <End Type="DB_FoodOnLinkModel.TB_DinningAnswer" Role="TB_DinningAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Diningrequest">
+              <PropertyRef Name="DINNING_ID" />
+            </Principal>
+            <Dependent Role="TB_DinningAnswer">
+              <PropertyRef Name="DINNING_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_Dinnin__RES_I__412EB0B6">
+          <End Type="DB_FoodOnLinkModel.TB_Restaurant" Role="TB_Restaurant" Multiplicity="0..1" />
+          <End Type="DB_FoodOnLinkModel.TB_DinningAnswer" Role="TB_DinningAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Restaurant">
+              <PropertyRef Name="RES_ID" />
+            </Principal>
+            <Dependent Role="TB_DinningAnswer">
+              <PropertyRef Name="RES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_Dinnin__USER___403A8C7D">
+          <End Type="DB_FoodOnLinkModel.TB_UserMaster" Role="TB_UserMaster" Multiplicity="0..1" />
+          <End Type="DB_FoodOnLinkModel.TB_DinningAnswer" Role="TB_DinningAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_UserMaster">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="TB_DinningAnswer">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1348,27 +1398,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_DinningAnswer">
-            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_DinningAnswer">
-              <MappingFragment StoreEntitySet="TB_DinningAnswer">
-                <ScalarProperty Name="PAYMENT_PHOTO" ColumnName="PAYMENT_PHOTO" />
-                <ScalarProperty Name="ADVANCED_AMOUNT" ColumnName="ADVANCED_AMOUNT" />
-                <ScalarProperty Name="ADVANCED_AMT" ColumnName="ADVANCED_AMT" />
-                <ScalarProperty Name="PAYMENT_AMOUNT" ColumnName="PAYMENT_AMOUNT" />
-                <ScalarProperty Name="PAYMENT_STATUS" ColumnName="PAYMENT_STATUS" />
-                <ScalarProperty Name="DRINK_DISCOUNT" ColumnName="DRINK_DISCOUNT" />
-                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
-                <ScalarProperty Name="TOTAL_DISCOUNT" ColumnName="TOTAL_DISCOUNT" />
-                <ScalarProperty Name="TOTAL_PRICE" ColumnName="TOTAL_PRICE" />
-                <ScalarProperty Name="DINNING_ID" ColumnName="DINNING_ID" />
-                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="DA_ID" ColumnName="DA_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TB_EMPLOYEE">
             <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_EMPLOYEE">
               <MappingFragment StoreEntitySet="TB_EMPLOYEE">
@@ -1415,28 +1444,6 @@
                 <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
                 <ScalarProperty Name="PMA_ID" ColumnName="PMA_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ProductMaster">
-            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_ProductMaster">
-              <MappingFragment StoreEntitySet="TB_ProductMaster">
-                <ScalarProperty Name="P_CAT_ID" ColumnName="P_CAT_ID" />
-                <ScalarProperty Name="OFFERS_ID" ColumnName="OFFERS_ID" />
-                <ScalarProperty Name="DISTANACE_KM" ColumnName="DISTANACE_KM" />
-                <ScalarProperty Name="SERVES_COUNT" ColumnName="SERVES_COUNT" />
-                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
-                <ScalarProperty Name="RATING" ColumnName="RATING" />
-                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="PRODUCT_IMAGE" ColumnName="PRODUCT_IMAGE" />
-                <ScalarProperty Name="PRODUCT_TYPE" ColumnName="PRODUCT_TYPE" />
-                <ScalarProperty Name="IS_STOCK" ColumnName="IS_STOCK" />
-                <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
-                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
-                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
-                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
-                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1498,6 +1505,7 @@
           <EntitySetMapping Name="TB_PreferredMenu">
             <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_PreferredMenu">
               <MappingFragment StoreEntitySet="TB_PreferredMenu">
+                <ScalarProperty Name="PAYMENT_STATUS" ColumnName="PAYMENT_STATUS" />
                 <ScalarProperty Name="RATE_STATUS" ColumnName="RATE_STATUS" />
                 <ScalarProperty Name="ORDER_RATING" ColumnName="ORDER_RATING" />
                 <ScalarProperty Name="ORDER_REMARK" ColumnName="ORDER_REMARK" />
@@ -1522,6 +1530,11 @@
           <EntitySetMapping Name="TB_ORDER">
             <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_ORDER">
               <MappingFragment StoreEntitySet="TB_ORDER">
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="PreferredMenu_ID" ColumnName="PreferredMenu_ID" />
+                <ScalarProperty Name="RES_REMARK" ColumnName="RES_REMARK" />
+                <ScalarProperty Name="PAYMENT_SOURCE" ColumnName="PAYMENT_SOURCE" />
+                <ScalarProperty Name="PAYMENT_STATUS" ColumnName="PAYMENT_STATUS" />
                 <ScalarProperty Name="RATE_STATUS" ColumnName="RATE_STATUS" />
                 <ScalarProperty Name="ORDER_RATING" ColumnName="ORDER_RATING" />
                 <ScalarProperty Name="ORDER_REMARK" ColumnName="ORDER_REMARK" />
@@ -1548,6 +1561,8 @@
           <EntitySetMapping Name="TB_SubscriptionMaster">
             <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_SubscriptionMaster">
               <MappingFragment StoreEntitySet="TB_SubscriptionMaster">
+                <ScalarProperty Name="PAY_SOURCE" ColumnName="PAY_SOURCE" />
+                <ScalarProperty Name="PAY_STATUS" ColumnName="PAY_STATUS" />
                 <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="PAID_AMOUNT" ColumnName="PAID_AMOUNT" />
@@ -1685,6 +1700,49 @@
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
                 <ScalarProperty Name="P_CAT_ID" ColumnName="P_CAT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ProductMaster">
+            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_ProductMaster">
+              <MappingFragment StoreEntitySet="TB_ProductMaster">
+                <ScalarProperty Name="P_CAT_ID" ColumnName="P_CAT_ID" />
+                <ScalarProperty Name="OFFERS_ID" ColumnName="OFFERS_ID" />
+                <ScalarProperty Name="DISTANACE_KM" ColumnName="DISTANACE_KM" />
+                <ScalarProperty Name="SERVES_COUNT" ColumnName="SERVES_COUNT" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="RATING" ColumnName="RATING" />
+                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="PRODUCT_IMAGE" ColumnName="PRODUCT_IMAGE" />
+                <ScalarProperty Name="PRODUCT_TYPE" ColumnName="PRODUCT_TYPE" />
+                <ScalarProperty Name="IS_STOCK" ColumnName="IS_STOCK" />
+                <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_DinningAnswer">
+            <EntityTypeMapping TypeName="DB_FoodOnLinkModel.TB_DinningAnswer">
+              <MappingFragment StoreEntitySet="TB_DinningAnswer">
+                <ScalarProperty Name="PAYMENT_PHOTO" ColumnName="PAYMENT_PHOTO" />
+                <ScalarProperty Name="ADVANCED_AMOUNT" ColumnName="ADVANCED_AMOUNT" />
+                <ScalarProperty Name="ADVANCED_AMT" ColumnName="ADVANCED_AMT" />
+                <ScalarProperty Name="PAYMENT_AMOUNT" ColumnName="PAYMENT_AMOUNT" />
+                <ScalarProperty Name="PAYMENT_STATUS" ColumnName="PAYMENT_STATUS" />
+                <ScalarProperty Name="DRINK_DISCOUNT" ColumnName="DRINK_DISCOUNT" />
+                <ScalarProperty Name="REG_DATE" ColumnName="REG_DATE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="TOTAL_DISCOUNT" ColumnName="TOTAL_DISCOUNT" />
+                <ScalarProperty Name="TOTAL_PRICE" ColumnName="TOTAL_PRICE" />
+                <ScalarProperty Name="DINNING_ID" ColumnName="DINNING_ID" />
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="DA_ID" ColumnName="DA_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
