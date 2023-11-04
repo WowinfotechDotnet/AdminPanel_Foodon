@@ -243,6 +243,8 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
         $scope.MRP = "";
         $scope.OFFER_PRICE = "";
         $scope.POST_COUNT = "";
+        CKEDITOR.instances.PACKAGE_DESCRIPTION.setData($scope.PACKAGE_DESCRIPTION);
+
     }
 
 
@@ -280,6 +282,15 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
             $scope.POST_COUNT = parseInt($scope._Party.POST_COUNT);
             $scope.P_ID = $scope._Party.P_ID;
 
+            var editor = CKEDITOR.instances.PACKAGE_DESCRIPTION;
+            if (editor) { editor.destroy(true); }
+
+            CKEDITOR.replace('PACKAGE_DESCRIPTION', {
+                //language: 'fr',
+                uiColor: '#9AB8F3'
+            });
+            CKEDITOR.instances.PACKAGE_DESCRIPTION.setData($scope.PACKAGE_DESCRIPTION);
+
         });
     };
 
@@ -287,14 +298,19 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
 
     $scope.AddAdmin = function () {
         $("#loader").css("display", '');
+        if (CKEDITOR.instances.PACKAGE_DESCRIPTION.getData().length < 1) {
+            alert("Package Description is required.");
+            return false;
+        }
         tb_Admin = {
             P_ID: $scope.P_ID, //for update table
             PACKAGE_NAME: $scope.PACKAGE_NAME,
-            PACKAGE_DESCRIPTION: $scope.PACKAGE_DESCRIPTION,
+            //PACKAGE_DESCRIPTION: $scope.PACKAGE_DESCRIPTION,
             PACKAGE_VALIDITY: parseInt($scope.PACKAGE_VALIDITY),
             MRP: parseFloat($scope.MRP),
             OFFER_PRICE: parseFloat($scope.OFFER_PRICE),
             POST_COUNT: parseInt($scope.POST_COUNT),
+            PACKAGE_DESCRIPTION: CKEDITOR.instances.PACKAGE_DESCRIPTION.getData(),
         };
         if ($scope.Admin_Action === "Add Package") {
             AddAdminRecord(tb_Admin);
@@ -377,9 +393,13 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
 
 
 
+    var editor = CKEDITOR.instances.PACKAGE_DESCRIPTION;
+    if (editor) { editor.destroy(true); }
 
-
-
+    CKEDITOR.replace('PACKAGE_DESCRIPTION', {
+        //language: 'fr',
+        uiColor: '#9AB8F3'
+    });
 
 
     $scope.GoToPreviousNextPage = function (pagehistory) {
