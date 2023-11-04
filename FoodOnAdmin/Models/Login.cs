@@ -30,6 +30,17 @@ namespace FoodOnAdmin.Models
         public bool RememberMe { get; set; }
     }
 
+    public class HOME
+    {
+        public string TOTAL_RESTAURANTS { get; set; }
+        public string TOTAL_DINNING { get; set; }
+        public string TODAY_DINNING { get; set; }
+        public string TODAY_FOOD_ORDER { get; set; }
+        public string TOTAL_FOOD_ORDER { get; set; }
+        public string TOTAL_PREFERRED_MENU { get; set; }
+        public string TODAY_PREFERRED_MENU { get; set; }
+
+    }
 
 
 

@@ -251,6 +251,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularJs\Home.js" />
     <Content Include="AngularJs\ProductCategory.js" />
     <Content Include="AngularJs\SubscriptionMaster.js" />
     <Content Include="AngularJs\FoodOnSaleBannerMaster.js" />

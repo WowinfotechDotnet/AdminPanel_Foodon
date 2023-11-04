@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,7 +14,13 @@ namespace FoodOnAdmin.Controllers
     public class HomeController : Controller
     {
         private DB_FoodOnLinkEntities db = new DB_FoodOnLinkEntities();
-        
+        public static string connectionString = ConfigurationManager.ConnectionStrings["DB_FoodOnLink"].ConnectionString;
+        public static SqlConnection con = new SqlConnection(connectionString);
+        static SqlCommand cmd;
+        static SqlDataAdapter sda;
+
+        static DataTable dt;
+
         [VerifyUserAttribute]
         public ActionResult Index()
         {
@@ -116,5 +125,51 @@ namespace FoodOnAdmin.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        [VerifyUserAttribute]
+        public JsonResult GetallHomeCount()
+        {
+            long adminId = Convert.ToInt64(Session["ADMIN_ID"]);
+            cmd = new SqlCommand("Get_AdminPanelDashboard_Count", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ADMIN_ID", adminId);
+            if (con.State == System.Data.ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
+            dt = new DataTable();
+            sda = new SqlDataAdapter(cmd);
+            sda.Fill(dt);
+            con.Close();
+
+            List<HOME> FinalreportList = new List<HOME>();
+            HOME rt2;
+            if (dt != null)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    rt2 = new HOME();
+                    try
+                    {
+                        rt2.TOTAL_RESTAURANTS = (dt.Rows[i]["TOTAL_RESTAURANTS"].ToString());
+
+                        rt2.TOTAL_DINNING = (dt.Rows[i]["TOTAL_DINNING"].ToString());
+                        rt2.TOTAL_PREFERRED_MENU = (dt.Rows[i]["TOTAL_PREFERRED_MENU"]).ToString();
+                        rt2.TOTAL_FOOD_ORDER = (dt.Rows[i]["TOTAL_FOOD_ORDER"]).ToString();
+
+                        rt2.TODAY_DINNING = (dt.Rows[i]["TODAY_DINNING"]).ToString();
+                        rt2.TODAY_FOOD_ORDER = (dt.Rows[i]["TODAY_FOOD_ORDER"]).ToString();
+                        rt2.TODAY_PREFERRED_MENU = (dt.Rows[i]["TODAY_PREFERRED_MENU"]).ToString();
+
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                    FinalreportList.Add(rt2);
+                }
+            }
+            var _user = FinalreportList;
+            return Json(_user, JsonRequestBehavior.AllowGet);
+        }
     }
 }
