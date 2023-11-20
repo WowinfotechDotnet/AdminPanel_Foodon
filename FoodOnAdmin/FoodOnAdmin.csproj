@@ -141,6 +141,7 @@
     <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RegistrationEnquiryController.cs" />
     <Compile Include="Controllers\RestaurantVideoController.cs" />
     <Compile Include="Controllers\Resturant_RegistrationController.cs" />
     <Compile Include="Controllers\ShopInformationController.cs" />
@@ -256,6 +257,7 @@
     <Content Include="AngularJs\FoodRequestDetails.js" />
     <Content Include="AngularJs\Home.js" />
     <Content Include="AngularJs\ProductCategory.js" />
+    <Content Include="AngularJs\EnquiryMaster.js" />
     <Content Include="AngularJs\SubscriptionMaster.js" />
     <Content Include="AngularJs\FoodOnSaleBannerMaster.js" />
     <Content Include="AngularJs\FoodOnMasterVideoURL.js" />
@@ -3347,6 +3349,7 @@
     <Content Include="Views\Resturant_Registration\FoodRequestDetails.cshtml" />
     <Content Include="Views\Resturant_Registration\DiningRequestDetails.cshtml" />
     <Content Include="Views\Resturant_Registration\PreferredMenuDetails.cshtml" />
+    <Content Include="Views\RegistrationEnquiry\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

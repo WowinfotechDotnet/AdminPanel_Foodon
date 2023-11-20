@@ -74,7 +74,7 @@
 
 });
 
-app.controller("AdminCtrl", function ($scope, AdminService) {
+app.controller("AdminCtrl", function ($scope, AdminService, $sce) {
 
     
    
@@ -163,8 +163,14 @@ app.controller("AdminCtrl", function ($scope, AdminService) {
         var SearchingConditions = GetSearchingConditions();
         var getrecord = AdminService.getRecordbyPaging(SearchingConditions);
         getrecord.then(function (response) {
-            $scope.AdminList = response.data;
+            //Unsanitized html
+            //$scope.AdminList = response.data;
 
+            //Sanitized html
+            $scope.AdminList = response.data.map(function (admin) {
+                admin.PACKAGE_DESCRIPTION = $sce.trustAsHtml(admin.PACKAGE_DESCRIPTION);
+                return admin;
+            });
            
         }, function () {
             $.notify("Error to load data...", "error");

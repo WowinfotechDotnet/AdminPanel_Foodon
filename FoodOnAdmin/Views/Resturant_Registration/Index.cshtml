@@ -51,7 +51,7 @@
                                     <th><b>Food Type</b></th>
                                     <th><b>Status</b></th>
                                     <th><b>Reg Date</b></th>
-                                    <th><b>Action</b></th>
+                                    <th style="width:10%;"><b>Action</b></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,8 +65,12 @@
                                     <td><a href="" ng-click="ChangeStatus(admin)"><b style="color:red">{{admin.STATUS}}</b></a></td>
                                     <td>{{admin.REG_DATE}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-xs" style="background-color:green;color:white;" data-toggle="modal" ng-click="Update(admin)">Edit</button>
-                                        <a href="~/Resturant_Registration/Details/{{admin.RES_ID}}" class="btn btn-xs" style="background-color:orangered;color:white;">View</a>
+                                        <div class="row">
+                                            <div class="col-lg-6"><button type="button" class="btn btn-xs" style="background-color:green;color:white;" data-toggle="modal" ng-click="Update(admin)">Edit</button></div>
+                                            <div class="col-lg-6"><a href="~/Resturant_Registration/Details/{{admin.RES_ID}}" class="btn btn-xs" style="background-color:orangered;color:white;">View</a></div>
+                                        </div>
+                                        
+                                        
                                     </td>
                                 </tr>
 

@@ -16,6 +16,9 @@
 
     <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
 
+    
+
+
     <style>
         .btn-info {
             color: white;
@@ -68,9 +71,10 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <div class="dropdown-divider"></div>
                         <a class="user-header">
-                            <center> 
-                            @*<img src="~/Images/spgif.gif" class="img-circle" style="height:180px;width:200px;">*@
-                            <img src="~/Images/Foodon-new-logo.png" class="img-circle" style="height:180px;width:200px;">
+                            <center>
+                                @*<img src="~/Images/spgif.gif" class="img-circle" style="height:180px;width:200px;">*@
+                                @*<img src="~/Images/Foodon-new-logo.png" class="img-circle" style="height:180px;width:200px;">*@
+                                <center> <img src="~/Images/Foodon-new-logo.png" @*class="img-circle"*@ style="height:75px;width:200px;"></center>
                             </center>
                             <center>  (<b style="color:red">@Session["ADMIN_NAME"]</b>)</center>
                             <br>
@@ -122,23 +126,70 @@
                             </a>
                         </li>
                         @*<li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-copy"></i>
-                                    <p style="color:white">
-                                        Product
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="~/Product/Index" class="nav-link">
-                                            <i class="far fa-circle nav-icon" style="color:white"></i>
-                                            <p style="color:white"> Product</p>
-                                        </a>
-                                    </li>
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p style="color:white">
+                        Product
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="~/Product/Index" class="nav-link">
+                            <i class="far fa-circle nav-icon" style="color:white"></i>
+                            <p style="color:white"> Product</p>
+                        </a>
+                    </li>
 
-                                </ul>
-                            </li>*@
+                </ul>
+        </li>*@
+                        <li class="nav-item menu-open">
+                            <a href="~/Package/Index" class="nav-link">
+                                <i class="nav-icon fas fa-box"></i>
+                                <p style="color:white">
+                                    Package Master
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item menu-open">
+                            <a href="~/SubscriptionMaster/Index" class="nav-link">
+                                <i class="nav-icon fas fa-ticket-alt"></i>
+                                <p style="color:white">
+                                    Subscription Master
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-film" style="color:white"></i>
+                                <p style="color:white">
+                                    Media
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="~/FoodOnSaleBannerMaster/Index" class="nav-link">
+                                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                                        <p style="color:white">FoodOn Banner Master</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/RestaurantVideo/Index" class="nav-link">
+                                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                                        <p style="color:white">Restaurant Video Master</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/FoodOnMasterVideo/Index" class="nav-link">
+                                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                                        <p style="color:white">FoodOn Video Master</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -167,101 +218,110 @@
                                         <p style="color:white">Delivery Boy Master</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="~/FoodOnSaleBannerMaster/Index" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="color:white"></i>
-                                        <p style="color:white">FoodOn Banner Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/Package/Index" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="color:white"></i>
-                                        <p style="color:white">Package Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/RestaurantVideo/Index" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="color:white"></i>
-                                        <p style="color:white">Restaurant Video Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/FoodOnMasterVideo/Index" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="color:white"></i>
-                                        <p style="color:white">FoodOn Video Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/SubscriptionMaster/Index" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="color:white"></i>
-                                        <p style="color:white">Subscription Master</p>
-                                    </a>
-                                </li>
-
                                 @*<li class="nav-item">
-            <a href="~/BannerMaster/Index" class="nav-link">
-                <i class="far fa-circle nav-icon" style="color:white"></i>
-                <p style="color:white">Banner Master</p>
-            </a>
-        </li>*@
+                    <a href="~/FoodOnSaleBannerMaster/Index" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">FoodOn Banner Master</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Package/Index" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Package Master</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/RestaurantVideo/Index" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Restaurant Video Master</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/FoodOnMasterVideo/Index" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">FoodOn Video Master</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/SubscriptionMaster/Index" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Subscription Master</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                        <a href="~/BannerMaster/Index" class="nav-link">
+                            <i class="far fa-circle nav-icon" style="color:white"></i>
+                            <p style="color:white">Banner Master</p>
+                        </a>
+                </li>*@
 
                             </ul>
                         </li>
 
+                        <li class="nav-item menu-open">
+                            <a href="~/RegistrationEnquiry/Index" class="nav-link">
+                                <i class="nav-icon fas fa-question-circle"></i>
+                                <p style="color:white">
+                                    Restaurant Enquiries
+                                </p>
+                            </a>
+                        </li>
+
 
                         @*<li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-copy" style="color:white"></i>
-                                    <p style="color:white">
-                                        Enquiry
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="~/FoodRequest/FoodRequest" class="nav-link">
-                                            <i class="far fa-circle nav-icon" style="color:white"></i>
-                                            <p style="color:white">Today Food Enquiry</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="~/Dining/Index" class="nav-link">
-                                            <i class="far fa-circle nav-icon" style="color:white"></i>
-                                            <p style="color:white">Today Dining Enquiry</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="~/FoodRequest/TotalFoodRequest" class="nav-link">
-                                            <i class="far fa-circle nav-icon" style="color:white"></i>
-                                            <p style="color:white">Total Food Enquiry</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="~/Dining/TotalDinningRequest" class="nav-link">
-                                            <i class="far fa-circle nav-icon" style="color:white"></i>
-                                            <p style="color:white">Total Dining Enquiry</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                            <a href="~/Order/AsignOrder" class="nav-link">
-                                                <i class="far fa-circle nav-icon" style="color:white"></i>
-                                                <p style="color:white">Assign Order</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="~/Order/CompleteOrder" class="nav-link">
-                                                <i class="far fa-circle nav-icon" style="color:white"></i>
-                                                <p style="color:white">Completed Order</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="~/Order/CancelOrder" class="nav-link">
-                                                <i class="far fa-circle nav-icon" style="color:white"></i>
-                                                <p style="color:white">Cancel Order</p>
-                                            </a>
-                                        </li>
-                                </ul>
-                            </li>*@
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-copy" style="color:white"></i>
+                <p style="color:white">
+                    Enquiry
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="~/FoodRequest/FoodRequest" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Today Food Enquiry</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Dining/Index" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Today Dining Enquiry</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/FoodRequest/TotalFoodRequest" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Total Food Enquiry</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Dining/TotalDinningRequest" class="nav-link">
+                        <i class="far fa-circle nav-icon" style="color:white"></i>
+                        <p style="color:white">Total Dining Enquiry</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                        <a href="~/Order/AsignOrder" class="nav-link">
+                            <i class="far fa-circle nav-icon" style="color:white"></i>
+                            <p style="color:white">Assign Order</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Order/CompleteOrder" class="nav-link">
+                            <i class="far fa-circle nav-icon" style="color:white"></i>
+                            <p style="color:white">Completed Order</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/Order/CancelOrder" class="nav-link">
+                            <i class="far fa-circle nav-icon" style="color:white"></i>
+                            <p style="color:white">Cancel Order</p>
+                        </a>
+                    </li>
+            </ul>
+        </li>*@
 
 
 
@@ -292,6 +352,7 @@
 
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
     <script src="~/AngularJs/Module.js"></script>
 
     <script>

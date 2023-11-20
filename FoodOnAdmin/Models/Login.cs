@@ -334,4 +334,24 @@ namespace FoodOnAdmin.Models
         public long QUANTITY { get; set; }
     }
 
+
+    public class RegistrationEnquiry
+    {
+        public long REG_ENQ_ID { get; set; }
+        public string RESTAURANT_NAME { get; set; }
+        public string EMAIL { get; set; }
+        public string OWNER_NAME { get; set; }
+        public string MOBILE_NO { get; set; }
+        public string FOOD_TYPE { get; set; }
+        public string OPEN_TIME { get; set; }
+        public string CLOSE_TIME { get; set; }
+        public string ADDRESS { get; set; }
+        public string PINCODE { get; set; }
+        public string STATUS { get; set; }
+        public string REG_DATE { get; set; }
+        public string DESCRIPTION { get; set; }
+        public string TERM_POLICY_AGREE { get; set; }
+    }
+
+
 }

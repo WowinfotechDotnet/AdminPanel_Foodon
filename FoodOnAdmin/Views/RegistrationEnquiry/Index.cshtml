@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+    .flex-container {
+        display: flex;
+    }
+
+    .flex-item {
+        flex: 1;
+        border: 1px solid #000;
+        padding: 10px;
+        margin: 5px;
+    }
+</style>
+<style>
+    .table td, .table th {
+        padding: 0.50rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        font-size: 12px;
+    }
+
+</style>
+
+<section class="content" ng-controller="EnquiryCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <a ng-click="GoToPreviousNextPage('Previous')" class="btn btn-xs" style="background-color:green;color:white"><span class="fa fa-arrow-left"></span></a>
+                            </div>
+                            <div class="col-md-8" style="padding-left:25%;text-align:center;">
+                                <h3 class="card-title"><b>Registration Enquiries</b></h3>
+                            </div>
+                            <div class="col-md-3" style="float:right">
+                                <input class="form-control" type="text" id="RESTAURANT_NAME" name="RESTAURANT_NAME" ng-model="RESTAURANT_NAME" ng-change="SearchAdmin()" placeholder="Search" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="ibox-body">
+                        <div>
+                            <div class="row">
+                                <label style="margin-left:10px">From Date:</label>
+                                <input class="form-control col-md-2" style="margin-left:10px" type="text" id="START_DATE" name="START_DATE" ng-model="START_DATE" />
+                                <label style="margin-left:10px">To Date:</label>
+                                <input class="form-control col-md-2" style="margin-left:10px" type="text" id="END_DATE" name="END_DATE" ng-model="END_DATE" />
+
+                                <label><a class="form-control button" style="background-color: green; margin-left: 10px; margin-right: 5px;text-align: center; color:white;" ng-click="SearchAdmin()">Get Data</a></label>
+
+                            </div>
+                            <div class="row" style="margin-bottom:10px">
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" border="1" style="border:2px solid black; width:100%;">
+                                    <tbody>
+                                        <tr style="background-color: #157da9; color: white; font-size: 10px; ">
+                                            <th style="width:50px;">Sr No</th>
+                                            <th>Restaurant Name</th>
+                                            <th>Owner Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile No</th>
+                                            <th>Food Type</th>
+                                            <th>Description</th>
+                                            <th>Open Time</th>
+                                            <th>Close Time</th>
+                                            <th>Address</th>
+                                            <th>Pincode</th>
+                                            <th>Term Policy Agree</th>
+                                            <th>Status</th>
+                                            <th>Reg Date</th>
+                                        </tr>
+                                        <tr ng-repeat="enq in AdminList">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{enq.RESTAURANT_NAME}}</td>
+                                            <td>{{enq.OWNER_NAME}}</td>
+                                            <td>{{enq.EMAIL}}</td>
+                                            <td>{{enq.MOBILE_NO}}</td>
+                                            <td>{{enq.FOOD_TYPE}}</td>
+                                            <td>{{enq.DESCRIPTION}}</td>
+                                            <td>{{enq.OPEN_TIME}}</td>
+                                            <td>{{enq.CLOSE_TIME}}</td>
+                                            <td>{{enq.ADDRESS}}</td>
+                                            <td>{{enq.PINCODE}}</td>
+                                            <td>{{enq.TERM_POLICY_AGREE}}</td>
+                                            @*<td ng-show="enq.STATUS==='Deactive'"><a href="" ng-click="ChangeStatus(enq)" style="color:red"><b>{{enq.STATUS}}</b></a></td>
+                                            <td ng-show="enq.STATUS==='Active'"><a href="" ng-click="ChangeStatus(enq)" style="color:green"><b>{{enq.STATUS}}</b></a></td>*@
+                                            <td style="color:green">{{enq.STATUS}}</td>
+                                            <td>{{enq.REG_DATE}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <ul ng-if="pager.pages.length" class="pagination" style="margin-left:30px;">
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(1)">First</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                                </li>
+                                <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+                                    <a ng-click="setPage(page)">{{page}}</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.totalPages)">Last</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+
+    <script src="~/AngularJs/EnquiryMaster.js"></script>
+    <link href="~/Css/Paging.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $("#START_DATE").datepicker({ changeMonth: true, changeYear: true, maxDate: 0 });
+        $("#START_DATE").datepicker("option", "dateFormat", "dd/mm/yy");
+        $("#START_DATE").datepicker("option", "monthNamesShort", ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+        $("#START_DATE").datepicker("option", "showMonthAfterYear", false);
+        $("#START_DATE").datepicker("option", "yearRange", "2000:2060");
+
+        $("#END_DATE").datepicker({ changeMonth: true, changeYear: true, maxDate: 0 });
+        $("#END_DATE").datepicker("option", "dateFormat", "dd/mm/yy");
+        $("#END_DATE").datepicker("option", "monthNamesShort", ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+        $("#END_DATE").datepicker("option", "showMonthAfterYear", false);
+        $("#END_DATE").datepicker("option", "yearRange", "2000:2060");
+    </script>
+}
+
